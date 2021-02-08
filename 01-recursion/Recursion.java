@@ -52,7 +52,7 @@ public class Recursion {
         int lastChar = word.length() - 1;
         if (word.length() > 0 && word.charAt(lastChar) == (char)('a')) {}
         else {
-          combos++;
+          //combos++;
           combos += countNoDoubleLetterWords(length - 1, word + (char)('a' + i));
         }
       }
