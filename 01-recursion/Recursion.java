@@ -1,13 +1,47 @@
 public class Recursion {
   public static void main (String[] args) {
-    countNoDoubleLetterWords(2);
+    String test = "abc";
+    System.out.println(reverse(test));
+    //countNoDoubleLetterWords(2);
   }
+
+  public static String reverse(String s){
+    if (s.length() == 2) {
+      return s.substring(1) + s.substring(0, 1);
+    }
+    else {
+      return s.substring(s.length() - 1) + reverse(s.substring(1));
+    }
+  }
+}
+
+
+  /*
 
   public static void countNoDoubleLetterWords (int length) {
     System.out.println(countNoDoubleLetterWords(length, ""));
   }
 
-  public static long countNoDoubleLetterWords(int length,String word){
+  public static long countNoDoubleLetterWords(int length,String word) {
+    if(length == 0) {
+      System.out.println(word);
+    }
+    else {
+      for (int i = 0; i < letters.length; i++) {
+        int lastChar = word.length() - 1;
+        if (word.length() > 0 && word.charAt(lastChar) == letters[i]) {
+        }
+        else {
+          printNoDoubleLetterWords(length - 1 , word + letters[i], letters);
+        }
+      }
+    }
+  }
+
+*/
+
+
+  /*
     long combos = 0;
     if(length == 0) {
       return combos;
@@ -28,6 +62,7 @@ public class Recursion {
     }
     return combos;
   }
+  */
     /*
     else {
       for (int i = 0; i < letters.length; i++) {
@@ -76,4 +111,3 @@ public class Recursion {
     }
   }
   */
-}
