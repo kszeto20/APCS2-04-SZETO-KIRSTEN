@@ -27,7 +27,7 @@ public class Recursion {
   public static double sqrt(double n) {
     return sqrt(n, 1.0, 0.00001);
   }
-
+  
   public static double sqrt(double n, double guess, double tolerance) {
     if (Math.abs(guess * guess - n) <= tolerance) {
         return guess;
