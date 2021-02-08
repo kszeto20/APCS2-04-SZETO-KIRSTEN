@@ -1,18 +1,21 @@
 public class Recursion {
   public static void main (String[] args) {
-    String test = "abc";
+    String test = "how much money you got?";
     System.out.println(reverse(test));
+    System.out.println(reverse("a lot"));
     //countNoDoubleLetterWords(2);
   }
 
   public static String reverse(String s){
+    String test;
     if (s.length() == 2) {
       return s.substring(1) + s.substring(0, 1);
     }
     else {
-      return s.substring(s.length() - 1) + reverse(s.substring(1));
+      return reverse(s.substring(1)) + s.charAt(0);
     }
   }
+
 }
 
 
