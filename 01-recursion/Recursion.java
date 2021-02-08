@@ -12,8 +12,8 @@ public class Recursion {
     System.out.println(myTest);
     System.out.println(realAns);
     System.out.println(((myTest - realAns) < (realAns * 0.00001)));
+    System.out.println(countNoDoubleLetterWords(3));
     */
-    System.out.println(countNoDoubleLetterWords(2));
   }
 
   public static String reverse(String s){
@@ -42,21 +42,19 @@ public class Recursion {
   public static long countNoDoubleLetterWords(int length) {
     return countNoDoubleLetterWords(length, "");
   }
+
   public static long countNoDoubleLetterWords(int length,String word){
     long combos = 0;
     if(length == 0) {
-      combos++;
-      return combos;
+      //System.out.println(word);
+      return 1;
     }
-    else{
+    else {
       for (int i = 0; i < 26; i++) {
-
         int lastChar = word.length() - 1;
-        System.out.println("DEBUG: " + word + " | " + combos + "|");
-        if (word.length() > 0 && word.charAt(lastChar) == (char)(i)) {}
+        if (word.length() > 0 && (word.charAt(lastChar)) == (char)('a' + i)) {
+        }
         else {
-          //combos++;
-        //  System.out.println(combos);
           combos += countNoDoubleLetterWords(length - 1, word + (char)('a' + i));
         }
       }
@@ -64,39 +62,3 @@ public class Recursion {
     return combos;
   }
 }
-  /*
-  public static void printAllWords(int length) {
-    printAllWords(length, "");
-  }
-
-  public static void printAllWords(int length, String word) {
-    if(length == 0) {
-      System.out.println(word);
-    }
-    else{
-      for (int i = 0; i < 26; i++) {
-        printAllWords(length - 1, word + (char)('a' + i));
-      }
-    }
-  }
-
-  public static void printNoDoubleLetterWords(int length,char[] letters){
-    printNoDoubleLetterWords(length,"", letters);
-  }
-
-  public static void printNoDoubleLetterWords(int length, String word, char[]letters){
-    if(length == 0) {
-      System.out.println(word);
-    }
-    else {
-      for (int i = 0; i < letters.length; i++) {
-        int lastChar = word.length() - 1;
-        if (word.length() > 0 && word.charAt(lastChar) == letters[i]) {
-        }
-        else {
-          printNoDoubleLetterWords(length - 1 , word + letters[i], letters);
-        }
-      }
-    }
-  }
-  */
