@@ -43,16 +43,20 @@ public class Recursion {
     return countNoDoubleLetterWords(length, "");
   }
   public static long countNoDoubleLetterWords(int length,String word){
-    long combos = 1;
+    long combos = 0;
     if(length == 0) {
+      combos++;
       return combos;
     }
     else{
       for (int i = 0; i < 26; i++) {
+
         int lastChar = word.length() - 1;
-        if (word.length() > 0 && word.charAt(lastChar) == (char)('a')) {}
+        System.out.println("DEBUG: " + word + " | " + combos + "|");
+        if (word.length() > 0 && word.charAt(lastChar) == (char)(i)) {}
         else {
           //combos++;
+        //  System.out.println(combos);
           combos += countNoDoubleLetterWords(length - 1, word + (char)('a' + i));
         }
       }
