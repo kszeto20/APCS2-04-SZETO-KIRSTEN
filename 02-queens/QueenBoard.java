@@ -18,10 +18,10 @@ public class QueenBoard {
     }
 
     //check for toString
-    board[0][1] = -1;
-    board[1][3] = -1;
-    board[2][0] = -1;
-    board[3][2] = -1;
+    //board[0][1] = -1;
+    //board[1][3] = -1;
+    //board[2][0] = -1;
+    //board[3][2] = -1;
 
   }
 
@@ -61,7 +61,9 @@ public class QueenBoard {
   // personal methods
 
 //addQueen substitute
-  public boolean avail (int rowPotQueen, int colPotQueen) {
+// avail == the check
+// place == placement
+  public boolean addQueen (int rowPotQueen, int colPotQueen) {
     // Debug statement: System.out.println("DEBUG: " + board[0][2]);
     // rowPotQueen = row of potential queen
     // colPotQueen = column of potential queen
@@ -79,6 +81,13 @@ public class QueenBoard {
       return true;
     }
   }
+/*
+  public boolean avail (int rowPotQueen, int colPotQueen) {
+
+  }
+
+  public void
+  */
 /*
 
   //required methods
