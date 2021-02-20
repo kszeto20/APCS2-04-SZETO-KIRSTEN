@@ -2,9 +2,6 @@ import java.util.*;
 import java.util.Arrays;
 public class QueenBoard {
   public static void main (String args[]) {
-   QueenBoard test = new QueenBoard(6);
-   System.out.println();
-   System.out.println(test.avail(3, 3));
   }
   private int[][] board;
   //constructor
@@ -58,11 +55,16 @@ public class QueenBoard {
     return toRet;
   }
 
+  public boolean addQueen (int r, int c) {
+    if (avail(r,c)) {
+      board[r][c] = -1;
+      return true;
+    }
+    return false;
+  }
 
-//  public boolean addQueen (int rowPotQueen, int colPotQueen) {}
-// avail == the check
-// place == placement
-  public boolean avail (int rowPotQueen, int colPotQueen) {
+  private boolean avail (int rowPotQueen, int colPotQueen) {
+    // What does this do? --> Tells you whether a specified position is good to place a queen.
     // rowPotQueen = row of potential queen
     // colPotQueen = column of potential queen
     // board[row][column]
