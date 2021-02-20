@@ -25,15 +25,36 @@ public class QueenBoard {
     String toRet = "";
     for (int i = 0; i < board.length - 1; i++) {
       for (int j = 0; j < board.length - 1; j++) {
-        toRet += board[i][j] + ", ";
+        if (board[i][j] == -1) {
+          toRet += "Q ";
+        }
+        else {
+          toRet += "_ ";
+        }
+        //toRet += board[i][j] + ", ";
       }
-      toRet += board[i][board.length - 1];
-      toRet += "\n";
+      if (board[i][board.length - 1] == -1) {
+        toRet += "Q\n";
+      }
+      else {
+        toRet += "_\n";
+      }
+      //toRet += board[i][board.length - 1];
+      //toRet += "\n";
     }
-    for (int j = 0; j < board.length - 1; j++) {
-      toRet += board[board.length - 1][j] + ", ";
+    for (int j = 0; j < board.length; j++) {
+      if (board[board.length - 1][j] == -1) {
+        toRet += "Q ";
+      }
+      else {
+        toRet += "_ ";
+      }
+      //toRet += board[board.length - 1][j] + ", ";
     }
-    toRet += board[board.length - 1][board.length - 1];
+
+    //toRet += board[board.length - 1][board.length - 1];
+
+    // modify the String??
     return toRet;
   }
 
