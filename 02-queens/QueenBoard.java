@@ -2,12 +2,11 @@ import java.util.*;
 import java.util.Arrays;
 public class QueenBoard {
   public static void main (String args[]) {
-   QueenBoard test = new QueenBoard(4);
+   QueenBoard test = new QueenBoard(6);
    System.out.println();
-   System.out.println(test.avail(3, 0));
+   System.out.println(test.avail(1, 2));
   }
   private int[][] board;
-  private int n;
   //constructor
   public QueenBoard (int size) {
     board = new int[size][size];
@@ -18,11 +17,11 @@ public class QueenBoard {
     }
 
     //check for toString
-    //board[0][1] = -1;
-    //board[1][3] = -1;
-    //board[2][0] = -1;
-    //board[3][2] = -1;
-
+    //board[0][3] = -1;
+    //board[1][0] = -1;
+    board[2][4] = -1;
+    //board[3][1] = -1;
+    //board[4][5] = -1;
   }
 
 //only use to String after solve() is completed
@@ -58,48 +57,68 @@ public class QueenBoard {
     }
     return toRet;
   }
-  // personal methods
 
-//addQueen substitute
+
+//  public boolean addQueen (int rowPotQueen, int colPotQueen) {}
 // avail == the check
 // place == placement
-  public boolean addQueen (int rowPotQueen, int colPotQueen) {
-    // Debug statement: System.out.println("DEBUG: " + board[0][2]);
+  public boolean avail (int rowPotQueen, int colPotQueen) {
     // rowPotQueen = row of potential queen
     // colPotQueen = column of potential queen
     // board[row][column]
-    // given the column that I want to place, check the other columns in the same row.
+
+    // Mission: given the column that I want to place, check the other previous columns in row.
+      // row clear?
+    for (int col = 0; col < colPotQueen; col++) {
     // all squares with queens will have a -1
-      for (int col = 0; col < colPotQueen; col++) {
-
-        // row clear?
-        if (board[rowPotQueen][col] != 0) {
-          //Debug Statement: System.out.println("initialized");
-          return false;
-        }
+      if (board[rowPotQueen][col] == -1) {
+        System.out.println("row has queen");
+        return false;
       }
-      return true;
     }
+    // Mission: given a given a column I want to place, check the previous rows in the column.
+      // col clear?
+    for (int row = 0; row < rowPotQueen; row++) {
+      if (board[row][colPotQueen] ==  -1) {
+        System.out.println("col has queen");
+        return false;
+      }
+    }
+    // Mission: given a point(x,y) I want to make sure there is no queen on the left diagonal
+      // left diag clear?
+    for (int i = rowPotQueen; i >= 0; i--) {
+      for (int j = colPotQueen; j >= 0; j--) {
+       if (board[i][j] == -1) {
+         System.out.println("up to the left has queen");
+         return false;
+       }
+       if (j == 0) {
+         System.out.println("upper left is free");
+         return true;
+       }
+      }
+    }
+    // Mission: given a point(x,y) I want to make sure there is no queen on the right diagonal
+      // right diag clear?
+    for (int i = rowPotQueen; i < board.length; i++) {
+      for (int j = colPotQueen; j >= 0; j--) {
+       if (board[i][j] == -1) {
+         System.out.println("up to the right has queen");
+         return false;
+       }
+       if (j == board.length - 1) {
+         return true;
+       }
+      }
+    }
+    return true;
   }
+}
 /*
-  public boolean avail (int rowPotQueen, int colPotQueen) {
+Private methods (suggested):
+private boolean addQueen(int r, int c) adding a queen to a location may not be possible so we want to have a way to determine if it worked.
+private void removeQueen(int r, int c) removing a queen should always work
 
-  }
-
-  public void
-  */
-/*
-
-  //required methods
-  public boolean solve(int nQueens, int[][] board, int rows) {
-    // nQueens is the number of queens to be place
-    // row is the the row that we are currently solving for.
-    // board is the empty QueenBoard
-  }
-
-  public int countSolutions() {}
-
-
-  //suggested methods
-  private void removeQueen (int r, int c) {}
-    */
+public boolean solve(){}
+public int countSolutions(){}
+*/
