@@ -4,7 +4,7 @@ public class QueenBoard {
   public static void main (String args[]) {
    QueenBoard test = new QueenBoard(4);
    System.out.println();
-   System.out.println(avail(test.getBoard(), 3, 3));
+   System.out.println(test.avail(3, 0));
   }
   private int[][] board;
   private int n;
@@ -16,21 +16,21 @@ public class QueenBoard {
         board[i][j] = 0;
       }
     }
-    /*
-    check for toString
+
+    //check for toString
     board[0][1] = -1;
     board[1][3] = -1;
     board[2][0] = -1;
     board[3][2] = -1;
-    */
+
   }
 
-  public int[][] getBoard() {
-    return board;
-  }
+//only use to String after solve() is completed
   public String toString() {
     String toRet = "";
+    //all rows except last
     for (int i = 0; i < board.length - 1; i++) {
+      //all columns except last
       for (int j = 0; j < board.length - 1; j++) {
         if (board[i][j] == -1) {
           toRet += "Q ";
@@ -38,17 +38,16 @@ public class QueenBoard {
         else {
           toRet += "_ ";
         }
-        //toRet += board[i][j] + ", ";
       }
+      //last columns of all rows
       if (board[i][board.length - 1] == -1) {
         toRet += "Q\n";
       }
       else {
         toRet += "_\n";
       }
-      //toRet += board[i][board.length - 1];
-      //toRet += "\n";
     }
+    //last row
     for (int j = 0; j < board.length; j++) {
       if (board[board.length - 1][j] == -1) {
         toRet += "Q ";
@@ -56,85 +55,29 @@ public class QueenBoard {
       else {
         toRet += "_ ";
       }
-      //toRet += board[board.length - 1][j] + ", ";
     }
-
-    //toRet += board[board.length - 1][board.length - 1];
-
-    // modify the String??
     return toRet;
   }
-
-  /*
-  public String toString() {
-    String toRet = "";
-    // convert to dash and Qs
-
-    char[][] print = new char[board.length][board.length];
-    for (int i = 0; i < board.length; i++) {
-      for (int j = 0; j < board.length; j++) {
-        if (board[i][j] != 0) {
-          print[i][j] = 'Q';
-        }
-        print[i][j] = '_';
-      }
-    }
-
-    for (int i = 0; i < print.length - 1; i++) {
-      for (int j = 0; j < print.length - 1; j++) {
-        toRet += print[i][j] + ", ";
-      }
-      toRet += print[i][print.length - 1];
-      toRet += "\n";
-    }
-    for (int j = 0; j < print.length - 1; j++) {
-      toRet += print[print.length - 1][j] + ", ";
-    }
-    toRet += print[print.length - 1][print.length - 1];
-
-
-    return toRet;
-  }
-  */
   // personal methods
 
-  public static boolean avail (int[][] board, int rowPotQueen, int colPotQueen) {
-      System.out.println("DEBUG: " + board[0][2]);
+//addQueen substitute
+  public boolean avail (int rowPotQueen, int colPotQueen) {
+    // Debug statement: System.out.println("DEBUG: " + board[0][2]);
     // rowPotQueen = row of potential queen
     // colPotQueen = column of potential queen
     // board[row][column]
     // given the column that I want to place, check the other columns in the same row.
     // all squares with queens will have a -1
-
       for (int col = 0; col < colPotQueen; col++) {
 
         // row clear?
         if (board[rowPotQueen][col] != 0) {
-          System.out.println("initialized");
+          //Debug Statement: System.out.println("initialized");
           return false;
         }
       }
       return true;
     }
-
-    /*
-    // board[] = row
-    // board[][] = column
-    for (int row = 0; row < board.length; row++) {
-      for (int col = 0; col < currentQueenCol; col++) {
-        // col free?
-        if (board[row][col] == board[row][currentQueenCol]) {
-          System.out.println("DEBUG: place | " + board[row][currentQueenCol]);
-          return false;
-        }
-        // same diag
-        if ((currentQueenCol - col) == Math.abs(board[row][col] - board[row][col])) {
-          return false;
-        }
-      }
-    }
-    return true;
-    */
   }
 /*
 
@@ -149,6 +92,5 @@ public class QueenBoard {
 
 
   //suggested methods
-  private boolean addQueen (int r, int c) {}
   private void removeQueen (int r, int c) {}
     */
