@@ -4,7 +4,7 @@ public class QueenBoard {
   public static void main (String args[]) {
    QueenBoard test = new QueenBoard(6);
    System.out.println();
-   System.out.println(test.avail(1, 2));
+   System.out.println(test.avail(3, 3));
   }
   private int[][] board;
   //constructor
@@ -18,7 +18,7 @@ public class QueenBoard {
 
     //check for toString
     //board[0][3] = -1;
-    //board[1][0] = -1;
+    board[1][0] = -1;
     board[2][4] = -1;
     //board[3][1] = -1;
     //board[4][5] = -1;
@@ -86,31 +86,20 @@ public class QueenBoard {
     }
     // Mission: given a point(x,y) I want to make sure there is no queen on the left diagonal
       // left diag clear?
-    for (int i = rowPotQueen; i >= 0; i--) {
-      for (int j = colPotQueen; j >= 0; j--) {
-       if (board[i][j] == -1) {
-         System.out.println("up to the left has queen");
-         return false;
-       }
-       if (j == 0) {
-         System.out.println("upper left is free");
-         return true;
-       }
+    for (int col = colPotQueen, row = rowPotQueen; col >= 0 && row >= 0; col--, row--) {
+      if (board[row][col] == -1) {
+        System.out.println("upper left has queen");
+        return false;
       }
     }
     // Mission: given a point(x,y) I want to make sure there is no queen on the right diagonal
       // right diag clear?
-    for (int i = rowPotQueen; i < board.length; i++) {
-      for (int j = colPotQueen; j >= 0; j--) {
-       if (board[i][j] == -1) {
-         System.out.println("up to the right has queen");
-         return false;
-       }
-       if (j == board.length - 1) {
-         return true;
-       }
+      for (int col = colPotQueen, row = rowPotQueen; col <= board.length && row >= 0; col++, row--) {
+        if (board[row][col] == -1) {
+          System.out.println("upper right has queen");
+          return false;
+        }
       }
-    }
     return true;
   }
 }
