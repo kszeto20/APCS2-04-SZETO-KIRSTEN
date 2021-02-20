@@ -16,6 +16,13 @@ public class QueenBoard {
         board[i][j] = 0;
       }
     }
+    /*
+    check for toString
+    board[0][1] = -1;
+    board[1][3] = -1;
+    board[2][0] = -1;
+    board[3][2] = -1;
+    */
   }
 
   public int[][] getBoard() {
