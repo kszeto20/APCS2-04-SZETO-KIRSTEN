@@ -63,6 +63,10 @@ public class QueenBoard {
     return false;
   }
 
+  public void removeQueen (int r, int c) {
+    board[r][c] = 0;
+  }
+
   private boolean avail (int rowPotQueen, int colPotQueen) {
     // What does this do? --> Tells you whether a specified position is good to place a queen.
     // rowPotQueen = row of potential queen
@@ -107,7 +111,6 @@ public class QueenBoard {
 }
 /*
 Private methods (suggested):
-private boolean addQueen(int r, int c) adding a queen to a location may not be possible so we want to have a way to determine if it worked.
 private void removeQueen(int r, int c) removing a queen should always work
 
 public boolean solve(){}

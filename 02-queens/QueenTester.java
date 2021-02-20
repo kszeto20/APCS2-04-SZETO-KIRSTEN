@@ -8,5 +8,8 @@ public class QueenTester {
     System.out.println();
     System.out.println(test.addQueen(3, 1));
     System.out.println(test.toString());
+    System.out.println("\n");
+    test.removeQueen(1, 0);
+    System.out.println(test.toString());
   }
 }
