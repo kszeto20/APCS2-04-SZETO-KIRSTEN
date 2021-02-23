@@ -47,26 +47,6 @@ public class QueenBoard {
     return false;
   }
 
-/*
-  public static boolean nQueen(int row, int numOfQ) {
-    int numOfQLeft = numOfQ;
-      if (numOfQueens==0) {
-        return true;
-      }
-      for (int i = 1; i <= NumOfQLeft; i++) {
-        if(addQueen(row, j, board, N)) {
-          board[row][j] = 1;
-
-          if (nQueen(row+1, n-1, N, board))
-            return true;
-
-          board[row][j] = 0; //backtracking
-        }
-    }
-    return false;
-    }
-    */
-
   public boolean addQueen (int r, int c) {
     if (avail(r,c)) {
       return true;
