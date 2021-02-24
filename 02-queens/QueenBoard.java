@@ -12,17 +12,14 @@ public class QueenBoard {
         board[i][j] = 0;
       }
     }
-
-    //check for toString
-    //board[0][3] = -1;
-    //board[1][0] = -1;
-    //board[2][4] = -1;
-    //board[3][1] = -1;
-    //board[4][5] = -1;
-    //board[5][2] = -1;
   }
 
   public boolean solve() {
+    for (int col = 0; col < board.length; col++) {
+      if (board[0][col] != 0) {
+        throw new IllegalStateException ("You have already solved this board");
+      }
+    }
     return (realSolve(0));
   }
 
@@ -43,28 +40,6 @@ public class QueenBoard {
     }
     return false;
   }
-    /*
-    int qLeft = qNum;
-    if (qLeft == 0) {
-      return true;
-    }
-    else {
-      for (int i = 0; i < qNum - 1; i++) {
-        System.out.println("new row");
-        for (int j = 0; j < qNum - 1; j++) {
-          System.out.println("new column");
-          if (addQueen(i, j)) {
-            System.out.println("adding");
-            board[i][j] = -1;
-            qLeft--;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  */
 
   public boolean addQueen (int r, int c) {
     if (avail(r,c)) {
@@ -88,7 +63,6 @@ public class QueenBoard {
     for (int col = 0; col < colPotQueen; col++) {
     // all squares with queens will have a -1
       if (board[rowPotQueen][col] == -1) {
-        System.out.println("row has queen");
         return false;
       }
     }
@@ -96,7 +70,6 @@ public class QueenBoard {
       // col clear?
     for (int row = 0; row < rowPotQueen; row++) {
       if (board[row][colPotQueen] ==  -1) {
-        System.out.println("col has queen");
         return false;
       }
     }
@@ -104,7 +77,6 @@ public class QueenBoard {
       // left diag clear?
     for (int col = colPotQueen, row = rowPotQueen; col >= 0 && row >= 0; col--, row--) {
       if (board[row][col] == -1) {
-        System.out.println("upper left has queen");
         return false;
       }
     }
@@ -112,15 +84,42 @@ public class QueenBoard {
       // right diag clear?
       for (int col = colPotQueen, row = rowPotQueen; row >= 0 && col <= board.length - 1; col++, row--) {
         if (board[row][col] == -1) {
-          System.out.println("upper right has queen");
           return false;
         }
       }
     return true;
   }
 
+  public int countSolutions(){
+    return realCount(0);
+  }
 
-  //only use to String after solve() is completed
+  public int realCount(int row) {
+
+    /*for (int col = 0; col < board.length; col++) {
+      if (board[0][col] != 0) {
+        throw new IllegalStateException ("You have already solved this board");
+      }
+    }
+    */
+    int total = 0;
+    if (row == board.length) {
+      return 1;
+    }
+    else {
+      for (int col = 0; col < board.length; col++) {
+        if (addQueen(row, col)) {
+          board[row][col] = -1;
+          total += realCount(row + 1);
+          board[row][col] = 0;
+        }
+      }
+    }
+    return total;
+  }
+
+
+
     public String toString() {
       String toRet = "";
       //all rows except last
@@ -154,9 +153,3 @@ public class QueenBoard {
       return toRet;
     }
 }
-/*
-
-
-public boolean solve(){}
-public int countSolutions(){}
-*/
