@@ -23,7 +23,7 @@ public class QueenBoard {
     return (realSolve(0));
   }
 
-  public boolean realSolve(int row) {
+  private boolean realSolve(int row) {
     if (row == board.length) {
       return true;
     }
@@ -41,14 +41,14 @@ public class QueenBoard {
     return false;
   }
 
-  public boolean addQueen (int r, int c) {
+  private boolean addQueen (int r, int c) {
     if (avail(r,c)) {
       return true;
     }
     return false;
   }
 
-  public void removeQueen (int r, int c) {
+  private void removeQueen (int r, int c) {
     board[r][c] = 0;
   }
 
@@ -91,17 +91,15 @@ public class QueenBoard {
   }
 
   public int countSolutions(){
-    return realCount(0);
-  }
-
-  public int realCount(int row) {
-
-    /*for (int col = 0; col < board.length; col++) {
+    for (int col = 0; col < board.length; col++) {
       if (board[0][col] != 0) {
         throw new IllegalStateException ("You have already solved this board");
       }
     }
-    */
+    return realCount(0);
+  }
+
+  private int realCount(int row) {
     int total = 0;
     if (row == board.length) {
       return 1;
@@ -111,7 +109,7 @@ public class QueenBoard {
         if (addQueen(row, col)) {
           board[row][col] = -1;
           total += realCount(row + 1);
-          board[row][col] = 0;
+          removeQueen(row, col);
         }
       }
     }
