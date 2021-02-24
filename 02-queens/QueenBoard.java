@@ -23,10 +23,27 @@ public class QueenBoard {
   }
 
   public boolean solve() {
-    return (realSolve(0, 0, board.length));
+    return (realSolve(0));
   }
 
-  public boolean realSolve(int row, int col, int qNum) {
+  public boolean realSolve(int row) {
+    if (row == board.length) {
+      return true;
+    }
+    else {
+      for (int col = 0; col < board.length; col++) {
+        if (addQueen(row, col)) {
+          board[row][col] = -1;
+          if (realSolve(row + 1)) {
+            return true;
+          }
+        }
+        board[row][col] = 0;
+      }
+    }
+    return false;
+  }
+    /*
     int qLeft = qNum;
     if (qLeft == 0) {
       return true;
@@ -46,6 +63,8 @@ public class QueenBoard {
     }
     return false;
   }
+
+  */
 
   public boolean addQueen (int r, int c) {
     if (avail(r,c)) {
