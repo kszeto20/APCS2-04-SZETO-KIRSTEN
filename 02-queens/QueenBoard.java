@@ -118,36 +118,36 @@ public class QueenBoard {
 
 
 
-    public String toString() {
-      String toRet = "";
-      //all rows except last
-      for (int i = 0; i < board.length - 1; i++) {
-        //all columns except last
-        for (int j = 0; j < board.length - 1; j++) {
-          if (board[i][j] == -1) {
-            toRet += "Q ";
-          }
-          else {
-            toRet += "_ ";
-          }
-        }
-        //last columns of all rows
-        if (board[i][board.length - 1] == -1) {
-          toRet += "Q\n";
-        }
-        else {
-          toRet += "_\n";
-        }
-      }
-      //last row
-      for (int j = 0; j < board.length; j++) {
-        if (board[board.length - 1][j] == -1) {
+  public String toString() {
+    String toRet = "";
+    //all rows except last
+    for (int i = 0; i < board.length - 1; i++) {
+      //all columns except last
+      for (int j = 0; j < board.length - 1; j++) {
+        if (board[i][j] == -1) {
           toRet += "Q ";
         }
         else {
           toRet += "_ ";
         }
       }
-      return toRet;
+      //last columns of all rows
+      if (board[i][board.length - 1] == -1) {
+        toRet += "Q\n";
+      }
+      else {
+        toRet += "_\n";
+      }
     }
+    //last row
+    for (int j = 0; j < board.length; j++) {
+      if (board[board.length - 1][j] == -1) {
+        toRet += "Q ";
+      }
+      else {
+        toRet += "_ ";
+      }
+    }
+    return toRet;
+  }
 }
