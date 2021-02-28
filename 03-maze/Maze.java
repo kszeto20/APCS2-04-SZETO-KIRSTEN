@@ -131,12 +131,53 @@ public class Maze{
   All visited spots that were not part of the solution are changed to '.'
   All visited spots that are part of the solution are changed to '@'
   */
+
+
+  private int solve(int row, int col){ //you can add more parameters since this is private
+  //automatic animation! You are welcome.
+  int stepCount = 0;
+
+  if(animate){
+    gotoTop();
+    System.out.println(this);
+    wait(1000);
+  }
+
+  if (maze[row][col] == 'E') {
+    return stepCount;
+  }
+  else if (safe(row, col)) {
+    maze[row][col] = '@';
+    stepCount += 1;
+
+    if (safe(row, col + 1)) {
+      System.out.println("Going right");
+      stepCount += 1;
+      return solve(row, col + 1);
+    }
+    else if (safe(row + 1, col)) {
+      System.out.println("Going up");
+      stepCount += 1;
+      return solve(row + 1, col);
+    }
+  }
+  else {
+    maze[row][col] = '.';
+    stepCount = stepCount - 1;
+  }
+  //COMPLETE SOLVE
+  return stepCount; //so it compiles
+}
+
+/*
+
+  int stepCount = 0;
   private int solve(int row, int col){ //you can add more parameters since this is private
   //automatic animation! You are welcome.
   if(animate){
     gotoTop();
     System.out.println(this);
-    wait(50);
+    wait(1000);
   }
 
   int stepCount = 0;
@@ -150,21 +191,23 @@ public class Maze{
     stepCount += 1;
   }
 
-  if (safe(row + 1, col)) {
-    System.out.println("Going up");
-    return solve(row + 1, col);
-  }
-  else if (safe(row, col + 1)) {
+  if (safe(row, col + 1)) {
     System.out.println("Going right");
+    stepCount += 1;
     return solve(row, col + 1);
   }
+  else if (safe(row + 1, col)) {
+    System.out.println("Going up");
+    stepCount += 1;
+    return solve(row + 1, col);
+  }
   maze[row][col] = '.';
-  stepCount -= 1;
+  stepCount = stepCount - 1;
 
     //COMPLETE SOLVE
-  return -1; //so it compiles
+  return stepCount; //so it compiles
   }
-
+*/
   private boolean safe(int row, int col) {
 
     if (maze[row][col] != 'S' && maze[row][col] != 'E') {
