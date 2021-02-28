@@ -151,8 +151,8 @@ public class Maze{
   }
 
   if (safe(row + 1, col)) {
-    return solve(row + 1, col);
     System.out.println("Going up");
+    return solve(row + 1, col);
   }
   else if (safe(row, col + 1)) {
     System.out.println("Going right");
