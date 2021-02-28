@@ -4,6 +4,8 @@ public class Maze{
 
   private char[][]maze;
   private boolean animate; //false by default
+  private int startR;
+  private int startC;
 
   /*
   Constructor loads a maze text file, and sets animate to false by default.
@@ -44,6 +46,15 @@ public class Maze{
       for (int j = 0; j < maze[0].length; j++) {
         if (!(maze[i][j] == 'S' || maze[i][j] == 'E' || maze[i][j] == '#')) {
           maze[i][j] = 0;
+        }
+      }
+    }
+
+    for (int i = 0; i < maze.length; i++) {
+      for (int j = 0; j < maze[0].length; j++) {
+        if (maze[i][j] == 'S') {
+          startR = i;
+          startC = j;
         }
       }
     }
@@ -101,13 +112,9 @@ public class Maze{
     if(animate){
       clearTerminal();
     }
-    //return solve(0, 0);
+    return solve(startR, startC);
     //start solving at the location of the s.
     //return solve(???,???);
-    if (safe(5,1)) {
-      return 123;
-    }
-    return 456;
   }
 
   /*
@@ -124,7 +131,6 @@ public class Maze{
   All visited spots that were not part of the solution are changed to '.'
   All visited spots that are part of the solution are changed to '@'
   */
-/*
   private int solve(int row, int col){ //you can add more parameters since this is private
   //automatic animation! You are welcome.
   if(animate){
@@ -133,42 +139,29 @@ public class Maze{
     wait(50);
   }
 
-  int stepCount;
+  int stepCount = 0;
 
-  int sRow = row;
-  int sCol = col;
-
-  for (int i = 0; i < maze.length; i++) {
-    for (int j = 0; j < maze[0].length; j++) {
-      if (maze[i][j] == 'S') {
-        sRow = i;
-        sCol = j;
-      }
-    }
-  }
-
-  int cRow = sRow;
-  int cCol = sCol;
-
-  int tRow = cRow;
-  int tCol = cCol;
-
-  if (maze[cRow][cCol] == 'E') {
+  if (maze[row][col] == 'E') {
     return stepCount;
   }
-  else {
-    if (maze[cRow + 1][cCol] == '0') {
 
-    }
+  if (safe(row, col)) {
+    maze[row][col] = '@';
+    stepCount += 1;
   }
 
-  //char startPoint = maze[][]
+  if (safe(row + 1, col)) {
+    return solve(row + 1, col);
+  }
+  else if (safe(row, col + 1)) {
+    return solve(row, col + 1);
+  }
+  maze[row][col] = '.';
+  stepCount -= 1;
 
     //COMPLETE SOLVE
-    return -1; //so it compiles
-    }
+  return -1; //so it compiles
   }
-  */
 
   private boolean safe(int row, int col) {
 
