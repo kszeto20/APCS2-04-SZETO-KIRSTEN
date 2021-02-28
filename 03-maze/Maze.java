@@ -2,25 +2,46 @@ import java.util.*;
 import java.io.*;
 public class Maze{
 
-private char[][]maze;
-private boolean animate;//false by default
+  private char[][]maze;
+  private boolean animate; //false by default
 
-/*Constructor loads a maze text file, and sets animate to false by default.
-When the file is not found then:
-throw a FileNotFoundException
+  /*
+  Constructor loads a maze text file, and sets animate to false by default.
+  When the file is not found then:
+  throw a FileNotFoundException
 
-You may assume the file contains a rectangular ascii maze, made with the following 4 characters:
-'#' - Walls - locations that cannot be moved onto
-' ' - Empty Space - locations that can be moved onto
-'E' - the location of the goal (exactly 1 per file)
-'S' - the location of the start(exactly 1 per file)
+  You may assume the file contains a rectangular ascii maze, made with the following 4 characters:
+  '#' - Walls - locations that cannot be moved onto
+  ' ' - Empty Space - locations that can be moved onto
+  'E' - the location of the goal (exactly 1 per file)
+  'S' - the location of the start(exactly 1 per file)
 
-You may also assume the maze has a border of '#' around the edges.
-So you don't have to check for out of bounds!
-*/
+  You may also assume the maze has a border of '#' around the edges.
+  So you don't have to check for out of bounds!
+  */
+
   public Maze(String filename) throws FileNotFoundException{
-    //COMPLETE CONSTRUCTOR
+
+    File n = new File(filename);
+    Scanner l = new Scanner(n);
+    int rowCount = 0;
+    String line = "";
+
+    while (l.hasNextLine()) {
+      line = l.nextLine();
+      rowCount++;
+    }
+    maze = new char[rowCount][];
+
+    Scanner sec = new Scanner(n);
+
+    for (int i = 0; i < maze.length; i++) {
+      String toAdd = sec.nextLine();
+      maze[i] = toAdd.toCharArray();
+    }
+    animate = true;
   }
+
 
   private void wait(int millis){
     try {
@@ -49,7 +70,17 @@ So you don't have to check for out of bounds!
   */
 
   public String toString(){
-    return "WRITE THIS METHOD";
+    String toRet = "";
+    for (int i = 0; i < maze.length - 1; i++) {
+      for (int j = 0; j < maze[0].length; j++) {
+        toRet += maze[i][j];
+      }
+      toRet += "\n";
+    }
+    for (int k = 0; k < maze[0].length; k++) {
+      toRet += maze[maze.length - 1][k];
+    }
+    return toRet;
   }
 
   /*Wrapper Solve Function returns the helper function
@@ -95,3 +126,15 @@ So you don't have to check for out of bounds!
     return -1; //so it compiles
     }
   }
+
+
+  /*
+  Parts to Code:
+   - constructor       DONE
+   - toString          DONE
+   - solve (wrapper)
+   - solve (helper)
+
+
+
+  */
