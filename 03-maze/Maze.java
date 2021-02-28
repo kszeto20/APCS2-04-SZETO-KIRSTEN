@@ -104,7 +104,7 @@ public class Maze{
     //return solve(0, 0);
     //start solving at the location of the s.
     //return solve(???,???);
-    if (safe(1,1)) {
+    if (safe(5,1)) {
       return 123;
     }
     return 456;
@@ -171,14 +171,17 @@ public class Maze{
   */
 
   private boolean safe(int row, int col) {
-    if (maze[row][col] == 0) {
-      return true;
+
+    if (maze[row][col] != 'S' && maze[row][col] != 'E') {
+      if (maze[row][col] != 0) {
+        return false;
+      }
     }
-    else {
-      return false;
-    }
+    return true;
   }
 }
+
+// note fix is safe "if statement"
   /*
   Parts to Code:
    - constructor       DONE
