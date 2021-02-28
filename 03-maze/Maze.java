@@ -11,13 +11,11 @@ public class Maze{
   Constructor loads a maze text file, and sets animate to false by default.
   When the file is not found then:
   throw a FileNotFoundException
-
   You may assume the file contains a rectangular ascii maze, made with the following 4 characters:
   '#' - Walls - locations that cannot be moved onto
   ' ' - Empty Space - locations that can be moved onto
   'E' - the location of the goal (exactly 1 per file)
   'S' - the location of the start(exactly 1 per file)
-
   You may also assume the maze has a border of '#' around the edges.
   So you don't have to check for out of bounds!
   */
@@ -119,12 +117,9 @@ public class Maze{
 
   /*
   Recursive Solve function:
-
   A solved maze has a path marked with '@' from S to E.
-
   Returns the number of @ symbols from S to E when the maze is solved,
   Returns -1 when the maze has no solution.
-
   Postcondition:
   The 'S' is replaced with '@'
   The 'E' remain the same
@@ -140,74 +135,36 @@ public class Maze{
   if(animate){
     gotoTop();
     System.out.println(this);
-    wait(1000);
+    wait(100);
   }
 
-  if (maze[row][col] == 'E') {
-    return stepCount;
-  }
-  else if (safe(row, col)) {
+  if (safe(row - 1, col)) {
     maze[row][col] = '@';
-    stepCount += 1;
-
-    if (safe(row, col + 1)) {
-      System.out.println("Going right");
-      stepCount += 1;
-      return solve(row, col + 1);
-    }
-    else if (safe(row + 1, col)) {
-      System.out.println("Going up");
-      stepCount += 1;
-      return solve(row + 1, col);
-    }
+    solve(row - 1, col);
   }
-  else {
-    maze[row][col] = '.';
-    stepCount = stepCount - 1;
-  }
-  //COMPLETE SOLVE
-  return stepCount; //so it compiles
-}
-
-/*
-
-  int stepCount = 0;
-  private int solve(int row, int col){ //you can add more parameters since this is private
-  //automatic animation! You are welcome.
-  if(animate){
-    gotoTop();
-    System.out.println(this);
-    wait(1000);
-  }
-
-  int stepCount = 0;
-
-  if (maze[row][col] == 'E') {
-    return stepCount;
-  }
-
-  if (safe(row, col)) {
-    maze[row][col] = '@';
-    stepCount += 1;
-  }
-
   if (safe(row, col + 1)) {
-    System.out.println("Going right");
-    stepCount += 1;
-    return solve(row, col + 1);
+    maze[row][col] = '@';
+    solve(row, col + 1);
   }
-  else if (safe(row + 1, col)) {
-    System.out.println("Going up");
-    stepCount += 1;
-    return solve(row + 1, col);
+  if (safe(row + 1, col)) {
+    maze[row][col] = '@';
+    solve(row + 1, col);
+  }
+  if (safe(row, col - 1)) {
+    maze[row][col] = '@';
+    solve(row, col - 1);
   }
   maze[row][col] = '.';
-  stepCount = stepCount - 1;
-
-    //COMPLETE SOLVE
-  return stepCount; //so it compiles
+  for (int i = 0; i < maze.length; i++) {
+    for (int j = 0; j < maze[0].length; j++) {
+      if (maze[i][j] == '@') {
+        stepCount++;
+      }
+    }
   }
-*/
+  return stepCount;
+}
+
   private boolean safe(int row, int col) {
 
     if (maze[row][col] != 'S' && maze[row][col] != 'E') {
@@ -226,7 +183,4 @@ public class Maze{
    - toString          DONE
    - solve (wrapper)   DONE
    - solve (helper)
-
-
-
   */
