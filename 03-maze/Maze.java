@@ -43,7 +43,7 @@ public class Maze{
     for (int i = 0; i < maze.length; i++) {
       for (int j = 0; j < maze[0].length; j++) {
         if (!(maze[i][j] == 'S' || maze[i][j] == 'E' || maze[i][j] == '#')) {
-          maze[i][j] = 0;
+          maze[i][j] = ' ';
         }
       }
     }
@@ -135,40 +135,37 @@ public class Maze{
   if(animate){
     gotoTop();
     System.out.println(this);
-    wait(100);
+    wait(1000);
+  }
+
+  if (maze[row][col] == 'E') {
+    return 1;
   }
 
   if (safe(row - 1, col)) {
     maze[row][col] = '@';
-    solve(row - 1, col);
+    stepCount += solve(row - 1, col);
   }
   if (safe(row, col + 1)) {
     maze[row][col] = '@';
-    solve(row, col + 1);
+    stepCount += solve(row, col + 1);
   }
   if (safe(row + 1, col)) {
     maze[row][col] = '@';
-    solve(row + 1, col);
+    stepCount += solve(row + 1, col);
   }
   if (safe(row, col - 1)) {
     maze[row][col] = '@';
-    solve(row, col - 1);
+    stepCount += solve(row, col - 1);
   }
   maze[row][col] = '.';
-  for (int i = 0; i < maze.length; i++) {
-    for (int j = 0; j < maze[0].length; j++) {
-      if (maze[i][j] == '@') {
-        stepCount++;
-      }
-    }
-  }
-  return stepCount;
+  return -1;
 }
 
   private boolean safe(int row, int col) {
 
-    if (maze[row][col] != 'S' && maze[row][col] != 'E') {
-      if (maze[row][col] != 0) {
+    if (maze[row][col] != 'S' || maze[row][col] != 'E') {
+      if (maze[row][col] != ' ') {
         return false;
       }
     }
