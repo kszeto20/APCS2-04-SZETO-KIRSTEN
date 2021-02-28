@@ -39,7 +39,15 @@ public class Maze{
       String toAdd = sec.nextLine();
       maze[i] = toAdd.toCharArray();
     }
-    animate = true;
+
+    for (int i = 0; i < maze.length; i++) {
+      for (int j = 0; j < maze[0].length; j++) {
+        if (!(maze[i][j] == 'S' || maze[i][j] == 'E' || maze[i][j] == '#')) {
+          maze[i][j] = 0;
+        }
+      }
+    }
+
   }
 
 
@@ -93,10 +101,13 @@ public class Maze{
     if(animate){
       clearTerminal();
     }
-
+    //return solve(0, 0);
     //start solving at the location of the s.
     //return solve(???,???);
-    return 0;
+    if (safe(1,1)) {
+      return 123;
+    }
+    return 456;
   }
 
   /*
@@ -113,26 +124,66 @@ public class Maze{
   All visited spots that were not part of the solution are changed to '.'
   All visited spots that are part of the solution are changed to '@'
   */
-
+/*
   private int solve(int row, int col){ //you can add more parameters since this is private
   //automatic animation! You are welcome.
-    if(animate){
-      gotoTop();
-      System.out.println(this);
-      wait(50);
+  if(animate){
+    gotoTop();
+    System.out.println(this);
+    wait(50);
+  }
+
+  int stepCount;
+
+  int sRow = row;
+  int sCol = col;
+
+  for (int i = 0; i < maze.length; i++) {
+    for (int j = 0; j < maze[0].length; j++) {
+      if (maze[i][j] == 'S') {
+        sRow = i;
+        sCol = j;
+      }
     }
+  }
+
+  int cRow = sRow;
+  int cCol = sCol;
+
+  int tRow = cRow;
+  int tCol = cCol;
+
+  if (maze[cRow][cCol] == 'E') {
+    return stepCount;
+  }
+  else {
+    if (maze[cRow + 1][cCol] == '0') {
+
+    }
+  }
+
+  //char startPoint = maze[][]
 
     //COMPLETE SOLVE
     return -1; //so it compiles
     }
   }
+  */
 
-
+  private boolean safe(int row, int col) {
+    if (maze[row][col] == 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+}
   /*
   Parts to Code:
    - constructor       DONE
    - toString          DONE
-   - solve (wrapper)
+   - solve (wrapper)   DONE
    - solve (helper)
 
 
