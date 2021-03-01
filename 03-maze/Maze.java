@@ -89,6 +89,7 @@ private boolean isFound = false;
   */
 
   public String toString(){
+
     String toRet = "";
     for (int i = 0; i < maze.length - 1; i++) {
       for (int j = 0; j < maze[0].length; j++) {
@@ -135,7 +136,6 @@ private boolean isFound = false;
   private void solve(int row, int col){ //you can add more parameters since this is private
   //automatic animation! You are welcome.
 //  int stepCount = 0;
-
   if(animate){
     gotoTop();
     System.out.println(this);
@@ -144,8 +144,6 @@ private boolean isFound = false;
 
   if (maze[row][col] == 'E') {
 //    return 1;
-
-
     isFound = true;
   }
 
@@ -156,11 +154,6 @@ private boolean isFound = false;
     maze[row][col] = '.';
     stepCount--;
   }
-
-
-
-
-
 
   if (!isFound && safe(row - 1, col)) {
 //    maze[row][col] = '@';
@@ -183,27 +176,29 @@ private boolean isFound = false;
     solve(row, col - 1);
   }
 //    solve(row, col - 1);
-if (!isFound && safe(row, col - 1)) {
+if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#')) {
 //    maze[row][col] = '@';
 //    stepCount++;
-  solve(row, col - 1);
-}
-if (!isFound && safe(row + 1, col)) {
-//    maze[row][col] = '@';
-//    stepCount++;
-  solve(row + 1, col);
-}
-if (!isFound && safe(row, col + 1)) {
-//    maze[row][col] = '@';
-//    stepCount++;
+  maze[row][col] = '.';
   solve(row, col + 1);
 }
-
-
-if (!isFound && safe(row - 1, col)) {
+if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#')) {
 //    maze[row][col] = '@';
 //    stepCount++;
+  maze[row][col] = '.';
   solve(row - 1, col);
+}
+if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#')) {
+//    maze[row][col] = '@';
+//    stepCount++;
+  maze[row][col] = '.';
+  solve(row, col - 1);
+}
+if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#')) {
+//    maze[row][col] = '@';
+//    stepCount++;
+  maze[row][col] = '.';
+  solve(row + 1, col);
 }
 
 }
