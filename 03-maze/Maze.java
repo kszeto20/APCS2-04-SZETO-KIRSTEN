@@ -136,77 +136,72 @@ private boolean isFound = false;
   private void solve(int row, int col){ //you can add more parameters since this is private
   //automatic animation! You are welcome.
 //  int stepCount = 0;
-  if(animate){
-    gotoTop();
-    System.out.println(this);
-    wait(250);
-  }
+    if(animate){
+      gotoTop();
+      System.out.println(this);
+      wait(10);
+    }
 
-  if (maze[row][col] == 'E') {
-//    return 1;
-    isFound = true;
-  }
+    if (maze[row][col] == 'E') {
+  //    return 1;
+      isFound = true;
+    }
 
-  if (safe(row, col) && maze[row][col] != 'E') {
-    maze[row][col] = '@';
-    stepCount++;
-  } else if (!safe(row, col)){
+    if (safe(row, col) && maze[row][col] != 'E') {
+      maze[row][col] = '@';
+      stepCount++;
+    } else if (!safe(row, col)){
+      if (row == startR && col == startC) {
+        maze[row][col] = '@';
+      }
+      maze[row][col] = '.';
+      stepCount--;
+    }
+
+    if (!isFound && safe(row - 1, col)) {
+
+      solve(row - 1, col);
+    }
+    if (!isFound && safe(row, col + 1)) {
+
+      solve(row, col + 1);
+    }
+    if (!isFound && safe(row + 1, col)) {
+
+      solve(row + 1, col);
+    }
+    if (!isFound && safe(row, col - 1)) {
+
+      solve(row, col - 1);
+    }
+
+  if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#') && maze[row][col + 1] == '@') {
+
     maze[row][col] = '.';
-    stepCount--;
-  }
-
-  if (!isFound && safe(row - 1, col)) {
-//    maze[row][col] = '@';
-//    stepCount++;
-    solve(row - 1, col);
-  }
-  if (!isFound && safe(row, col + 1)) {
-//    maze[row][col] = '@';
-//    stepCount++;
     solve(row, col + 1);
   }
-  if (!isFound && safe(row + 1, col)) {
-//    maze[row][col] = '@';
-//    stepCount++;
-    solve(row + 1, col);
+  if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#') && maze[row - 1][col] == '@') {
+
+    maze[row][col] = '.';
+    solve(row - 1, col);
   }
-  if (!isFound && safe(row, col - 1)) {
-//    maze[row][col] = '@';
-//    stepCount++;
+  if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#') && maze[row][col - 1] == '@') {
+
+    maze[row][col] = '.';
     solve(row, col - 1);
   }
-//    solve(row, col - 1);
-if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#')) {
-//    maze[row][col] = '@';
-//    stepCount++;
-  maze[row][col] = '.';
-  solve(row, col + 1);
-}
-if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#')) {
-//    maze[row][col] = '@';
-//    stepCount++;
-  maze[row][col] = '.';
-  solve(row - 1, col);
-}
-if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#')) {
-//    maze[row][col] = '@';
-//    stepCount++;
-  maze[row][col] = '.';
-  solve(row, col - 1);
-}
-if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#')) {
-//    maze[row][col] = '@';
-//    stepCount++;
-  maze[row][col] = '.';
-  solve(row + 1, col);
-}
+  if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#') && maze[row + 1][col] == '@') {
+
+    maze[row][col] = '.';
+    solve(row + 1, col);
+  }
 
 }
 
   private boolean safe(int row, int col) {
     char c = maze[row][col];
 
-    if (c == 'S' || c == 'E' || c == ' ')
+    if (c == 'S' ||c == 'E' || c == ' ')
       return true;
     return false;
   }
@@ -218,5 +213,5 @@ if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#')) {
    - constructor       DONE
    - toString          DONE
    - solve (wrapper)   DONE
-   - solve (helper)
+   - solve (helper)    DONE
   */
