@@ -7,6 +7,8 @@ public class Maze{
   private int startR;
   private int startC;
 
+private int stepCount = 1;
+private boolean isFound = false;
   /*
   Constructor loads a maze text file, and sets animate to false by default.
   When the file is not found then:
@@ -110,7 +112,9 @@ public class Maze{
     if(animate){
       clearTerminal();
     }
-    return solve(startR, startC);
+    solve(startR, startC);
+
+    return stepCount;
     //start solving at the location of the s.
     //return solve(???,???);
   }
@@ -128,48 +132,88 @@ public class Maze{
   */
 
 
-  private int solve(int row, int col){ //you can add more parameters since this is private
+  private void solve(int row, int col){ //you can add more parameters since this is private
   //automatic animation! You are welcome.
-  int stepCount = 0;
+//  int stepCount = 0;
 
   if(animate){
     gotoTop();
     System.out.println(this);
-    wait(1000);
+    wait(250);
   }
 
   if (maze[row][col] == 'E') {
-    return 1;
+//    return 1;
+
+
+    isFound = true;
   }
 
-  if (safe(row - 1, col)) {
+  if (safe(row, col) && maze[row][col] != 'E') {
     maze[row][col] = '@';
-    stepCount += solve(row - 1, col);
+    stepCount++;
+  } else if (!safe(row, col)){
+    maze[row][col] = '.';
+    stepCount--;
   }
-  if (safe(row, col + 1)) {
-    maze[row][col] = '@';
-    stepCount += solve(row, col + 1);
+
+
+
+
+
+
+  if (!isFound && safe(row - 1, col)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+    solve(row - 1, col);
   }
-  if (safe(row + 1, col)) {
-    maze[row][col] = '@';
-    stepCount += solve(row + 1, col);
+  if (!isFound && safe(row, col + 1)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+    solve(row, col + 1);
   }
-  if (safe(row, col - 1)) {
-    maze[row][col] = '@';
-    stepCount += solve(row, col - 1);
+  if (!isFound && safe(row + 1, col)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+    solve(row + 1, col);
   }
-  maze[row][col] = '.';
-  return -1;
+  if (!isFound && safe(row, col - 1)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+    solve(row, col - 1);
+  }
+//    solve(row, col - 1);
+if (!isFound && safe(row, col - 1)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+  solve(row, col - 1);
+}
+if (!isFound && safe(row + 1, col)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+  solve(row + 1, col);
+}
+if (!isFound && safe(row, col + 1)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+  solve(row, col + 1);
+}
+
+
+if (!isFound && safe(row - 1, col)) {
+//    maze[row][col] = '@';
+//    stepCount++;
+  solve(row - 1, col);
+}
+
 }
 
   private boolean safe(int row, int col) {
+    char c = maze[row][col];
 
-    if (maze[row][col] != 'S' || maze[row][col] != 'E') {
-      if (maze[row][col] != ' ') {
-        return false;
-      }
-    }
-    return true;
+    if (c == 'S' || c == 'E' || c == ' ')
+      return true;
+    return false;
   }
 }
 
