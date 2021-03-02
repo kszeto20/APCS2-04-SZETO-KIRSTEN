@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 public class MazeGenerator {
 
-
   public static void generate(char[][] maze, int x, int y, int row, int column) {
     // place
     maze[row][column] = ' ';
@@ -11,7 +10,7 @@ public class MazeGenerator {
     int[] poss = {0, 1, 2, 3};
     for(int i = 0; i < poss.length; i++) {
       Random r = new Random();
-      int j = Math.abs(r.nextInt(4));
+      int j = (r.nextInt(4));
       //switch
       int hold = poss[i];
       poss[i] = poss[j];
@@ -21,24 +20,24 @@ public class MazeGenerator {
     //check + recursion
     for(int i = 0; i < poss.length; i++) {
       int random = poss[i];
-      if(random == 0) {
+      if (random == 0){
+        if(safe(maze, row - 1, column)) {
+          generate(maze, 0, 0, row - 1, column);
+        }
+      }
+      if(random == 1) {
         if(safe(maze, row, column + 1)) {
           generate(maze, 0, 0, row, column + 1);
         }
       }
-      if(random == 1) {
-        if(safe(maze, row + 1, column)) {
-          generate(maze, 0, 0, row + 1, column);
-        }
-      }
-      if(random == 2) {
+      if(random == 3) {
         if(safe(maze, row, column - 1)) {
           generate(maze, 0, 0, row, column - 1);
         }
       }
-      if (random == 3){
-        if(safe(maze, row - 1, column)) {
-          generate(maze, 0, 0, row - 1, column);
+      if(random == 2) {
+        if(safe(maze, row + 1, column)) {
+          generate(maze, 0, 0, row + 1, column);
         }
       }
     }
@@ -74,7 +73,6 @@ public class MazeGenerator {
     else {
       return true;
     }
-
   }
 
   public static String toString(char[][] maze) {

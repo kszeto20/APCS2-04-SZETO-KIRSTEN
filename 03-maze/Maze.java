@@ -135,7 +135,6 @@ public class Maze{
 
   private void solve(int row, int col){ //you can add more parameters since this is private
   //automatic animation! You are welcome.
-//  int stepCount = 0;
     if(animate){
       gotoTop();
       System.out.println(this);
@@ -143,7 +142,6 @@ public class Maze{
     }
 
     if (maze[row][col] == 'E') {
-  //    return 1;
       isFound = true;
     }
 
