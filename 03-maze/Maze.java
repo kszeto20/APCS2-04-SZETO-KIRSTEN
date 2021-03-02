@@ -7,8 +7,8 @@ public class Maze{
   private int startR;
   private int startC;
 
-private int stepCount = 0;
-private boolean isFound = false;
+  private int stepCount = 0;
+  private boolean isFound = false;
   /*
   Constructor loads a maze text file, and sets animate to false by default.
   When the file is not found then:
@@ -139,7 +139,7 @@ private boolean isFound = false;
     if(animate){
       gotoTop();
       System.out.println(this);
-      wait(250);
+      wait(10);
     }
 
     if (maze[row][col] == 'E') {
@@ -189,25 +189,30 @@ System.out.println(row + "," + col + "->.");
       solve(row, col - 1);
     }
 
-  if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#') && (maze[row][col + 1] == '@' || maze[row][col + 1] == ' ')) {
+
+  if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#')
+    && (maze[row][col + 1] == '@' || maze[row][col + 1] == ' ')) {
 
     maze[row][col] = '.';
     stepCount--;
     solve(row, col + 1);
   }
-  if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#') && (maze[row - 1][col] == '@' || maze[row - 1][col] == ' ')) {
+  if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#')
+    && (maze[row - 1][col] == '@' || maze[row - 1][col] == ' ')) {
 
     maze[row][col] = '.';
     stepCount--;
     solve(row - 1, col);
   }
-  if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#') && (maze[row][col - 1] == '@' || maze[row][col - 1] == ' ')) {
+  if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#')
+    && (maze[row][col - 1] == '@' || maze[row][col - 1] == ' ')) {
 
     maze[row][col] = '.';
     stepCount--;
     solve(row, col - 1);
   }
-  if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#') && (maze[row + 1][col] == '@' || maze[row + 1][col] == ' ')) {
+  if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#')
+    && (maze[row + 1][col] == '@' || maze[row + 1][col] == ' ')) {
 
     maze[row][col] = '.';
     stepCount--;
@@ -219,23 +224,9 @@ System.out.println(row + "," + col + "->.");
   private boolean safe(int row, int col) {
     char c = maze[row][col];
 
-    if (c == 'S' ||c == 'E' || c == ' ')
+    if (c == 'S' ||c == 'E' || c == ' ') {
       return true;
+    }
     return false;
   }
 }
-
-// note fix is safe "if statement"
-  /*
-  Parts to Code:
-   - constructor       DONE
-   - toString          DONE
-   - solve (wrapper)   DONE
-   - solve (helper)
-
-
-   TO DO:
-   stop S from becoming dot
-   correct count
-   make sure twice recursed points dont get left as dot
-  */
