@@ -13,6 +13,7 @@ public class MazeGenerator {
       Random r = new Random();
       int j = Math.abs(r.nextInt(4));
       int hold = poss[j];
+      poss[i] = hold;
     }
 
     //check + recursion
