@@ -172,7 +172,7 @@ System.out.println(row + "," + col + "->.");
       maze[row][col] = '@';
       stepCount++;
       solve(row - 1, col);
-    } else
+    }
     if (!isFound && safe(row, col + 1)) {
       maze[row][col] = '@';
       stepCount++;
@@ -182,7 +182,7 @@ System.out.println(row + "," + col + "->.");
       maze[row][col] = '@';
       stepCount++;
       solve(row + 1, col);
-    }else
+    }
     if (!isFound && safe(row, col - 1)) {
       maze[row][col] = '@';
       stepCount++;
@@ -194,7 +194,7 @@ System.out.println(row + "," + col + "->.");
     maze[row][col] = '.';
     stepCount--;
     solve(row, col + 1);
-  }else
+  }
   if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#') && (maze[row - 1][col] == '@' || maze[row - 1][col] == ' ')) {
 
     maze[row][col] = '.';
@@ -206,7 +206,7 @@ System.out.println(row + "," + col + "->.");
     maze[row][col] = '.';
     stepCount--;
     solve(row, col - 1);
-  }else
+  }
   if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#') && (maze[row + 1][col] == '@' || maze[row + 1][col] == ' ')) {
 
     maze[row][col] = '.';
