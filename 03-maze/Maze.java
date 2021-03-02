@@ -147,27 +147,6 @@ public class Maze{
       isFound = true;
     }
 
-    /*
-
-    if (safe(row, col) && maze[row][col] != 'E') {
-System.out.println(row + "," + col + "->@");
-      maze[row][col] = '@';
-      stepCount++;
-    } else if (!safe(row, col)){
-      if (row == startR && col == startC) {
-System.out.println(row + "," + col + "--->@");
-        maze[row][col] = '@';
-      } else {
-System.out.println(row + "," + col + "->.");
-        maze[row][col] = '.';
-      }
-      stepCount--;
-    }
-*/
-
-//System.out.println("STEPCOUNT: " + stepCount);
-
-
     if (!isFound && safe(row - 1, col)) {
       maze[row][col] = '@';
       stepCount++;
