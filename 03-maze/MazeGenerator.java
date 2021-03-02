@@ -12,8 +12,10 @@ public class MazeGenerator {
     for(int i = 0; i < poss.length; i++) {
       Random r = new Random();
       int j = Math.abs(r.nextInt(4));
-      int hold = poss[j];
-      poss[i] = hold;
+      //switch
+      int hold = poss[i];
+      poss[i] = poss[j];
+      poss[j] = hold;
     }
 
     //check + recursion
