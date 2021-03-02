@@ -7,7 +7,7 @@ public class Maze{
   private int startR;
   private int startC;
 
-private int stepCount = 1;
+private int stepCount = 0;
 private boolean isFound = false;
   /*
   Constructor loads a maze text file, and sets animate to false by default.
@@ -89,8 +89,8 @@ private boolean isFound = false;
   */
 
   public String toString(){
-
     String toRet = "";
+//    String toRet = "====\n";
     for (int i = 0; i < maze.length - 1; i++) {
       for (int j = 0; j < maze[0].length; j++) {
         toRet += maze[i][j];
@@ -147,52 +147,70 @@ private boolean isFound = false;
       isFound = true;
     }
 
+    /*
+
     if (safe(row, col) && maze[row][col] != 'E') {
+System.out.println(row + "," + col + "->@");
       maze[row][col] = '@';
       stepCount++;
     } else if (!safe(row, col)){
       if (row == startR && col == startC) {
+System.out.println(row + "," + col + "--->@");
         maze[row][col] = '@';
+      } else {
+System.out.println(row + "," + col + "->.");
+        maze[row][col] = '.';
       }
-      maze[row][col] = '.';
       stepCount--;
     }
+*/
+
+//System.out.println("STEPCOUNT: " + stepCount);
+
 
     if (!isFound && safe(row - 1, col)) {
-
+      maze[row][col] = '@';
+      stepCount++;
       solve(row - 1, col);
-    }
+    } else
     if (!isFound && safe(row, col + 1)) {
-
+      maze[row][col] = '@';
+      stepCount++;
       solve(row, col + 1);
     }
     if (!isFound && safe(row + 1, col)) {
-
+      maze[row][col] = '@';
+      stepCount++;
       solve(row + 1, col);
-    }
+    }else
     if (!isFound && safe(row, col - 1)) {
-
+      maze[row][col] = '@';
+      stepCount++;
       solve(row, col - 1);
     }
 
-  if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#') && maze[row][col + 1] == '@') {
+  if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#') && (maze[row][col + 1] == '@' || maze[row][col + 1] == ' ')) {
 
     maze[row][col] = '.';
+    stepCount--;
     solve(row, col + 1);
-  }
-  if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#') && maze[row - 1][col] == '@') {
+  }else
+  if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#') && (maze[row - 1][col] == '@' || maze[row - 1][col] == ' ')) {
 
     maze[row][col] = '.';
+    stepCount--;
     solve(row - 1, col);
   }
-  if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#') && maze[row][col - 1] == '@') {
+  if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#') && (maze[row][col - 1] == '@' || maze[row][col - 1] == ' ')) {
 
     maze[row][col] = '.';
+    stepCount--;
     solve(row, col - 1);
-  }
-  if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#') && maze[row + 1][col] == '@') {
+  }else
+  if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#') && (maze[row + 1][col] == '@' || maze[row + 1][col] == ' ')) {
 
     maze[row][col] = '.';
+    stepCount--;
     solve(row + 1, col);
   }
 
