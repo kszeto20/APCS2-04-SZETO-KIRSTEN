@@ -190,36 +190,36 @@ System.out.println(row + "," + col + "->.");
     }
 
 
-  if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#')
-    && (maze[row][col + 1] == '@' || maze[row][col + 1] == ' ')) {
+    if (!isFound && !safe(row, col - 1) && (maze[row][col + 1] != '#')
+      && (maze[row][col + 1] == '@' || maze[row][col + 1] == ' ')) {
 
-    maze[row][col] = '.';
-    stepCount--;
-    solve(row, col + 1);
+      maze[row][col] = '.';
+      stepCount--;
+      solve(row, col + 1);
+    }
+    if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#')
+      && (maze[row - 1][col] == '@' || maze[row - 1][col] == ' ')) {
+
+      maze[row][col] = '.';
+      stepCount--;
+      solve(row - 1, col);
+    }
+    if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#')
+      && (maze[row][col - 1] == '@' || maze[row][col - 1] == ' ')) {
+
+      maze[row][col] = '.';
+      stepCount--;
+      solve(row, col - 1);
+    }
+    if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#')
+      && (maze[row + 1][col] == '@' || maze[row + 1][col] == ' ')) {
+
+      maze[row][col] = '.';
+      stepCount--;
+      solve(row + 1, col);
+    }
+
   }
-  if (!isFound && !safe(row + 1, col) && (maze[row - 1][col] != '#')
-    && (maze[row - 1][col] == '@' || maze[row - 1][col] == ' ')) {
-
-    maze[row][col] = '.';
-    stepCount--;
-    solve(row - 1, col);
-  }
-  if (!isFound && !safe(row, col + 1) && (maze[row][col - 1] != '#')
-    && (maze[row][col - 1] == '@' || maze[row][col - 1] == ' ')) {
-
-    maze[row][col] = '.';
-    stepCount--;
-    solve(row, col - 1);
-  }
-  if (!isFound && !safe(row - 1, col) && (maze[row + 1][col] != '#')
-    && (maze[row + 1][col] == '@' || maze[row + 1][col] == ' ')) {
-
-    maze[row][col] = '.';
-    stepCount--;
-    solve(row + 1, col);
-  }
-
-}
 
   private boolean safe(int row, int col) {
     char c = maze[row][col];
