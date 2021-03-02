@@ -139,7 +139,7 @@ private boolean isFound = false;
     if(animate){
       gotoTop();
       System.out.println(this);
-      wait(10);
+      wait(250);
     }
 
     if (maze[row][col] == 'E') {
@@ -213,5 +213,11 @@ private boolean isFound = false;
    - constructor       DONE
    - toString          DONE
    - solve (wrapper)   DONE
-   - solve (helper)    DONE
+   - solve (helper)
+
+
+   TO DO:
+   stop S from becoming dot
+   correct count
+   make sure twice recursed points dont get left as dot
   */
