@@ -36,56 +36,59 @@ public class USACO {
         farm[i][j] = Integer.parseInt(elvFarm[j]);
       }
     }
-    // still need to implement stomp + direction reading
-    /*
+//    System.out.println("DEBUG : ");
+//    System.out.println(toString(farm) + "\n");
     for (int i = 0; i < numDir; i++) {
       String directions = l.nextLine();
       String[] indiDir = directions.split(" ");
-      cowRow = Integer.parseInt(indiDir[0]);
-      cowCol = Integer.parseInt(indiDir[1]);
+      cowRow = Integer.parseInt(indiDir[0]) - 1;
+      cowCol = Integer.parseInt(indiDir[1]) - 1;
       stompDown = Integer.parseInt(indiDir[2]);
+      System.out.println("DEBUG: before the stomp\n" + toString(farm));
+      stomp(farm, cowRow, cowCol, stompDown);
+      System.out.println("DEBUG: after the stomp\n" + toString(farm));
+      System.out.println("------------");
+    }
+    return 1;
+  }
 
+  private static void stomp(int[][] farm, int row, int col, int toStomp) {
+//    System.out.println(row + " | " + col);
+    int largest = 0;
+    for (int i = row; i < row + 3; i++) {
+      for (int j = col; j < col + 3; j++) {
+//        System.out.println("DEBUG:" + "row | " + i + " col | " + j);
+        if (farm[i][j] > largest) {
+          largest = farm[i][j];
+//          System.out.println("DEBUG: " + largest);
         }
-        */
-        return 1;
       }
     }
-
-
-//  private static void stomp
-/*
-File n = new File(filename);
-Scanner l = new Scanner(n);
-int rowCount = 0;
-String line = "";
-
-while (l.hasNextLine()) {
-  line = l.nextLine();
-  rowCount++;
-}
-maze = new char[rowCount][];
-
-Scanner sec = new Scanner(n);
-
-for (int i = 0; i < maze.length; i++) {
-  String toAdd = sec.nextLine();
-  maze[i] = toAdd.toCharArray();
-}
-
-for (int i = 0; i < maze.length; i++) {
-  for (int j = 0; j < maze[0].length; j++) {
-    if (!(maze[i][j] == 'S' || maze[i][j] == 'E' || maze[i][j] == '#')) {
-      maze[i][j] = ' ';
+//    System.out.println("DEBUG: " + largest);
+    int targetLevel = largest - toStomp;
+    for (int i = row; i < row + 3; i++) {
+      for (int j = col; j < col + 3; j++) {
+        if (farm[i][j] > targetLevel) {
+          farm[i][j] = targetLevel;
+        }
+      }
     }
   }
-}
 
-for (int i = 0; i < maze.length; i++) {
-  for (int j = 0; j < maze[0].length; j++) {
-    if (maze[i][j] == 'S') {
-      startR = i;
-      startC = j;
+  public static String toString(int[][] farm){
+    String toRet = "";
+  //    String toRet = "====\n";
+    for (int i = 0; i < farm.length - 1; i++) {
+      for (int j = 0; j < farm[0].length; j++) {
+        toRet += farm[i][j];
+        toRet += " ";
+      }
+      toRet += "\n";
     }
+    for (int k = 0; k < farm[0].length; k++) {
+      toRet += farm[farm.length - 1][k];
+      toRet += " ";
+    }
+    return toRet;
   }
 }
-*/
