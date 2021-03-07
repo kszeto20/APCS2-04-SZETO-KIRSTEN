@@ -44,10 +44,21 @@ public class USACO {
       cowRow = Integer.parseInt(indiDir[0]) - 1;
       cowCol = Integer.parseInt(indiDir[1]) - 1;
       stompDown = Integer.parseInt(indiDir[2]);
-      System.out.println("DEBUG: before the stomp\n" + toString(farm));
+//      System.out.println("DEBUG: before the stomp\n" + toString(farm));
       stomp(farm, cowRow, cowCol, stompDown);
-      System.out.println("DEBUG: after the stomp\n" + toString(farm));
-      System.out.println("------------");
+//      System.out.println("DEBUG: after the stomp\n" + toString(farm));
+//      System.out.println("------------");
+    }
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
+        int oldVal = farm[i][j];
+        if (oldVal > elv) {
+          farm[i][j] = 0;
+        }
+        else {
+          farm[i][j] = elv - oldVal;
+        }
+      }
     }
     return 1;
   }
