@@ -60,6 +60,7 @@ public class USACO {
         }
       }
     }
+    System.out.println(toString(farm));
     return 1;
   }
 
