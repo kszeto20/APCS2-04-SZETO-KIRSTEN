@@ -95,6 +95,50 @@ public class USACO {
     }
   }
 
+  public static long silver(String filename) throws FileNotFoundException{
+    File n = new File(filename);
+    Scanner l = new Scanner(n);
+
+    int row = 0;
+    int col = 0;
+    int time = 0;
+
+    int startR = 0;
+    int startC = 0;
+    int endR = 0;
+    int endC = 0;
+
+    String boardDim = l.nextLine();
+    String[] dim = boardDim.split(" ");
+    row = Integer.parseInt(dim[0]);
+    col = Integer.parseInt(dim[1]);
+    time = Integer.parseInt(dim[2]);
+
+    int[][] farm = new int[row][col];
+    // assigning board contents
+    for (int i = 0; i < row; i++) {
+      String lineI = l.nextLine();
+      for (int j = 0; j < col; j++) {
+        if (lineI.charAt(j) == '.') {
+          farm[i][j] = 0;
+        }
+        else if (lineI.charAt(j) == '*') {
+          farm[i][j] = -1;
+        }
+      }
+    }
+
+    // assigning start coord and end coord
+    String cowCor = l.nextLine();
+    String[] cors = cowCor.split(" ");
+    startR = Integer.parseInt(cors[0]);
+    startC = Integer.parseInt(cors[1]);
+    endR = Integer.parseInt(cors[2]);
+    endC = Integer.parseInt(cors[3]);
+//    System.out.println(toString(farm));
+    return 1;
+  }
+
   public static String toString(int[][] farm){
     String toRet = "";
   //    String toRet = "====\n";
