@@ -67,7 +67,6 @@ public class USACO {
         aggDepth += farm[i][j];
       }
     }
-
     // 72 is for 6ft by 6ft length and width
     return (aggDepth * 72 * 72);
   }
