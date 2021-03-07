@@ -1,34 +1,33 @@
 import java.util.*;
 import java.io.*;
 public class USACO {
-  public static void main(String[] args) {
-    System.out.println("hello");
-  }
-
 
   public static int bronze(String filename) throws FileNotFoundException {
     File n = new File(filename);
     Scanner l = new Scanner(n);
-    String line1 = "";
+
+    //board vars
     int row = 0;
     int col = 0;
     int elv = 0;
     int numDir = 0;
 
+    //cow pack vars
     int cowRow = 0;
     int cowCol = 0;
     int stompDown = 0;
-    line1 = l.nextLine();
+    String line1 = l.nextLine();
 
+    // assigning board vars
     String[] parts = line1.split(" ");
-
     row = Integer.parseInt(parts[0]);
     col = Integer.parseInt(parts[1]);
     elv = Integer.parseInt(parts[2]);
     numDir = Integer.parseInt(parts[3]);
 
+    //declaring board
     int[][] farm = new int[row][col];
-
+    // assigning board contents
     for (int i = 0; i < row; i++) {
       String lineI = l.nextLine();
       String[] elvFarm = lineI.split(" ");
@@ -36,19 +35,19 @@ public class USACO {
         farm[i][j] = Integer.parseInt(elvFarm[j]);
       }
     }
-//    System.out.println("DEBUG : ");
-//    System.out.println(toString(farm) + "\n");
+
+    // assigning direction vars per pass
     for (int i = 0; i < numDir; i++) {
       String directions = l.nextLine();
       String[] indiDir = directions.split(" ");
       cowRow = Integer.parseInt(indiDir[0]) - 1;
       cowCol = Integer.parseInt(indiDir[1]) - 1;
       stompDown = Integer.parseInt(indiDir[2]);
-//      System.out.println("DEBUG: before the stomp\n" + toString(farm));
+      // stomping with new directions
       stomp(farm, cowRow, cowCol, stompDown);
-//      System.out.println("DEBUG: after the stomp\n" + toString(farm));
-//      System.out.println("------------");
     }
+
+    // finding difference between dirt level and desired lake level
     for (int i = 0; i < row; i++) {
       for (int j = 0; j < col; j++) {
         int oldVal = farm[i][j];
@@ -60,14 +59,16 @@ public class USACO {
         }
       }
     }
-//    System.out.println(toString(farm));
+
+    // calculating space taken up by the lake
     int aggDepth = 0;
     for (int i = 0; i < row; i++) {
       for (int j = 0; j < col; j++) {
         aggDepth += farm[i][j];
       }
     }
-//    System.out.println(aggDepth);
+
+    // 72 is for 6ft by 6ft length and width
     return (aggDepth * 72 * 72);
   }
 
