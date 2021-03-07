@@ -60,9 +60,17 @@ public class USACO {
         }
       }
     }
-    System.out.println(toString(farm));
-    return 1;
+//    System.out.println(toString(farm));
+    int aggDepth = 0;
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
+        aggDepth += farm[i][j];
+      }
+    }
+//    System.out.println(aggDepth);
+    return (aggDepth * 72 * 72);
   }
+
 
   private static void stomp(int[][] farm, int row, int col, int toStomp) {
 //    System.out.println(row + " | " + col);
