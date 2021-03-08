@@ -77,14 +77,11 @@ public class USACO {
     int largest = 0;
     for (int i = row; i < row + 3; i++) {
       for (int j = col; j < col + 3; j++) {
-//        System.out.println("DEBUG:" + "row | " + i + " col | " + j);
         if (farm[i][j] > largest) {
           largest = farm[i][j];
-//          System.out.println("DEBUG: " + largest);
         }
       }
     }
-//    System.out.println("DEBUG: " + largest);
     int targetLevel = largest - toStomp;
     for (int i = row; i < row + 3; i++) {
       for (int j = col; j < col + 3; j++) {
@@ -135,17 +132,13 @@ public class USACO {
     startC = Integer.parseInt(cors[1]) - 1;
     endR = Integer.parseInt(cors[2]) - 1;
     endC = Integer.parseInt(cors[3]) - 1;
-//    System.out.println(toString(farm));
 
     int[][] baseClone = cloneMe(farm);
-//    System.out.println("DEBUG: THIS IS THE CLONE\n" + toString(baseClone));
     baseClone[startR][startC] = 1;
-//    System.out.println("initial\n" + toString(baseClone));
     for (int i = 0; i < time; i++) {
       baseClone = automate(baseClone);
-//      System.out.println(i + " run\n" + toString(baseClone) + "\n");
     }
-
+    //return count at end coordinate
     return baseClone[endR][endC];
   }
 
@@ -153,14 +146,11 @@ public class USACO {
     int[][] nextMap = cloneMe(curMap);
     for (int i = 0; i < curMap.length; i++) {
       for (int j = 0; j < curMap[0].length; j++) {
-//        System.out.println("DEBUG: " + i + " " + j + " " + curMap[i][j]);
         if (curMap[i][j] != -1) {
-//          System.out.println("DEBUG2: " + i + " " + j + " " + curMap[i][j]);
           nextMap[i][j] = applyRules(curMap, i, j);
         }
       }
     }
-//    System.out.println("DEBUG3: \n" + toString(nextMap));
     return nextMap;
   }
 
@@ -177,18 +167,21 @@ public class USACO {
       toRet.add(toAdd);
     }
     if (r + 1 <= rowCount - 1) {
+      // not at bottom, must check bottom.
       int toAdd[] = new int[2];
       toAdd[0] = r + 1;
       toAdd[1] = c;
       toRet.add(toAdd);
     }
     if (c - 1 >= 0) {
+      // not at left, must check left.
       int toAdd[] = new int[2];
       toAdd[0] = r;
       toAdd[1] = c - 1;
       toRet.add(toAdd);
     }
     if (c + 1 <= rowLength - 1) {
+      // not at right, must check right.
       int toAdd[] = new int[2];
       toAdd[0] = r;
       toAdd[1] = c + 1;
@@ -202,7 +195,6 @@ public class USACO {
     // to check what dir I need to add
     ArrayList<int[]> directions = whichDir(curMap, curRow, curCol);
     for (int i = 0; i < directions.size(); i++) {
-      // get the array of size 2
       int[] cors = directions.get(i);
       int row = cors[0];
       int col = cors[1];
@@ -226,11 +218,8 @@ public class USACO {
     return toRet;
   }
 
-
-
   public static String toString(int[][] farm){
     String toRet = "";
-  //    String toRet = "====\n";
     for (int i = 0; i < farm.length - 1; i++) {
       for (int j = 0; j < farm[0].length; j++) {
         toRet += farm[i][j];
