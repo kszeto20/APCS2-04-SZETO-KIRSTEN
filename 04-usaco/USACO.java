@@ -140,10 +140,10 @@ public class USACO {
     int[][] baseClone = cloneMe(farm);
 //    System.out.println("DEBUG: THIS IS THE CLONE\n" + toString(baseClone));
     baseClone[startR][startC] = 1;
-    System.out.println("initial\n" + toString(baseClone));
+//    System.out.println("initial\n" + toString(baseClone));
     for (int i = 0; i < time; i++) {
       baseClone = automate(baseClone);
-      System.out.println(i + " run\n" + toString(baseClone) + "\n");
+//      System.out.println(i + " run\n" + toString(baseClone) + "\n");
     }
 
     return baseClone[endR][endC];
@@ -160,7 +160,7 @@ public class USACO {
         }
       }
     }
-    System.out.println("DEBUG3: \n" + toString(nextMap));
+//    System.out.println("DEBUG3: \n" + toString(nextMap));
     return nextMap;
   }
 
