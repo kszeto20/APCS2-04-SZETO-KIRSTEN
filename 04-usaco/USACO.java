@@ -131,12 +131,82 @@ public class USACO {
     // assigning start coord and end coord
     String cowCor = l.nextLine();
     String[] cors = cowCor.split(" ");
-    startR = Integer.parseInt(cors[0]);
-    startC = Integer.parseInt(cors[1]);
-    endR = Integer.parseInt(cors[2]);
-    endC = Integer.parseInt(cors[3]);
+    startR = Integer.parseInt(cors[0]) - 1;
+    startC = Integer.parseInt(cors[1]) - 1;
+    endR = Integer.parseInt(cors[2]) - 1;
+    endC = Integer.parseInt(cors[3]) - 1;
 //    System.out.println(toString(farm));
-    return 1;
+    for (int i = 0; i < time; i++) {
+      System.out.println("initialized");
+      if (i == 0) {
+        farm[startR][startC] = 1;
+      }
+      farm = auto(farm);
+      System.out.println(toString(farm));
+    }
+
+    return farm[endR][endC];
+  }
+
+  private static int[][] auto (int[][] farm) {
+    int[][] mirror = new int[farm.length][farm[0].length];
+    for (int i = 0; i < farm.length; i++) {
+      for (int j = 0; j < farm[0].length; j++) {
+        int toRep = 0;
+        if (i == 0) {
+          System.out.println("checking top row");
+          if (j == 0) {
+            toRep += farm[i][j + 1];
+            toRep += farm[i + 1][j];
+          }
+          else if (j == farm[0].length - 1) {
+            toRep += farm[i][j - 1];
+            toRep += farm[i + 1][j];
+          }
+          else {
+            toRep += farm[i][j - 1];
+            toRep += farm[i + 1][j];
+            toRep += farm[i][j + 1];
+          }
+        }
+        else if (i == farm.length - 1){
+          System.out.println("checking bottom row");
+          if (j == 0) {
+            toRep += farm[i][j + 1];
+            toRep += farm[i - 1][j];
+          }
+          else if (j == farm[0].length - 1) {
+            toRep += farm[i][j - 1];
+            toRep += farm[i - 1][j];
+          }
+          else {
+            toRep += farm[i][j - 1];
+            toRep += farm[i - 1][j];
+            toRep += farm[i][j + 1];
+          }
+        }
+        else if (j == 0) {
+          System.out.println("checking left col");
+          toRep += farm[i + 1][j];
+          toRep += farm[i][j + 1];
+          toRep += farm[i - 1][j];
+        }
+        else if (j == farm[0].length - 1) {
+          System.out.println("checking right col");
+          toRep += farm[i - 1][j];
+          toRep += farm[i][j - 1];
+          toRep += farm[i + 1][j];
+        }
+        else {
+          toRep += farm[i - 1][j];
+          toRep += farm[i][j + 1];
+          toRep += farm[i + 1][j];
+          toRep += farm[i][j - 1];
+        }
+        mirror[i][j] = toRep;
+      }
+    }
+    return mirror;
   }
 
   public static String toString(int[][] farm){
