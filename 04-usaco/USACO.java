@@ -136,78 +136,97 @@ public class USACO {
     endR = Integer.parseInt(cors[2]) - 1;
     endC = Integer.parseInt(cors[3]) - 1;
 //    System.out.println(toString(farm));
+
+    int[][] baseClone = cloneMe(farm);
+//    System.out.println("DEBUG: THIS IS THE CLONE\n" + toString(baseClone));
+    baseClone[startR][startC] = 1;
+    System.out.println("initial\n" + toString(baseClone));
     for (int i = 0; i < time; i++) {
-      System.out.println("initialized");
-      if (i == 0) {
-        farm[startR][startC] = 1;
-      }
-      farm = auto(farm);
-      System.out.println(toString(farm));
+      baseClone = automate(baseClone);
+      System.out.println(i + " run\n" + toString(baseClone) + "\n");
     }
 
-    return farm[endR][endC];
+    return baseClone[endR][endC];
   }
 
-  private static int[][] auto (int[][] farm) {
-    int[][] mirror = new int[farm.length][farm[0].length];
-    for (int i = 0; i < farm.length; i++) {
-      for (int j = 0; j < farm[0].length; j++) {
-        int toRep = 0;
-        if (i == 0) {
-          System.out.println("checking top row");
-          if (j == 0) {
-            toRep += farm[i][j + 1];
-            toRep += farm[i + 1][j];
-          }
-          else if (j == farm[0].length - 1) {
-            toRep += farm[i][j - 1];
-            toRep += farm[i + 1][j];
-          }
-          else {
-            toRep += farm[i][j - 1];
-            toRep += farm[i + 1][j];
-            toRep += farm[i][j + 1];
-          }
+  private static int[][] automate (int[][] curMap) {
+    int[][] nextMap = cloneMe(curMap);
+    for (int i = 0; i < curMap.length; i++) {
+      for (int j = 0; j < curMap[0].length; j++) {
+//        System.out.println("DEBUG: " + i + " " + j + " " + curMap[i][j]);
+        if (curMap[i][j] != -1) {
+//          System.out.println("DEBUG2: " + i + " " + j + " " + curMap[i][j]);
+          nextMap[i][j] = applyRules(curMap, i, j);
         }
-        else if (i == farm.length - 1){
-          System.out.println("checking bottom row");
-          if (j == 0) {
-            toRep += farm[i][j + 1];
-            toRep += farm[i - 1][j];
-          }
-          else if (j == farm[0].length - 1) {
-            toRep += farm[i][j - 1];
-            toRep += farm[i - 1][j];
-          }
-          else {
-            toRep += farm[i][j - 1];
-            toRep += farm[i - 1][j];
-            toRep += farm[i][j + 1];
-          }
-        }
-        else if (j == 0) {
-          System.out.println("checking left col");
-          toRep += farm[i + 1][j];
-          toRep += farm[i][j + 1];
-          toRep += farm[i - 1][j];
-        }
-        else if (j == farm[0].length - 1) {
-          System.out.println("checking right col");
-          toRep += farm[i - 1][j];
-          toRep += farm[i][j - 1];
-          toRep += farm[i + 1][j];
-        }
-        else {
-          toRep += farm[i - 1][j];
-          toRep += farm[i][j + 1];
-          toRep += farm[i + 1][j];
-          toRep += farm[i][j - 1];
-        }
-        mirror[i][j] = toRep;
       }
     }
-    return mirror;
+    System.out.println("DEBUG3: \n" + toString(nextMap));
+    return nextMap;
   }
+
+  private static ArrayList<int[]> whichDir (int[][] curMap, int r, int c) {
+    ArrayList<int[]> toRet = new ArrayList<>();
+    int rowCount = curMap.length;
+    int rowLength = curMap[0].length;
+
+    if (r - 1 >= 0) {
+      // not at top, must check top.
+      int toAdd[] = new int[2];
+      toAdd[0] = r - 1;
+      toAdd[1] = c;
+      toRet.add(toAdd);
+    }
+    if (r + 1 <= rowCount - 1) {
+      int toAdd[] = new int[2];
+      toAdd[0] = r + 1;
+      toAdd[1] = c;
+      toRet.add(toAdd);
+    }
+    if (c - 1 >= 0) {
+      int toAdd[] = new int[2];
+      toAdd[0] = r;
+      toAdd[1] = c - 1;
+      toRet.add(toAdd);
+    }
+    if (c + 1 <= rowLength - 1) {
+      int toAdd[] = new int[2];
+      toAdd[0] = r;
+      toAdd[1] = c + 1;
+      toRet.add(toAdd);
+    }
+    return toRet;
+  }
+
+  private static int applyRules(int[][] curMap, int curRow, int curCol) {
+    int toRet = 0;
+    // to check what dir I need to add
+    ArrayList<int[]> directions = whichDir(curMap, curRow, curCol);
+    for (int i = 0; i < directions.size(); i++) {
+      // get the array of size 2
+      int[] cors = directions.get(i);
+      int row = cors[0];
+      int col = cors[1];
+      if (curMap[row][col] == -1) {
+        toRet += 0;
+      }
+      else {
+        toRet += curMap[row][col];
+      }
+    }
+    return toRet;
+  }
+
+  private static int[][] cloneMe(int[][] template){
+    int[][] toRet = new int[template.length][template[0].length];
+    for (int i = 0; i < template.length; i++) {
+      for (int j = 0; j < template[0].length; j++) {
+        toRet[i][j] = template[i][j];
+      }
+    }
+    return toRet;
+  }
+
+
 
   public static String toString(int[][] farm){
     String toRet = "";
