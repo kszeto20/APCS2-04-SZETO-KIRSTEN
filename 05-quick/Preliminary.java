@@ -6,19 +6,42 @@ public class Preliminary {
     System.out.println(toString(data));
 
     Random r = new Random();
-    int randIndex = r.nextInt(data.length);
-    System.out.println("RandomIndex: " + randIndex);
-    int pivot = data[randIndex];
+    int index = r.nextInt(end - start) + start;
+    System.out.println("RandomIndex: " + index);
+    int pivot = data[index];
     System.out.println("Pivot: " + pivot);
-
     int front = data[start];
-
     data[start] = pivot;
-    data[randIndex] = front;
+    data[index] = front;
+    int bigInd = start + 1;
 
+    for (int toScan = start + 1; toScan <= end; toScan++) {
+      if (data[toScan] < pivot) {
+        int storage = data[bigInd];
+        data[bigInd] = data[toScan];
+        data[toScan] = storage;
+        bigInd++;
+      }
+      else if (data[toScan] > pivot) {
+      }
+    }
+
+    int temp = data[bigInd - 1];
+    data[bigInd - 1] = data[start];
+    data[start] = temp;
     System.out.println(toString(data));
-    return 1;
+    return (bigInd - 1);
   }
+/*
+    for (start; start <= end; start++) {
+      if (data[start] < pivot) {
+        current++;
+      }
+      if (data[start] > pivot) {
+        current
+      }
+    }
+*/
 
   public static String toString(int[] data) {
     String toRet = "{";
