@@ -3,13 +3,13 @@ import java.util.*;
 public class Preliminary {
 
   public static int partition (int [] data, int start, int end){
-    System.out.println(toString(data));
+//    System.out.println(toString(data));
 
     Random r = new Random();
     int index = r.nextInt(end - start) + start;
-    System.out.println("RandomIndex: " + index);
+//    System.out.println("RandomIndex: " + index);
     int pivot = data[index];
-    System.out.println("Pivot: " + pivot);
+//    System.out.println("Pivot: " + pivot);
     int front = data[start];
     data[start] = pivot;
     data[index] = front;
@@ -29,19 +29,11 @@ public class Preliminary {
     int temp = data[bigInd - 1];
     data[bigInd - 1] = data[start];
     data[start] = temp;
-    System.out.println(toString(data));
+//    System.out.println(toString(data));
+//    System.out.println("BigInd: " + bigInd);
+//    System.out.println("Pivot: " + data[bigInd - 1]);
     return (bigInd - 1);
   }
-/*
-    for (start; start <= end; start++) {
-      if (data[start] < pivot) {
-        current++;
-      }
-      if (data[start] > pivot) {
-        current
-      }
-    }
-*/
 
   public static String toString(int[] data) {
     String toRet = "{";
