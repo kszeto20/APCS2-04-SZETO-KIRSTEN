@@ -15,7 +15,7 @@ public class Preliminary {
     data[index] = front;
     int bigInd = start + 1;
 
-    for (int toScan = start + 1; toScan <= end; toScan++) {
+    for (int toScan = start + 1; toScan < end; toScan++) {
       if (data[toScan] < pivot) {
         int storage = data[bigInd];
         data[bigInd] = data[toScan];
