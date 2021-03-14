@@ -1,11 +1,12 @@
 import java.io.*;
 import java.util.*;
 public class Preliminary {
+  private static Random r = new Random();
 
   public static int partition (int [] data, int start, int end){
 //    System.out.println(toString(data));
-    Random r = new Random();
-    int index = r.nextInt(end - start + 1) + start;
+    //Random r = new Random();
+    int index = r.nextInt(end - start) + start;
 //    System.out.println("RandomIndex: " + index);
     int pivot = data[index];
 //    System.out.println("PivotValue: " + pivot);
@@ -27,8 +28,8 @@ public class Preliminary {
 //        System.out.println("Actual Smaller Case: " + toString(data) + "\n -------------");
       }
       else if (data[toScan] == pivot) {
-        Random b = new Random();
-        int bool = b.nextInt(2);
+        //Random b = new Random();
+        int bool = r.nextInt(2);
         if (bool == 0) {
 //          System.out.println("System chose smaller!");
           int toStore = data[bigInd];
@@ -50,7 +51,7 @@ public class Preliminary {
 //    System.out.println("DEBUG: Moved back into pivot spot" + toString(data));
 //    System.out.println("BigInd: " + bigInd);
 //    System.out.println("PivotValue: " + data[bigInd - 1]);
-//    System.out.println("Kirsten's Pivot Index: " + (bigInd - 1));
+//   System.out.println("Kirsten's Pivot Index: " + (bigInd - 1));
     return (bigInd - 1);
   }
 
