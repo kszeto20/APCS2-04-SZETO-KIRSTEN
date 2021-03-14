@@ -27,11 +27,9 @@ public class Preliminary {
 //        System.out.println("Actual Smaller Case: " + toString(data) + "\n -------------");
       }
       else if (data[toScan] == pivot) {
-        boolean bigSmallSplit = true;
         Random b = new Random();
         int bool = b.nextInt(2);
         if (bool == 0) {
-          bigSmallSplit = false;
 //          System.out.println("System chose smaller!");
           int toStore = data[bigInd];
           data[bigInd] = data[toScan];
@@ -75,6 +73,18 @@ public class Preliminary {
 //      System.out.println("After Initial Partition " + toString(data));
 //      System.out.println("Returned Index: " + resultInd);
       return quickSelect(data, k, start, resultInd);
+    }
+  }
+
+  public static void quicksort(int[] data){
+    quicksort(data, 0, data.length - 1);
+  }
+
+  private static void quicksort(int[] data, int lo, int hi) {
+    if (lo < hi) {
+      int p = partition(data, lo, hi);
+      quicksort(data, lo, p - 1);
+      quicksort(data, p + 1, hi);
     }
   }
 
