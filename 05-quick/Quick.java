@@ -6,7 +6,7 @@ public class Quick {
   public static int partition (int [] data, int start, int end){
 //    System.out.println(toString(data));
     //Random r = new Random();
-    int index = r.nextInt(end - start) + start;
+    int index = r.nextInt(end - start + 1) + start;
 //    System.out.println("RandomIndex: " + index);
     int pivot = data[index];
 //    System.out.println("PivotValue: " + pivot);
@@ -51,7 +51,7 @@ public class Quick {
     int resultInd = partition(data, start, end);
     if (resultInd == k) {
       return data[k];
-    }
+    } else
     if (resultInd < k) {
 //      System.out.println("After Initial Partition " + toString(data));
 //      System.out.println("Returned Index: " + resultInd);
