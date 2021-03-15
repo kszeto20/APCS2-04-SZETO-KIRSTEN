@@ -48,10 +48,7 @@ public class Quick {
 
   private static int quickSelect(int[] data, int k, int start, int end) {
 //    System.out.println("Start --> " + start + " end --> " + end);
-    int resultInd = Preliminary.partition(data, start, end);
-    if (k == 0) {
-      return data[k];
-    }
+    int resultInd = partition(data, start, end);
     if (resultInd == k) {
       return data[k];
     }
