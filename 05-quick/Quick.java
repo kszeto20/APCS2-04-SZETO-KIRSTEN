@@ -74,5 +74,4 @@ public class Quick {
     toRet += "}";
     return toRet;
   }
-
 }
