@@ -20,32 +20,16 @@ public class Preliminary {
 
     for (int toScan = start + 1; toScan <= end; toScan++) {
       ++fiftyChance;
-      if (data[toScan] < pivot) {
-//        System.out.println("BEFORE: " + toString(data));
-        storage = data[bigInd];
-        data[bigInd] = data[toScan];
-        data[toScan] = storage;
-//        System.out.println("BigInd Before: " + bigInd);
-        bigInd++;
-//        System.out.println("BigInd After: " + bigInd);
-//        System.out.println("Actual Smaller Case: " + toString(data) + "\n -------------");
+      if (data[toScan] > pivot) {
       }
-      else if (data[toScan] == pivot) {
-        //Random b = new Random();
-//        int bool = r.nextInt(2);
-        if ((fiftyChance % 2) == 0) {
-//          System.out.println("System chose smaller!");
+      else {
+        if (data[toScan] < pivot || fiftyChance % 2 == 0) {
           storage = data[bigInd];
           data[bigInd] = data[toScan];
           data[toScan] = storage;
-//          System.out.println("BigInd Before: " + bigInd);
           bigInd++;
-//          System.out.println("BigInd After: " + bigInd);
-//          System.out.println("\n -------------");
         }
-//        System.out.println("System chose larger!");
       }
-//      System.out.println("AFTER: " + toString(data));
     }
     storage = data[bigInd - 1];
     data[bigInd - 1] = data[start];

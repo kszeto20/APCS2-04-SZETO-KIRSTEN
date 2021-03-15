@@ -53,12 +53,18 @@ public class PrelimTester {
     long timeElapsed = endTime - startTime;
     System.out.println("Arrays.sort() Execution time in milliseconds: " + timeElapsed);
 
+    long prof = timeElapsed;
+
     startTime = System.currentTimeMillis();
     Preliminary.quicksort(test);
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
     System.out.println("My.sort() Execution time in milliseconds: " + timeElapsed);
 
+    long ama = timeElapsed;
+
+    long timesSlower = (ama / prof);
+    System.out.println("How many times slower is mine: " + timesSlower);
 // below is forward sorted (2.2 seconds on 10 million)
     /*
 
