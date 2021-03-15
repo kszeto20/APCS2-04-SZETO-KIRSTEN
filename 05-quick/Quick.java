@@ -49,15 +49,12 @@ public class Quick {
   private static int quickSelect(int[] data, int k, int start, int end) {
 //    System.out.println("Start --> " + start + " end --> " + end);
     int resultInd = partition(data, start, end);
-//    if (start - end <= 1) {
-//      return data[k];
-//    }
 
     if (resultInd == k) {
 //      System.out.println("0.After Initial Partition " + toString(data));
 //      System.out.println("0.Returned Index: " + resultInd);
       return data[k];
-    } else
+    } 
     if (resultInd < k) {
 //      System.out.println("1.After Initial Partition " + toString(data));
 //      System.out.println("1.Returned Index: " + resultInd);
