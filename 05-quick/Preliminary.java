@@ -10,16 +10,19 @@ public class Preliminary {
 //    System.out.println("RandomIndex: " + index);
     int pivot = data[index];
 //    System.out.println("PivotValue: " + pivot);
-    int front = data[start];
+    data[index] = data[start];
     data[start] = pivot;
-    data[index] = front;
+
+    int storage = 0;
+    int fiftyChance = 0;
 //    System.out.println("Initial move of P to the front: " + toString(data));
     int bigInd = start + 1;
 
     for (int toScan = start + 1; toScan <= end; toScan++) {
+      ++fiftyChance;
       if (data[toScan] < pivot) {
 //        System.out.println("BEFORE: " + toString(data));
-        int storage = data[bigInd];
+        storage = data[bigInd];
         data[bigInd] = data[toScan];
         data[toScan] = storage;
 //        System.out.println("BigInd Before: " + bigInd);
@@ -29,12 +32,12 @@ public class Preliminary {
       }
       else if (data[toScan] == pivot) {
         //Random b = new Random();
-        int bool = r.nextInt(2);
-        if (bool == 0) {
+//        int bool = r.nextInt(2);
+        if ((fiftyChance % 2) == 0) {
 //          System.out.println("System chose smaller!");
-          int toStore = data[bigInd];
+          storage = data[bigInd];
           data[bigInd] = data[toScan];
-          data[toScan] = toStore;
+          data[toScan] = storage;
 //          System.out.println("BigInd Before: " + bigInd);
           bigInd++;
 //          System.out.println("BigInd After: " + bigInd);
@@ -44,9 +47,9 @@ public class Preliminary {
       }
 //      System.out.println("AFTER: " + toString(data));
     }
-    int temp = data[bigInd - 1];
+    storage = data[bigInd - 1];
     data[bigInd - 1] = data[start];
-    data[start] = temp;
+    data[start] = storage;
 
 //    System.out.println("DEBUG: Moved back into pivot spot" + toString(data));
 //    System.out.println("BigInd: " + bigInd);
