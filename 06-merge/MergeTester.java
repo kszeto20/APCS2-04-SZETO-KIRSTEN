@@ -1,6 +1,11 @@
+import java.util.*;
+import java.lang.*;
 public class MergeTester {
   public static void main(String[] args) {
-    int[] test = {10, 89, 32, 12, 45, 4};
+      int[] test = {234, 45, 69, 43, 123, 68, 432, 77};
+
+      System.out.println("-------------NOW MERGING---------------");
+
     Merge.mergeSort(test);
     System.out.println(toString(test));
   }
