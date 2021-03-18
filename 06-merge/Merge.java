@@ -28,6 +28,18 @@ public class Merge {
       }
     }
 
+    // extras
+    if (leftInitial <= rightInitial) {
+      temp[totalInitial] = data[leftInitial];
+      totalInitial++;
+      leftInitial++;
+    }
+    else if (rightInitial < hi) {
+      temp[totalInitial] = data[rightInitial];
+      totalInitial++;
+      rightInitial++;
+    }
+
 
     for (int h = lo; h < hi; h++) {
       data[h] = temp[h - lo];
@@ -38,10 +50,8 @@ public class Merge {
     // middle is inclusive
 
     if (lo < hi) {
-      int middle = (hi + lo) / 2;
-      System.out.println("left || upper " + (middle) + " val at mid: " + data[middle]);
+      int middle = (lo + hi) / 2;
       actualSort(data, lo, middle);
-      System.out.println("right || lower " + (middle) + " val at mid: " + data[middle]);
       actualSort(data, middle + 1, hi);
       mergeThat(data, lo, middle, hi);
     }
