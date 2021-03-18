@@ -1,11 +1,11 @@
 public class Merge {
 
   public static void mergeSort(int data[]) {
-    actualSort(data, 0, data.length - 1);
+    int[] temp = new int[data.length];
+    actualSort(data, temp, 0, data.length - 1);
   }
 
-  private static void mergeThat (int[] data, int lo, int middle, int hi) {
-    int[] temp = new int[(hi - lo) + 1];
+  private static void mergeThat (int[] data, int[] temp, int lo, int middle, int hi) {
     // merge both sides
 
     int leftInitial = lo;
@@ -27,12 +27,12 @@ public class Merge {
     }
 
     // extras
-    while (leftInitial <= middle) {
+    if (leftInitial <= middle) {
       temp[totalInitial] = data[leftInitial];
       leftInitial++;
       totalInitial++;
     }
-    while (rightInitial <= hi) {
+    if (rightInitial <= hi) {
       temp[totalInitial] = data[rightInitial];
       rightInitial++;
       totalInitial++;
@@ -42,14 +42,14 @@ public class Merge {
       data[i] = temp[i - lo];
     }
   }
-  private static void actualSort (int[] data, int lo, int hi) {
+  private static void actualSort (int[] data, int[] temp, int lo, int hi) {
     // middle is inclusive
 
     if (lo < hi) {
       int middle = (lo + hi) / 2;
-      actualSort(data, lo, middle);
-      actualSort(data, middle + 1, hi);
-      mergeThat(data, lo, middle, hi);
+      actualSort(data, temp, lo, middle);
+      actualSort(data, temp, middle + 1, hi);
+      mergeThat(data, temp, lo, middle, hi);
     }
   }
 
