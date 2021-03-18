@@ -15,9 +15,9 @@ public class Merge {
 
     if (lo < hi) {
       int middle = ((hi - 1) / 2) + lo;
-      System.out.println("left || upper " + middle + " val at mid: " + data[middle]);
+      System.out.println("left || upper " + (middle - 1) + " val at mid: " + data[middle - 1]);
       actualSort(data, lo, middle - 1);
-      System.out.println("right || lower " + (middle + 1) + " val at mid: " + data[middle + 1]);
+      System.out.println("right || lower " + (middle) + " val at mid: " + data[middle]);
       actualSort(data, middle, hi);
     }
   }
