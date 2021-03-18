@@ -64,13 +64,3 @@ public class Merge {
     return toRet;
   }
 }
-
-/*
-private static void quicksort(int[] data, int lo, int hi) {
-  if (lo < hi) {
-    int p = partition(data, lo, hi);
-    quicksort(data, lo, p - 1);
-    quicksort(data, p + 1, hi);
-  }
-}
-*/

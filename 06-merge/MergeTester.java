@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.*;
 public class MergeTester {
   public static void main(String[] args) {
-    int[] test = new int[100000000];
+    int[] test = new int[10000000];
     Random r = new Random();
     for (int i = 0; i < test.length; i++) {
       test[i] = r.nextInt(101);
@@ -11,22 +11,33 @@ public class MergeTester {
     for (int i = 0; i < test.length; i++) {
       copy[i] = test[i];
     }
+
+
+    System.out.println("-------------NOW ARRAYS MERGING---------------");
     long startTime = System.currentTimeMillis();
     Arrays.sort(copy);
     long endTime = System.currentTimeMillis();
     long timeElapsed = endTime - startTime;
     System.out.println("Arrays.sort() Execution time in milliseconds: " + timeElapsed);
 
-    System.out.println("-------------NOW MERGING---------------");
+    long prof = timeElapsed;
+
+    System.out.println("-------------NOW MY MERGING---------------");
 
     startTime = System.currentTimeMillis();
     Merge.mergeSort(test);
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
     System.out.println("My.sort() Execution time in milliseconds: " + timeElapsed);
+
+    long ama = timeElapsed;
+
+    long timesSlower = (ama / prof);
+    System.out.println("How many times slower is mine: " + timesSlower);
+
     int smallest = 0;
     for (int i = 1; i < test.length; i++) {
-      if (test[i] < test[0]) {
+      if (test[i] < test[smallest]) {
         smallest = i;
       }
     }
