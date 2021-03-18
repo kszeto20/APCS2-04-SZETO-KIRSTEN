@@ -1,13 +1,11 @@
 public class Merge {
 
   public static void mergeSort(int data[]) {
-
-    //// girl wtf we gotta fix this
     actualSort(data, 0, data.length - 1);
   }
 
   private static void mergeThat (int[] data, int lo, int middle, int hi) {
-    int[] temp = new int[hi - lo + 1];
+    int[] temp = new int[(hi - lo) + 1];
     // merge both sides
 
     int leftInitial = lo;
@@ -15,7 +13,7 @@ public class Merge {
 
     int totalInitial = 0;
 
-    while (leftInitial <= rightInitial && rightInitial <= hi) {
+    while (leftInitial <= middle && rightInitial <= hi) {
       if (data[leftInitial] <= data[rightInitial]) {
         temp[totalInitial] = data[leftInitial];
         leftInitial++;
@@ -29,23 +27,21 @@ public class Merge {
     }
 
     // extras
-    if (leftInitial <= rightInitial) {
+    while (leftInitial <= middle) {
       temp[totalInitial] = data[leftInitial];
-      totalInitial++;
       leftInitial++;
-    }
-    else if (rightInitial < hi) {
-      temp[totalInitial] = data[rightInitial];
       totalInitial++;
+    }
+    while (rightInitial <= hi) {
+      temp[totalInitial] = data[rightInitial];
       rightInitial++;
+      totalInitial++;
     }
 
-
-    for (int h = lo; h < hi; h++) {
-      data[h] = temp[h - lo];
+    for (int i = lo; i <= hi; i++) {
+      data[i] = temp[i - lo];
     }
   }
-
   private static void actualSort (int[] data, int lo, int hi) {
     // middle is inclusive
 
@@ -55,6 +51,17 @@ public class Merge {
       actualSort(data, middle + 1, hi);
       mergeThat(data, lo, middle, hi);
     }
+  }
+
+  public static String toString(int[] data) {
+    String toRet = "{";
+    for (int i = 0; i < data.length - 1; i++) {
+        toRet += data[i];
+        toRet += ", ";
+      }
+    toRet += data[data.length - 1];
+    toRet += "}";
+    return toRet;
   }
 }
 

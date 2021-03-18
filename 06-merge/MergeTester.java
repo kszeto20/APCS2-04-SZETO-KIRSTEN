@@ -2,12 +2,26 @@ import java.util.*;
 import java.lang.*;
 public class MergeTester {
   public static void main(String[] args) {
-      int[] test = {234, 45, 69, 43, 123, 68, 432, 77};
+      int[] test = new int[100];
+
+      Random r = new Random();
+
+      for (int i = 0; i < test.length; i++) {
+        test[i] = r.nextInt(101);
+      }
 
       System.out.println("-------------NOW MERGING---------------");
 
     Merge.mergeSort(test);
-    System.out.println(toString(test));
+    System.out.println(toString(test) + "\n");
+
+    int smallest = 0;
+    for (int i = 0; i < test.length; i++) {
+      if (test[i] < test[smallest]) {
+        smallest = i;
+      }
+    }
+    System.out.println((smallest == 0));
   }
 
   public static String toString(int[] data) {
