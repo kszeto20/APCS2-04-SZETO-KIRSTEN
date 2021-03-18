@@ -1,6 +1,6 @@
 public class MergeTester {
   public static void main(String[] args) {
-    int[] test = {10, 89, 32, 12};
+    int[] test = {10, 89, 32, 12, 45, 2};
     Merge.mergeSort(test);
     System.out.println(toString(test));
   }
