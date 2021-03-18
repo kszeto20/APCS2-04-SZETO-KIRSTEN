@@ -8,15 +8,17 @@ public class Merge {
 
 
 
+
+
   private static void actualSort (int[] data, int lo, int hi) {
     // middle is inclusive
 
-    if (lo != hi) {
+    if (lo < hi) {
       int middle = ((hi - 1) / 2) + lo;
       System.out.println("left || upper " + middle + " val at mid: " + data[middle]);
-      actualSort(data, lo, middle);
+      actualSort(data, lo, middle - 1);
       System.out.println("right || lower " + (middle + 1) + " val at mid: " + data[middle + 1]);
-      actualSort(data, middle + 1, hi);
+      actualSort(data, middle, hi);
     }
   }
 }
