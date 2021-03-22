@@ -28,7 +28,7 @@ public class MyDeque<E> {
 
   public int size() {
     return size;
-  }
+  } /*
   public E get( int ind) {
     return data[ind];
   }
@@ -38,7 +38,7 @@ public class MyDeque<E> {
   public int getEndVal() {
     return end;
   }
-
+*/
   public void addFirst (E element) throws NullPointerException{
     if (element == null) {
       throw new NullPointerException ("This element is null");
@@ -57,13 +57,21 @@ public class MyDeque<E> {
         // System.out.println(Arrays.toString(data));
         // System.out.println("This is start: " + start);
         // System.out.println("This is end: " + end);
-        resize();
-        data[data.length - 1] = element;
-        start = data.length - 1;
+        if (data.length == 1) {
+          data[0] = element;
+        }
+        else{
+          resize();
+          data[data.length - 1] = element;
+          start = data.length - 1;
+        }
       }
       else {
+        if (data.length == 0) {
+          resize();
+        }
         // System.out.println("initialized2");
-        data[data.length - 1] = element;
+        data[data.length - 1] = element; ///// ehehehehheheehehehehrrere
         start = data.length - 1;
       }
     }
@@ -100,11 +108,19 @@ public class MyDeque<E> {
         // System.out.println(Arrays.toString(data));
         // System.out.println("This is start: " + start);
         // System.out.println("This is end: " + end);
-        resize();
-        data[end + 1] = element;
-        end++;
+        if (data.length == 1) {
+          data[0] = element;
+        }
+        else {
+          resize();
+          data[end + 1] = element;
+          end++;
+        }
       }
       else {
+        if (data.length == 0) {
+          resize();
+        }
         data[0] = element;
         end = 0;
       }
