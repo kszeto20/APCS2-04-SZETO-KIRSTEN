@@ -5,7 +5,7 @@ public class MyDeque<E> {
   private int size;
   //inclusive
   private int start;
-  //exclusive
+  //inclusive
   private int end;
 
   public MyDeque() {
@@ -21,7 +21,7 @@ public class MyDeque<E> {
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[initialCapacity];
     data = d;
-    size = initialCapacity - 1;
+    size = initialCapacity;
     start = 0;
     end = 0;
   }
@@ -39,61 +39,30 @@ public class MyDeque<E> {
     return end;
   }
 
-  public String toString() {
-    int obLeft = 0;
-    if (start == 0) {
-      obLeft = end + 1;
-    }
-    else {
-      obLeft = (size - start) + (Math.abs(0 - end));
-    }
-    String toRet = "{";
-    for (int i = start; i < data.length; i++) {
-      if (obLeft > 1) {
-        toRet = toRet + data[i] + ", ";
-        obLeft--;
-      }
-      else if (obLeft == 1) {
-        toRet = toRet + data[i];
-        obLeft--;
-      }
-    }
-    if (obLeft > 0) {
-      for (int i = 0; i <= end; i++) {
-        if (obLeft > 1) {
-          toRet = toRet + data[i] + ", ";
-          obLeft--;
-        }
-        else if (obLeft == 1) {
-          toRet = toRet + data[i];
-          obLeft--;
-        }
-      }
-    }
-    toRet += "}";
-    return toRet;
-  }
-
 
 
   public void addFirst (E element) {
     if (start - 1 == end) {
+      System.out.println("in01");
       resize();
       data[data.length - 1] = element;
       start = data.length - 1;
     }
     else if (start - 1 < 0) {
       if (end == data.length - 1) {
+        System.out.println("in02");
         resize();
         data[data.length - 1] = element;
         start = data.length - 1;
       }
       else {
+        System.out.println("in03");
         data[data.length - 1] = element;
         start = data.length - 1;
       }
     }
     else {
+      System.out.println("in04");
       data[start - 1] = element;
       start--;
     }
@@ -110,23 +79,27 @@ public class MyDeque<E> {
 
   public void addLast (E element) {
     if (end + 1 == start) {
+      System.out.println("in01");
       resize();
       data[end + 1] = element;
       end++;
     }
     else if (end + 1 > data.length - 1) {
       if (start == 0) {
+        System.out.println("in02");
         resize();
         data[end + 1] = element;
         end++;
       }
       else {
+        System.out.println("in03");
         data[0] = element;
         end = 0;
       }
     }
     else {
-      data[end] = element;
+      System.out.println("in04");
+      data[end + 1] = element;
       end++;
     }
   }
@@ -145,6 +118,51 @@ public class MyDeque<E> {
     start = 0;
     data = toChange;
     size = toChange.length;
+  }
+
+  public String toString() {
+    int obLeft = 0;
+    if (start == 0) {
+      obLeft = end + 1;
+    }
+    else {
+      obLeft = (size - start) + (Math.abs(0 - end));
+    }
+    String toRet = "{";
+    for (int i = start; i < data.length; i++) {
+      if (data[i] == null) {
+        if (i == end) {
+          toRet += "";
+        }
+      }
+      else if (obLeft > 1) {
+        toRet = toRet + data[i] + ", ";
+        obLeft--;
+      }
+      else if (obLeft == 1) {
+        toRet = toRet + data[i];
+        obLeft--;
+      }
+    }
+    if (obLeft > 0) {
+      for (int i = 0; i <= end; i++) {
+        if (data[i] == null) {
+          if (i == end) {
+            toRet += "";
+          }
+        }
+        else if (obLeft > 1) {
+          toRet = toRet + data[i] + ", ";
+          obLeft--;
+        }
+        else if (obLeft == 1) {
+          toRet = toRet + data[i];
+          obLeft--;
+        }
+      }
+    }
+    toRet += "}";
+    return toRet;
   }
 
 /*
