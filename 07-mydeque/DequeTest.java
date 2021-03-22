@@ -7,9 +7,10 @@ public class DequeTest {
     //System.out.println(test.toString());
 
     //System.out.println("--------------------");
+    System.out.println("DEBUG: ORIG --> " + test.toString());
     for (int i = 0; i < 100; i++) {
       test.addFirst(i);
-      System.out.println(i);
+      //System.out.println(test.toString());
       //System.out.println(test.toString() + "\n");
       //System.out.println("This is end: " + test.getEndVal());
       //System.out.println("This is start: " + test.getStartVal());
@@ -18,7 +19,7 @@ public class DequeTest {
     System.out.println(test.toString() + "\n");
     //System.out.println("out of loop");
       //System.out.println("EndVal: " + test.getEndVal());
-    test.addLast(50000);
+    //test.addLast(50000);
     System.out.println(test.toString());
     //System.out.println("This is end: " + test.getEndVal());
     //System.out.println("This is start: " + test.getStartVal());
