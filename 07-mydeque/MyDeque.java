@@ -39,8 +39,6 @@ public class MyDeque<E> {
     return end;
   }
 
-
-
   public void addFirst (E element) throws NullPointerException{
     if (element == null) {
       throw new NullPointerException ("This element is null");
@@ -158,6 +156,20 @@ public class MyDeque<E> {
       size--;
       return toRet;
     }
+
+    public E getFirst() throws NoSuchElementException{
+      if(size == 0){
+        throw new NoSuchElementException("This deque is empty");
+      }
+    return data[start];
+    }
+    public E getLast() throws NoSuchElementException{
+      if(size == 0){
+        throw new NoSuchElementException("This deque is empty");
+      }
+      return data[end];
+    }
+
 
   public String toString() {
     // System.out.println(Arrays.toString(data) + "\n");
