@@ -34,44 +34,45 @@ public class MyDeque<E> {
   public int getEnd() {
     return end;
   }
-/*
-  public int toString() {
+
+  public String toString() {
     int obLeft = size;
-    String toRet = "{";
-    for (int i = start; i <= data.length; i++) {
+    String toRet = "[";
+    for (int i = start; i < data.length; i++) {
       if (data[i] == null) {
-        toRet += ", ";
+        if (i == end) {
+          toRet += " ";
+        }
+        else {
+          toRet += " ,";
+        }
       }
-      if (obLeft > 0 && i == data.length) {
-        i = 0;
+      if (obLeft > 1 && data[i] != null) {
         toRet = toRet + data[i] + ", ";
         obLeft--;
       }
-      else if (obLeft > 0){
-        toRet = toRet + data[i] + ", ";
+      else if (obLeft == 1 && data[i] != null) {
+        toRet = toRet + data[i];
         obLeft--;
       }
     }
-    toRet += "}";
+    if (obLeft > 0) {
+      for (int i = 0; i <= end; i++) {
+        if (obLeft > 1 && data[i] != null) {
+          toRet = toRet + data[i] + ", ";
+          obLeft--;
+        }
+        else if (obLeft == 1 && data[i] != null) {
+          toRet = toRet + data[i];
+          obLeft--;
+        }
+      }
+    }
+    toRet += "]";
     return toRet;
   }
-*/
-/*
-  public String toString() {
-    String full = "";
-    for (int i = 0; i < data.length; i++) {
-      if (data[i] == null) {
-        full += "";
-      }
-      else if(i == size - 1) {
-        full = full + data[i];
-      }
-      else {
-        full = full + data[i] + ", ";
-      }
-    }
-    return "[" + full + "]";
-  }
+
+  /*
 
   public void addFirst (E element) {
     if (start - 1 < 0) {
