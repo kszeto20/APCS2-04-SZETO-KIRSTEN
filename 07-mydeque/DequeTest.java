@@ -3,10 +3,13 @@ public class DequeTest {
     @SuppressWarnings("unchecked")
     MyDeque<Integer> test = new MyDeque<Integer>();
 
+    test.addLast(10);
+
     //System.out.println("--------------------");
     //System.out.println(test.toString());
 
     //System.out.println("--------------------");
+    /* // here
     long startTime = System.currentTimeMillis();
     for (int i = 0; i < 1000; i++) {
       if (i % 2 == 0) {
@@ -24,6 +27,7 @@ public class DequeTest {
     }
     long endTime = System.currentTimeMillis();
     long timeElapsed = endTime - startTime;
+    */ // here
 /*
     System.out.println("DEBUG: ORIG --> " + test.toString());
     for (int i = 0; i < 100; i++) {
