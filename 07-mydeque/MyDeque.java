@@ -158,50 +158,50 @@ public class MyDeque<E> {
     size++;
   }
 
-    public E removeFirst() throws NoSuchElementException{
-      if (size == 0) {
-        throw new NoSuchElementException ("The deque is empty");
-      }
-      E toRet = data[start];
-      data[start] = null;
-      if (start == data.length - 1) {
-        start = 0;
-      }
-      else {
-        start++;
-      }
-      size--;
-      return toRet;
+  public E removeFirst() throws NoSuchElementException{
+    if (size == 0) {
+      throw new NoSuchElementException ("The deque is empty");
     }
+    E toRet = data[start];
+    data[start] = null;
+    if (start == data.length - 1) {
+      start = 0;
+    }
+    else {
+      start++;
+    }
+    size--;
+    return toRet;
+  }
 
-    public E removeLast() throws NoSuchElementException{
-      if (size == 0) {
-        throw new NoSuchElementException ("The deque is empty");
-      }
-      E toRet = data[end];
-      data[end] = null;
-      if (end == 0) {
-        end = data.length - 1;
-      }
-      else {
-        end--;
-      }
-      size--;
-      return toRet;
+  public E removeLast() throws NoSuchElementException{
+    if (size == 0) {
+      throw new NoSuchElementException ("The deque is empty");
     }
+    E toRet = data[end];
+    data[end] = null;
+    if (end == 0) {
+      end = data.length - 1;
+    }
+    else {
+      end--;
+    }
+    size--;
+    return toRet;
+  }
 
-    public E getFirst() throws NoSuchElementException{
-      if(size == 0){
-        throw new NoSuchElementException("This deque is empty");
-      }
-    return data[start];
+  public E getFirst() throws NoSuchElementException{
+    if(size == 0){
+      throw new NoSuchElementException("This deque is empty");
     }
-    public E getLast() throws NoSuchElementException{
-      if(size == 0){
-        throw new NoSuchElementException("This deque is empty");
-      }
-      return data[end];
+  return data[start];
+  }
+  public E getLast() throws NoSuchElementException{
+    if(size == 0){
+      throw new NoSuchElementException("This deque is empty");
     }
+    return data[end];
+  }
 
 
   private void resize () {
@@ -230,7 +230,7 @@ public class MyDeque<E> {
       }
     }
     start = 0;
-    end = data.length - 1 + start;
+    end = data.length - 1;
     data = toChange;
   }
 
