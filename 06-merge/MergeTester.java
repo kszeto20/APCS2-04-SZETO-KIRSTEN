@@ -25,7 +25,7 @@ public class MergeTester {
     System.out.println("-------------NOW MY MERGING---------------");
 
     startTime = System.currentTimeMillis();
-    Merge.mergeSort(test);
+    Merge.mergesort(test);
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
     System.out.println("My.sort() Execution time in milliseconds: " + timeElapsed);

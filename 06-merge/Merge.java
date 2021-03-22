@@ -1,6 +1,6 @@
 public class Merge {
 
-  public static void mergeSort(int data[]) {
+  public static void mergesort(int data[]) {
     int[] temp = new int[data.length];
     actualSort(data, temp, 0, data.length - 1);
   }
