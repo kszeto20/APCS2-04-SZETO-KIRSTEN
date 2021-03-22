@@ -79,10 +79,19 @@ public class MyDeque<E> {
   public void addFirst (E element) {
     if (start - 1 == end) {
       resize();
-    }
-    if (start - 1 < 0) {
       data[data.length - 1] = element;
       start = data.length - 1;
+    }
+    else if (start - 1 < 0) {
+      if (end == data.length - 1) {
+        resize();
+        data[data.length - 1] = element;
+        start = data.length - 1;
+      }
+      else {
+        data[data.length - 1] = element;
+        start = data.length - 1;
+      }
     }
     else {
       data[start - 1] = element;
