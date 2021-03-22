@@ -40,7 +40,13 @@ public class MyDeque<E> {
   }
 
   public String toString() {
-    int obLeft = (size - start) + (Math.abs(0 - end));
+    int obLeft = 0;
+    if (start == 0) {
+      obLeft = end + 1;
+    }
+    else {
+      obLeft = (size - start) + (Math.abs(0 - end));
+    }
     String toRet = "{";
     for (int i = start; i < data.length; i++) {
       if (obLeft > 1) {
@@ -82,6 +88,15 @@ public class MyDeque<E> {
       data[start - 1] = element;
       start--;
     }
+    int uhh = 0;
+    for (int i = 0; i < data.length; i++) {
+      if (data[i] != null) {
+        uhh++;
+      }
+    }
+    if (uhh <= 1) {
+      end = start;
+    }
   }
 
   public void addLast (E element) {
@@ -96,8 +111,10 @@ public class MyDeque<E> {
         data[end + 1] = element;
         end++;
       }
-      data[0] = element;
-      end = 0;
+      else {
+        data[0] = element;
+        end = 0;
+      }
     }
     else {
       data[end] = element;
@@ -107,6 +124,7 @@ public class MyDeque<E> {
 
   private void resize () {
     System.out.println("Resizing");
+    int length = data.length;
     @SuppressWarnings("unchecked")
     E[] toChange = (E[]) new Object[size * 2];
     int newS = 0;
@@ -114,7 +132,7 @@ public class MyDeque<E> {
       toChange[newS] = data[i];
       newS++;
     }
-    end = data.length - 1;
+    end = length - 1;
     start = 0;
     data = toChange;
     size = toChange.length;
