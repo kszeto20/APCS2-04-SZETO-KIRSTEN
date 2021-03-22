@@ -1,19 +1,21 @@
 public class DequeTest {
   public static void main(String[] args) {
-    MyDeque test = new MyDeque();
-    System.out.println(test.size());
-    System.out.println(test.get(0));
-    System.out.println(test.get(1));
-    System.out.println(test.get(2));
-    System.out.println(test.get(3));
-    System.out.println(test.get(4));
-    System.out.println(test.get(5));
-    System.out.println(test.get(6));
-    System.out.println(test.get(7));
-    System.out.println("--------------------");
-    System.out.println(test.getStart());
-    System.out.println(test.getEnd());
+    @SuppressWarnings("unchecked")
+    MyDeque<Integer> test = new MyDeque<Integer>();
+
     System.out.println("--------------------");
     System.out.println(test.toString());
+
+    System.out.println("--------------------");
+    for (int i = 0; i < 8; i++) {
+      test.addFirst(i);
+      System.out.println("This is start: " + test.getStartVal());
+      System.out.println("This was added: " + i);
+    }
+    System.out.println("out of loop");
+    test.addLast(50000);
+    System.out.println(test.toString() + "\n");
+    System.out.println("EndVal: " + test.getEndVal());
+    System.out.println(test.get(test.getEndVal()));
   }
 }

@@ -1,7 +1,11 @@
+import java.util.*;
+import java.lang.*;
 public class MyDeque<E> {
   private E[] data;
   private int size;
+  //inclusive
   private int start;
+  //exclusive
   private int end;
 
   public MyDeque() {
@@ -28,73 +32,95 @@ public class MyDeque<E> {
   public E get( int ind) {
     return data[ind];
   }
-  public int getStart() {
+  public int getStartVal() {
     return start;
   }
-  public int getEnd() {
+  public int getEndVal() {
     return end;
   }
 
   public String toString() {
-    int obLeft = size;
-    String toRet = "[";
+    int obLeft = (size - start) + (Math.abs(0 - end));
+    String toRet = "{";
     for (int i = start; i < data.length; i++) {
-      if (data[i] == null) {
-        if (i == end) {
-          toRet += " ";
-        }
-        else {
-          toRet += " ,";
-        }
-      }
-      if (obLeft > 1 && data[i] != null) {
+      if (obLeft > 1) {
         toRet = toRet + data[i] + ", ";
         obLeft--;
       }
-      else if (obLeft == 1 && data[i] != null) {
+      else if (obLeft == 1) {
         toRet = toRet + data[i];
         obLeft--;
       }
     }
     if (obLeft > 0) {
       for (int i = 0; i <= end; i++) {
-        if (obLeft > 1 && data[i] != null) {
+        if (obLeft > 1) {
           toRet = toRet + data[i] + ", ";
           obLeft--;
         }
-        else if (obLeft == 1 && data[i] != null) {
+        else if (obLeft == 1) {
           toRet = toRet + data[i];
           obLeft--;
         }
       }
     }
-    toRet += "]";
+    toRet += "}";
     return toRet;
   }
 
-  /*
+
 
   public void addFirst (E element) {
+    if (start - 1 == end) {
+      resize();
+    }
     if (start - 1 < 0) {
       data[data.length - 1] = element;
       start = data.length - 1;
     }
     else {
       data[start - 1] = element;
-      start = start--;
+      start--;
     }
   }
 
   public void addLast (E element) {
-    if (end + 1 > data.length - 1) {
+    if (end + 1 == start) {
+      resize();
+      data[end + 1] = element;
+      end++;
+    }
+    else if (end + 1 > data.length - 1) {
+      if (start == 0) {
+        resize();
+        data[end + 1] = element;
+        end++;
+      }
       data[0] = element;
       end = 0;
     }
     else {
-      data[end + 1] = element;
+      data[end] = element;
       end++;
     }
   }
+
+  private void resize () {
+    System.out.println("Resizing");
+    @SuppressWarnings("unchecked")
+    E[] toChange = (E[]) new Object[size * 2];
+    int newS = 0;
+    for (int i = start; i < size; i++) {
+      toChange[newS] = data[i];
+      newS++;
+    }
+    end = data.length - 1;
+    start = 0;
+    data = toChange;
+    size = toChange.length;
+  }
+
+/*
 
   public E removeFirst() {
     E toRet;
