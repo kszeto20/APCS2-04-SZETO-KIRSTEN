@@ -10,6 +10,7 @@ public class DequeTest {
     System.out.println("DEBUG: ORIG --> " + test.toString());
     for (int i = 0; i < 100; i++) {
       test.addFirst(i);
+      System.out.println(test.toString() + "\n");
       //System.out.println(test.toString());
       //System.out.println(test.toString() + "\n");
       //System.out.println("This is end: " + test.getEndVal());

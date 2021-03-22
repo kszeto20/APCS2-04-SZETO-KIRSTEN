@@ -122,11 +122,10 @@ public class MyDeque<E> {
   public String toString() {
     System.out.println(Arrays.toString(data) + "\n");
     int obLeft = 0;
-    if (start == 0) {
-      obLeft = end + 1;
-    }
-    else {
-      obLeft = (size - start) + (Math.abs(0 - end));
+    for (int i = 0; i < data.length; i++) {
+      if (data[i] != null) {
+        obLeft++;
+      }
     }
     String toRet = "{";
     for (int i = start; i < data.length; i++) {
