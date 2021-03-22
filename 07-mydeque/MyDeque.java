@@ -41,7 +41,10 @@ public class MyDeque<E> {
 
 
 
-  public void addFirst (E element) {
+  public void addFirst (E element) throws NullPointerException{
+    if (element == null) {
+      throw new NullPointerException ("This element is null");
+    }
     if (start - 1 == end) {
       // System.out.println(Arrays.toString(data));
       // System.out.println("This is start: " + start);
@@ -82,7 +85,10 @@ public class MyDeque<E> {
     size++;
   }
 
-  public void addLast (E element) {
+  public void addLast (E element) throws NullPointerException{
+    if (element == null) {
+      throw new NullPointerException ("This element is null");
+    }
     if (end + 1 == start) {
       // System.out.println(Arrays.toString(data));
       // System.out.println("This is start: " + start);
@@ -120,6 +126,38 @@ public class MyDeque<E> {
     }
     size++;
   }
+
+    public E removeFirst() throws NoSuchElementException{
+      if (size == 0) {
+        throw new NoSuchElementException ("The deque is empty");
+      }
+      E toRet = data[start];
+      data[start] = null;
+      if (start == data.length - 1) {
+        start = 0;
+      }
+      else {
+        start++;
+      }
+      size--;
+      return toRet;
+    }
+
+    public E removeLast() throws NoSuchElementException{
+      if (size == 0) {
+        throw new NoSuchElementException ("The deque is empty");
+      }
+      E toRet = data[end];
+      data[end] = null;
+      if (end == 0) {
+        end = data.length - 1;
+      }
+      else {
+        end--;
+      }
+      size--;
+      return toRet;
+    }
 
   public String toString() {
     // System.out.println(Arrays.toString(data) + "\n");
@@ -161,6 +199,7 @@ public class MyDeque<E> {
     return toRet;
   }
 
+
   private void resize () {
     // System.out.println("resizing");
     int nSize = 10;
@@ -198,20 +237,4 @@ public class MyDeque<E> {
     // System.out.println("This is end val: " + data[end]);
     // System.out.println("This is size: " + size);
   }
-
-/*
-
-  public E removeFirst() {
-    E toRet;
-    toRet += data[start];
-    start = start++;
-    return toRet;
-  }
-
-  public E removeLast() {
-    E toRet;
-    toRet += data[end];
-    end--;
-  }
-*/
 }
