@@ -12,7 +12,7 @@ public class MyDeque<E> {
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[10];
     data = d;
-    size = 10;
+    size = 0;
     start = 0;
     end = 0;
   }
@@ -21,7 +21,7 @@ public class MyDeque<E> {
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[initialCapacity];
     data = d;
-    size = initialCapacity;
+    size = 0;
     start = 0;
     end = 0;
   }
@@ -43,25 +43,25 @@ public class MyDeque<E> {
 
   public void addFirst (E element) {
     if (start - 1 == end) {
-      System.out.println(Arrays.toString(data));
-      System.out.println("This is start: " + start);
-      System.out.println("This is end: " + end);
+      // System.out.println(Arrays.toString(data));
+      // System.out.println("This is start: " + start);
+      // System.out.println("This is end: " + end);
       resize();
       data[data.length - 1] = element;
       start = data.length - 1;
     }
     else if (start - 1 < 0) {
       if (end == data.length - 1) {
-        System.out.println("initialized");
-        System.out.println(Arrays.toString(data));
-        System.out.println("This is start: " + start);
-        System.out.println("This is end: " + end);
+        // System.out.println("initialized");
+        // System.out.println(Arrays.toString(data));
+        // System.out.println("This is start: " + start);
+        // System.out.println("This is end: " + end);
         resize();
         data[data.length - 1] = element;
         start = data.length - 1;
       }
       else {
-        System.out.println("initialized2");
+        // System.out.println("initialized2");
         data[data.length - 1] = element;
         start = data.length - 1;
       }
@@ -79,22 +79,23 @@ public class MyDeque<E> {
     if (uhh <= 1) {
       end = start;
     }
+    size++;
   }
 
   public void addLast (E element) {
     if (end + 1 == start) {
-      System.out.println(Arrays.toString(data));
-      System.out.println("This is start: " + start);
-      System.out.println("This is end: " + end);
+      // System.out.println(Arrays.toString(data));
+      // System.out.println("This is start: " + start);
+      // System.out.println("This is end: " + end);
       resize();
       data[end + 1] = element;
       end++;
     }
     else if (end + 1 > data.length - 1) {
       if (start == 0) {
-        System.out.println(Arrays.toString(data));
-        System.out.println("This is start: " + start);
-        System.out.println("This is end: " + end);
+        // System.out.println(Arrays.toString(data));
+        // System.out.println("This is start: " + start);
+        // System.out.println("This is end: " + end);
         resize();
         data[end + 1] = element;
         end++;
@@ -117,16 +118,12 @@ public class MyDeque<E> {
     if (uhh <= 1) {
       start = end;
     }
+    size++;
   }
 
   public String toString() {
-    System.out.println(Arrays.toString(data) + "\n");
-    int obLeft = 0;
-    for (int i = 0; i < data.length; i++) {
-      if (data[i] != null) {
-        obLeft++;
-      }
-    }
+    // System.out.println(Arrays.toString(data) + "\n");
+    int obLeft = size;
     String toRet = "{";
     for (int i = start; i < data.length; i++) {
       if (data[i] == null) {
@@ -165,24 +162,20 @@ public class MyDeque<E> {
   }
 
   private void resize () {
-    System.out.println("resizing");
+    // System.out.println("resizing");
     int nSize = 10;
     if (data.length != 0) {
       nSize = size * 2;
     }
     @SuppressWarnings("unchecked")
     E[] toChange = (E[]) new Object[nSize];
-    int obLeft = 0;
-    for (int i = 0; i < data.length; i++) {
-      if (data[i] != null) {
-        obLeft++;
-      }
-    }
-    System.out.println(obLeft);
+    int obLeft = size;
+    // System.out.println(obLeft);
     int newS = 0;
     for (int i = start; i < data.length; i++) {
-      if (obLeft < 0) {}
-      if (obLeft > 0) {
+      if (obLeft < 0) {
+      }
+      else if (obLeft > 0) {
         toChange[newS] = data[i];
         newS++;
         obLeft--;
@@ -195,16 +188,15 @@ public class MyDeque<E> {
         obLeft--;
       }
     }
-    System.out.println(Arrays.toString(toChange));
-    System.out.println("DEBUG: " + obLeft);
+    // System.out.println(Arrays.toString(toChange));
+    // System.out.println("DEBUG: " + obLeft);
     start = 0;
     end = data.length - 1 + start;
     data = toChange;
-    size = toChange.length;
-    System.out.println("This is start: " + start);
-    System.out.println("This is end: " + end);
-    System.out.println("This is end val: " + data[end]);
-    System.out.println("This is size: " + size);
+    // System.out.println("This is start: " + start);
+    // System.out.println("This is end: " + end);
+    // System.out.println("This is end val: " + data[end]);
+    // System.out.println("This is size: " + size);
   }
 
 /*
