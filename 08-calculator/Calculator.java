@@ -4,7 +4,7 @@ public class Calculator {
 
   private static Random r = new Random();
 
-  private static ArrayList<Character> ops = new ArrayList<Character>();
+  private static ArrayList<String> ops = new ArrayList<String>();
 
   /*Evaluate a postfix expression stored in s.
   *Assume valid postfix notation, of ints doubles and operators separated by spaces.
@@ -15,48 +15,26 @@ public class Calculator {
   */
 
   public static double eval(String s) throws IllegalArgumentException {
-    char[] operators = {'+', '-', '*', '/', '%'};
+    String[] operators = {"+", "-", "*", "/", "%"};
+    //char[] operators = {'+', '-', '*', '/', '%'};
     addOperators(operators);
-    String instNoSpace = s.replace(" ", "");
+    System.out.println(ops.toString());
+    boolean opAdded = false;
     int numsC = 0;
     int opsC = 0;
-    boolean opAdded = false;
     // to check for correct num of operators and operands
     String[] instArr= s.split(" ");
-
-    for (int i = 0; i < instNoSpace.length(); i++) {
-      if (ops.contains(instNoSpace.charAt(i))) {
+    for (int i = 0; i < instArr.length; i++) {
+      if (ops.contains(instArr[i])) {
         opsC++;
       }
       else {
         numsC++;
       }
+      System.out.println("DEBUG: \n" + "NumsC: " + numsC + "\nOpsC: " + opsC);
     }
-
-
-
-
-
-/*
-
-      opAdded = false;
-      System.out.println(instArr[i]);
-      for (int j = 0; j < ops.length; j++) {
-        if (instArr[i] == ops[j]) {
-          opsC++;
-          opAdded = true;
-          System.out.println("opsAdded1: " + opAdded);
-        }
-        System.out.println("opsAdded2: " + opAdded);
-      }
-      System.out.println("opsAdded3: " + opAdded);
-      if (opAdded == false) {
-        numsC++;
-      }
-      System.out.println("NumsC: " + numsC + "\nOpsC: " + opsC);
-    }
-*/
     int check = numsC - opsC;
+    System.out.println("CHECK: " + check);
 
     if (check == 1) {
       return 0;
@@ -75,19 +53,6 @@ public class Calculator {
 //    System.out.println(s);
     //ArrayDeque<Double> instructions = new ArrayDeque<Double>();
     int numLeft = 0;
-/*
-
-    if (instReader.next() == double) {
-      instructions.addFirst(instReader.nextDouble());
-      numLeft++;
-    }
-    else {
-
-    }
-
-    while (instReader.hasNextDouble()) {
-    }
-*/
 
     //System.out.println(instructions);
 
@@ -96,49 +61,9 @@ public class Calculator {
   }
 
 
-  private static void addOperators(char[] o) {
+  private static void addOperators(String[] o) {
     for (int i = 0; i < o.length; i++) {
       ops.add(o[i]);
     }
   }
-/*
-  public String toString(ArrayDeque<E> in) {
-    int obLeft = in.size();
-    String toRet = "{";
-    for (int i = start; i < data.length; i++) {
-      if (data[i] == null) {
-        if (i == end) {
-          toRet += "";
-        }
-      }
-      else if (obLeft > 1) {
-        toRet = toRet + data[i] + ", ";
-        obLeft--;
-      }
-      else if (obLeft == 1) {
-        toRet = toRet + data[i];
-        obLeft--;
-      }
-    }
-    if (obLeft > 0) {
-      for (int i = 0; i <= end; i++) {
-        if (data[i] == null) {
-          if (i == end) {
-            toRet += "";
-          }
-        }
-        else if (obLeft > 1) {
-          toRet = toRet + data[i] + ", ";
-          obLeft--;
-        }
-        else if (obLeft == 1) {
-          toRet = toRet + data[i];
-          obLeft--;
-        }
-      }
-    }
-    toRet += "}";
-    return toRet;
-  }
-  */
 }
