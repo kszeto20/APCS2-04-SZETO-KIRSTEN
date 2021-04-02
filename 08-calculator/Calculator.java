@@ -56,6 +56,7 @@ public class Calculator {
     //// checking portion
 
     for (int i = 0; i < instArr.length; i++) {
+      System.out.println("WHAT ARE WE WORKING WITH: " + instArr[i]);
       if (ops.contains(instArr[i])) {
         if (instArr[i] == "+") {
 
