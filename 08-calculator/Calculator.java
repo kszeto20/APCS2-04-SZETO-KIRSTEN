@@ -2,9 +2,7 @@ import java.util.*;
 import java.lang.*;
 public class Calculator {
 
-  private static Random r = new Random();
-
-  private static ArrayList<String> ops = new ArrayList<String>();
+  //private static ArrayList<String> ops = ArrayList<String>("+", "-", "*", "/", "%");
 
   /*Evaluate a postfix expression stored in s.
   *Assume valid postfix notation, of ints doubles and operators separated by spaces.
@@ -15,21 +13,19 @@ public class Calculator {
   */
 
   public static double eval(String s) throws IllegalArgumentException {
-    String[] operators = {"+", "-", "*", "/", "%"};
-    addOperators(operators);
     String[] instArr= s.split(" ");
     // deque for numbers; using for evaluation portion
     ArrayDeque<Double> instructions = new ArrayDeque<Double>();
 
     //////// start of checking if the instuction set is valid
-    boolean opAdded = false;
     int numsC = 0;
     int opsC = 0;
     int check = 0;
     // to check for correct num of operators and operands
 //    System.out.println("LENGTH: " + instArr.length);
     for (int i = 0; i < instArr.length; i++) {
-      if (ops.contains(instArr[i])) {
+      String comp = instArr[i];
+      if (comp.equals("+") || comp.equals("-") || comp.equals("*") || comp.equals("/") || comp.equals("%")) {
         opsC++;
       }
       else {
@@ -54,64 +50,55 @@ public class Calculator {
     ////////// end of check portion
 
     //// checking portion
-    System.out.println(instArr[3]);
-    System.out.println(Arrays.toString(instArr));
 
     for (int i = 0; i < instArr.length; i++) {
-      System.out.println("WHAT ARE WE WORKING WITH: " + instArr[i]);
-      if (ops.contains(instArr[i])) {
-        if (instArr[i].equals("+")) {
-          double first = instructions.removeLast();
-          System.out.println(first);
-          double sec = instructions.removeLast();
-          System.out.println(sec);
-          double toRet = first + sec;
-          System.out.println("TORET: " + toRet);
-          instructions.offer(toRet);
-        }
-        else if (instArr[i].equals("-")) {
-          double sec = instructions.removeLast();
-          double toRet = instructions.removeLast() - sec;
-          System.out.println("TORET: " + toRet);
-          instructions.offer(toRet);
-        }
-        else if (instArr[i].equals("*")) {
-          double toRet = instructions.removeLast() * instructions.removeLast();
-          System.out.println("TORET: " + toRet);
-          instructions.offer(toRet);
-        }
-        else if (instArr[i].equals("/")) {
-          double sec = instructions.removeLast();
-          double toRet = instructions.removeLast() / sec;
-          System.out.println("TORET: " + toRet);
-          instructions.offer(toRet);
-        }
-        else {
-          double sec = instructions.removeLast();
-          double toRet = instructions.removeLast() % sec;
-          System.out.println("hello");
-          System.out.println("TORET: " + toRet);
-          instructions.offer(toRet);
-        }
+      double toRet = 0.0;
+      double sec = 0.0;
+//      System.out.println("WHAT ARE WE WORKING WITH: " + instArr[i]);
+      if (instArr[i].equals("+")) {
+        toRet = instructions.removeLast() + instructions.removeLast();
+//         System.out.println("TORET: " + toRet);
+        instructions.offer(toRet);
+      }
+      else if (instArr[i].equals("-")) {
+        sec = instructions.removeLast();
+        toRet = instructions.removeLast() - sec;
+//         System.out.println("TORET: " + toRet);
+        instructions.offer(toRet);
+      }
+      else if (instArr[i].equals("*")) {
+        toRet = instructions.removeLast() * instructions.removeLast();
+//         System.out.println("TORET: " + toRet);
+        instructions.offer(toRet);
+      }
+      else if (instArr[i].equals("/")) {
+        sec = instructions.removeLast();
+        toRet = instructions.removeLast() / sec;
+//         System.out.println("TORET: " + toRet);
+        instructions.offer(toRet);
+      }
+      else if (instArr[i].equals("%")){
+        sec = instructions.removeLast();
+        toRet = instructions.removeLast() % sec;
+//         System.out.println("hello");
+//         System.out.println("TORET: " + toRet);
+        instructions.offer(toRet);
       }
       else {
-        System.out.println("adding................. "  + Double.parseDouble(instArr[i]));
+//       System.out.println("adding................. "  + Double.parseDouble(instArr[i]));
         instructions.offer(Double.parseDouble(instArr[i]));
       }
-      System.out.println(instructions);
+//     System.out.println(instructions);
     }
-
-
-    //System.out.println(instructions);
-
-
+  //System.out.println(instructions);
     return instructions.remove();
   }
 
-
+  /*
   private static void addOperators(String[] o) {
     for (int i = 0; i < o.length; i++) {
       ops.add(o[i]);
     }
   }
+  */
 }
