@@ -54,30 +54,33 @@ public class Calculator {
     ////////// end of check portion
 
     //// checking portion
+    System.out.println(instArr[3]);
+    System.out.println(Arrays.toString(instArr));
 
     for (int i = 0; i < instArr.length; i++) {
       System.out.println("WHAT ARE WE WORKING WITH: " + instArr[i]);
       if (ops.contains(instArr[i])) {
-        if (instArr[i] == "+") {
-
-          double toRet = instructions.removeLast() + instructions.removeLast();
+        if (instArr[i].equals("+")) {
+          double first = instructions.removeLast();
+          System.out.println(first);
+          double sec = instructions.removeLast();
+          System.out.println(sec);
+          double toRet = first + sec;
           System.out.println("TORET: " + toRet);
           instructions.offer(toRet);
         }
-        else if (instArr[i] == "-") {
+        else if (instArr[i].equals("-")) {
           double sec = instructions.removeLast();
           double toRet = instructions.removeLast() - sec;
-          System.out.println("REMOVING FOR SUB: " + instructions);
-          System.out.println("TORET2: " + toRet);
           System.out.println("TORET: " + toRet);
           instructions.offer(toRet);
         }
-        else if (instArr[i] == "*") {
+        else if (instArr[i].equals("*")) {
           double toRet = instructions.removeLast() * instructions.removeLast();
           System.out.println("TORET: " + toRet);
           instructions.offer(toRet);
         }
-        else if (instArr[i] == "/") {
+        else if (instArr[i].equals("/")) {
           double sec = instructions.removeLast();
           double toRet = instructions.removeLast() / sec;
           System.out.println("TORET: " + toRet);
@@ -86,6 +89,7 @@ public class Calculator {
         else {
           double sec = instructions.removeLast();
           double toRet = instructions.removeLast() % sec;
+          System.out.println("hello");
           System.out.println("TORET: " + toRet);
           instructions.offer(toRet);
         }
@@ -101,7 +105,7 @@ public class Calculator {
     //System.out.println(instructions);
 
 
-    return 10;///instructions.peek();
+    return instructions.remove();
   }
 
 
