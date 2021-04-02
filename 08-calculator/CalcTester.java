@@ -1,5 +1,5 @@
 public class CalcTester {
   public static void main (String[] args) {
-    Calculator.eval("4 + + + + +      ");
+    System.out.println(Calculator.eval("4 10 5 + -"));
   }
 }

@@ -16,14 +16,18 @@ public class Calculator {
 
   public static double eval(String s) throws IllegalArgumentException {
     String[] operators = {"+", "-", "*", "/", "%"};
-    //char[] operators = {'+', '-', '*', '/', '%'};
     addOperators(operators);
-    System.out.println(ops.toString());
+    String[] instArr= s.split(" ");
+    // deque for numbers; using for evaluation portion
+    ArrayDeque<Double> instructions = new ArrayDeque<Double>();
+
+    //////// start of checking if the instuction set is valid
     boolean opAdded = false;
     int numsC = 0;
     int opsC = 0;
+    int check = 0;
     // to check for correct num of operators and operands
-    String[] instArr= s.split(" ");
+//    System.out.println("LENGTH: " + instArr.length);
     for (int i = 0; i < instArr.length; i++) {
       if (ops.contains(instArr[i])) {
         opsC++;
@@ -31,33 +35,72 @@ public class Calculator {
       else {
         numsC++;
       }
-      System.out.println("DEBUG: \n" + "NumsC: " + numsC + "\nOpsC: " + opsC);
+//      System.out.println("DEBUG: \n" + "NumsC: " + numsC + "\nOpsC: " + opsC);
     }
-    int check = numsC - opsC;
-    System.out.println("CHECK: " + check);
+      check = numsC - opsC;
+//      System.out.println("CHECK: " + check);
+      if (check == 1) {
+      }
+      else if (check > 1) {
+        throw new IllegalArgumentException ("Too many operands \n" + "Given: " + s + "\n all operators need two operands to work");
+      }
+      else if (check == 0) {
+        throw new IllegalArgumentException ("One operand too few \n" + "Given: " + s + "\n same number of operands and operators");
+      }
+      else if (check < 0) {
+        throw new IllegalArgumentException ("Not enough operands \n" + "Given: " + s + "\n all operators need two operands to work");
+      }
 
-    if (check == 1) {
-      return 0;
-    }
-    else if (check > 1) {
-      throw new IllegalArgumentException ("Too many operands \n" + "Given: " + s + "\n all operators need two operands to work");
-    }
-    else if (check == 0) {
-      throw new IllegalArgumentException ("Not enough operands \n" + "Given: " + s + "\n same number of operands and operators; one operand too few");
-    }
-    else if (check < 0) {
-      throw new IllegalArgumentException ("Not enough operands \n" + "Given: " + s + "\n all operators need two operands to work");
+    ////////// end of check portion
+
+    //// checking portion
+
+    for (int i = 0; i < instArr.length; i++) {
+      if (ops.contains(instArr[i])) {
+        if (instArr[i] == "+") {
+
+          double toRet = instructions.removeLast() + instructions.removeLast();
+          System.out.println("TORET: " + toRet);
+          instructions.offer(toRet);
+        }
+        else if (instArr[i] == "-") {
+          double sec = instructions.removeLast();
+          double toRet = instructions.removeLast() - sec;
+          System.out.println("REMOVING FOR SUB: " + instructions);
+          System.out.println("TORET2: " + toRet);
+          System.out.println("TORET: " + toRet);
+          instructions.offer(toRet);
+        }
+        else if (instArr[i] == "*") {
+          double toRet = instructions.removeLast() * instructions.removeLast();
+          System.out.println("TORET: " + toRet);
+          instructions.offer(toRet);
+        }
+        else if (instArr[i] == "/") {
+          double sec = instructions.removeLast();
+          double toRet = instructions.removeLast() / sec;
+          System.out.println("TORET: " + toRet);
+          instructions.offer(toRet);
+        }
+        else {
+          double sec = instructions.removeLast();
+          double toRet = instructions.removeLast() % sec;
+          System.out.println("TORET: " + toRet);
+          instructions.offer(toRet);
+        }
+      }
+      else {
+        System.out.println("adding................. "  + Double.parseDouble(instArr[i]));
+        instructions.offer(Double.parseDouble(instArr[i]));
+      }
+      System.out.println(instructions);
     }
 
-    Scanner instReader = new Scanner(s);
-//    System.out.println(s);
-    //ArrayDeque<Double> instructions = new ArrayDeque<Double>();
-    int numLeft = 0;
 
     //System.out.println(instructions);
 
 
-    return 0;
+    return 10;///instructions.peek();
   }
 
 
