@@ -2,8 +2,6 @@ import java.util.*;
 import java.lang.*;
 public class Calculator {
 
-  //private static ArrayList<String> ops = ArrayList<String>("+", "-", "*", "/", "%");
-
   /*Evaluate a postfix expression stored in s.
   *Assume valid postfix notation, of ints doubles and operators separated by spaces.
   *Valid operators are + - / * and % (remainder not modulo)
@@ -14,6 +12,7 @@ public class Calculator {
 
   public static double eval(String s) throws IllegalArgumentException {
     String[] instArr= s.split(" ");
+
     // deque for numbers; using for evaluation portion
     ArrayDeque<Double> instructions = new ArrayDeque<Double>();
 
