@@ -207,7 +207,7 @@ public class MyDeque<E> {
   private void resize () {
     int nSize = 10;
     if (data.length != 0) {
-      nSize = size * 2;
+      nSize = data.length * 2;
     }
     @SuppressWarnings("unchecked")
     E[] toChange = (E[]) new Object[nSize];
@@ -233,6 +233,7 @@ public class MyDeque<E> {
     end = data.length - 1;
     data = toChange;
   }
+
 
   /*
   // tester methods
