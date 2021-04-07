@@ -207,7 +207,7 @@ public class MyDeque<E> {
   private void resize () {
     int nSize = 10;
     if (data.length != 0) {
-      nSize = data.length * 2;
+      nSize = data.length + 100;
     }
     @SuppressWarnings("unchecked")
     E[] toChange = (E[]) new Object[nSize];
