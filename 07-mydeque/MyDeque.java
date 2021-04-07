@@ -4,8 +4,6 @@ public class MyDeque<E> {
 
   private E[] data;
   private int size;
-
-  // inclusive
   private int start;
   private int end;
 

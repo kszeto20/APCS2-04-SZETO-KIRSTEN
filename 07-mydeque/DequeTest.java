@@ -30,7 +30,7 @@ public class DequeTest {
     //System.out.println(test.getLast());
     System.out.println(test.toString());
     */
-    System.out.println("\n\n\n\n\n\n\n" + test6(500000));
+    System.out.println("\n\n\n\n\n\n\n" + test6(487233));
   }
 
   public static boolean equals(MyDeque<Integer>a, ArrayDeque<Integer>b){
