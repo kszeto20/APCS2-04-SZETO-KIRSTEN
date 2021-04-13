@@ -8,9 +8,6 @@ public class BurnTrees{
   private static int SPACE = 0;
 
   // my own
-  private static int minColAt;
-  private static int maxColAt;
-
   private static boolean hasPrevCol;
   private static boolean hasNextCol;
   private static boolean hasUp;
@@ -40,8 +37,6 @@ public class BurnTrees{
         if(Math.random() < density)
            map[r][c]=2;
     start();//set the left column on fire.
-    minColAt = 0;
-    maxColAt = 0;
   }
 
   /*Determine if the simulation is still burning
@@ -55,7 +50,7 @@ public class BurnTrees{
     hasDown = false;
     isFire = false;
     returnThat = false;
-    for (int col = minColAt; col < maxColAt; col++) {
+    for (int col = 0; col < map[0].length; col++) {
       for (int row = 0; row < map.length; row++) {
         isFire = false;
         if (map[row][col] == 1) {
@@ -201,7 +196,7 @@ public class BurnTrees{
         }
       }
     }
-    return (returnThat);
+    return true;
   }
 
 
@@ -213,7 +208,7 @@ public class BurnTrees{
     boolean leftAd = false;
     boolean rightAd = false;
     boolean upDown = false;
-    for (int col = minColAt; col < maxColAt; col++) {
+    for (int col = 0; col < map[0].length; col++) {
       for (int row = 0; row < map.length; row++) {
         isFire = false;
         if (map[row][col] == 1) {
@@ -356,22 +351,6 @@ public class BurnTrees{
           }
         }
       }
-      if (col == minColAt) {
-        if (leftAd) {
-          minColAt--;
-        }
-        else if (upDown == false) {
-          minColAt++;
-        }
-      }
-      if (col == maxColAt) {
-        if (rightAd) {
-          maxColAt++;
-        }
-        else if (upDown == false) {
-          maxColAt--;
-        }
-      }
     }
 
     ticks++;
@@ -479,8 +458,8 @@ public class BurnTrees{
     BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
 
 
-    //System.out.println(b.animate(DELAY));//animate all screens and print the final answer
-    System.out.println(b.outputAll());//print all screens and the final answer
+    System.out.println(b.animate(DELAY));//animate all screens and print the final answer
+    //System.out.println(b.outputAll());//print all screens and the final answer
   }
 
 
