@@ -7,6 +7,17 @@ public class BurnTrees{
   private static int ASH = 3;
   private static int SPACE = 0;
 
+  // my own
+  private static int minColAt;
+  private static int maxColAt;
+
+  private static boolean hasPrevCol;
+  private static boolean hasNextCol;
+  private static boolean hasUp;
+  private static boolean hasDown;
+  private static boolean isFire;
+  private static boolean returnThat;
+
 
   /*DO NOT UPDATE THIS
    *PLEASE READ SO YOU SEE HOW THE SIMULATION IS SUPPOSED TO WORK!!!
@@ -29,6 +40,8 @@ public class BurnTrees{
         if(Math.random() < density)
            map[r][c]=2;
     start();//set the left column on fire.
+    minColAt = 0;
+    maxColAt = 0;
   }
 
   /*Determine if the simulation is still burning
@@ -36,14 +49,159 @@ public class BurnTrees{
    */
   public boolean done(){
     //YOU MUST IMPLEMENT THIS
-    Random r = new Random();
-    int c = r.nextInt(2);
-    if (c != 0) {
-      return true;
+    hasPrevCol = false;
+    hasNextCol = false;
+    hasUp = false;
+    hasDown = false;
+    isFire = false;
+    returnThat = false;
+    for (int col = minColAt; col <= maxColAt; col++) {
+      for (int row = 0; row < map.length; row++) {
+        isFire = false;
+        if (map[row][col] == FIRE) {
+          isFire = true;
+        }
+        if (isFire) {
+          // top border
+          if (row == 0) {
+            // under
+            if (map[row + 1][col] == TREE) {
+              hasDown = true;
+              returnThat = true;
+            }
+            // left corner
+            if (col == 0) {
+              // right
+              if (map[row][col + 1] == TREE) {
+                hasNextCol = true;
+                returnThat = true;
+              }
+            }
+            // right corner
+            else if (col == map[0].length - 1) {
+              // left
+              if (map[row][col - 1] == TREE) {
+                hasPrevCol = true;
+                returnThat = true;
+              }
+            }
+            // everything else
+            else {
+              if (map[row][col - 1] == TREE) {
+                hasPrevCol = true;
+                returnThat = true;
+              }
+              if (map[row][col + 1] == TREE) {
+                hasNextCol = true;
+                returnThat = true;
+              }
+            }
+          }
+
+          // bottom border
+          else if (row == map.length - 1) {
+            // over
+            if (map[row - 1][col] == TREE) {
+              hasUp = true;
+              returnThat = true;
+            }
+            // left corner
+            if (col == 0) {
+              // right
+              if (map[row][col + 1] == TREE) {
+                hasNextCol = true;
+                returnThat = true;
+              }
+            }
+            // right corner
+            else if (col == map[0].length - 1) {
+              // left
+              if (map[row][col - 1] == TREE) {
+                hasPrevCol = true;
+                returnThat = true;
+              }
+            }
+            // everything else
+            else {
+              if (map[row][col - 1] == TREE) {
+                hasPrevCol = true;
+                returnThat = true;
+              }
+              if (map[row][col + 1] == TREE) {
+                hasNextCol = true;
+                returnThat = true;
+              }
+            }
+          }
+
+          // left border
+          else if (col == 0) {
+            // right
+            if (map[row][col + 1] == TREE) {
+              hasNextCol = true;
+              returnThat = true;
+            }
+            // up
+            if (map[row - 1][col] == TREE) {
+                hasUp = true;
+                returnThat = true;
+            }
+            // down
+            if (map[row + 1][col] == TREE) {
+              hasDown = true;
+              returnThat = true;
+            }
+          }
+
+          // right border
+          else if (col == map[0].length - 1) {
+            // left
+            if (map[row][col - 1] == TREE) {
+              hasPrevCol = true;
+              returnThat = true;
+            }
+            // up
+            if (map[row - 1][col] == TREE) {
+                hasUp = true;
+                returnThat = true;
+            }
+            // down
+            if (map[row + 1][col] == TREE) {
+              hasDown = true;
+              returnThat = true;
+            }
+          }
+
+          // everything else
+          else {
+            // right
+            if (map[row][col + 1] == TREE) {
+              hasNextCol = true;
+              returnThat = true;
+            }
+            // left
+            if (map[row][col - 1] == TREE) {
+              hasPrevCol = true;
+              returnThat = true;
+            }
+            // up
+            if (map[row - 1][col] == TREE) {
+                hasUp = true;
+                returnThat = true;
+            }
+            // down
+            if (map[row + 1][col] == TREE) {
+              hasDown = true;
+              returnThat = true;
+            }
+          }
+        }
+        if (returnThat) {
+          return false;
+        }
+      }
     }
-    else {
-      return false;
-    }
+    return !(returnThat);
   }
 
 
@@ -52,7 +210,157 @@ public class BurnTrees{
    *new fires should remain fire, and not spread.
    */
   public void tick(){
+    /*
+    boolean spread = false;
+    boolean leftAd = false;
+    boolean rightAd = false;
+    for (int col = minColAt; col <= maxColAt; col++) {
+      for (int row = 0; row < map.length; row++) {
+        isFire = false;
+        if (map[row][col] == FIRE) {
+          isFire = true;
+          map[row][col] = ASH;
+        }
+        if (isFire) {
+          // top border
+          if (row == 0) {
+            // under
+            if (map[row + 1][col] == TREE) {
+              map[row + 1][col] == FIRE;
+              spread = true;
+            }
+            // left corner
+            if (col == 0) {
+              // right
+              if (map[row][col + 1] == TREE) {
+                map[row][col + 1] == FIRE;
+                rightAd = true;
+                spread = true;
+              }
+            }
+            // right corner
+            else if (col == map[0].length - 1) {
+              // left
+              if (map[row][col - 1] == TREE) {
+                map[row][col - 1] == FIRE;
+                leftAd = true;
+                spread = true;
+              }
+            }
+            // everything else
+            else {
+              if (map[row][col - 1] == TREE) {
+                hasPrevCol = true;
+                returnThat = true;
+              }
+              if (map[row][col + 1] == TREE) {
+                hasNextCol = true;
+                returnThat = true;
+              }
+            }
+          }
 
+          // bottom border
+          else if (row == map.length - 1) {
+            // over
+            if (map[row - 1][col] == TREE) {
+              hasUp = true;
+              returnThat = true;
+            }
+            // left corner
+            if (col == 0) {
+              // right
+              if (map[row][col + 1] == TREE) {
+                hasNextCol = true;
+                returnThat = true;
+              }
+            }
+            // right corner
+            else if (col == map[0].length - 1) {
+              // left
+              if (map[row][col - 1] == TREE) {
+                hasPrevCol = true;
+                returnThat = true;
+              }
+            }
+            // everything else
+            else {
+              if (map[row][col - 1] == TREE) {
+                hasPrevCol = true;
+                returnThat = true;
+              }
+              if (map[row][col + 1] == TREE) {
+                hasNextCol = true;
+                returnThat = true;
+              }
+            }
+          }
+
+          // left border
+          else if (col == 0) {
+            // right
+            if (map[row][col + 1] == TREE) {
+              hasNextCol = true;
+              returnThat = true;
+            }
+            // up
+            if (map[row - 1][col] == TREE) {
+                hasUp = true;
+                returnThat = true;
+            }
+            // down
+            if (map[row + 1][col] == TREE) {
+              hasDown = true;
+              returnThat = true;
+            }
+          }
+
+          // right border
+          else if (col == map[0].length - 1) {
+            // left
+            if (map[row][col - 1] == TREE) {
+              hasPrevCol = true;
+              returnThat = true;
+            }
+            // up
+            if (map[row - 1][col] == TREE) {
+                hasUp = true;
+                returnThat = true;
+            }
+            // down
+            if (map[row + 1][col] == TREE) {
+              hasDown = true;
+              returnThat = true;
+            }
+          }
+
+          // everything else
+          else {
+            // right
+            if (map[row][col + 1] == TREE) {
+              hasNextCol = true;
+              returnThat = true;
+            }
+            // left
+            if (map[row][col - 1] == TREE) {
+              hasPrevCol = true;
+              returnThat = true;
+            }
+            // up
+            if (map[row - 1][col] == TREE) {
+                hasUp = true;
+                returnThat = true;
+            }
+            // down
+            if (map[row + 1][col] == TREE) {
+              hasDown = true;
+              returnThat = true;
+            }
+          }
+        }
+      }
+    }
+    */
     ticks++;
     //YOU MUST IMPLEMENT THIS
   }
