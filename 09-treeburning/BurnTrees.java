@@ -192,11 +192,14 @@ public class BurnTrees{
             }
           }
         }
+
         if (returnThat) {
           return false;
         }
+
       }
     }
+
     return true;
   }
 
@@ -360,9 +363,7 @@ public class BurnTrees{
           map[row][col] = FIRE;
         }
       }
-
     }
-
     ticks++;
     //YOU MUST IMPLEMENT THIS
   }
@@ -379,10 +380,6 @@ public class BurnTrees{
       }
     }
   }
-
-
-
-
 
   /*DO NOT UPDATE THIS*/
   public int getTicks(){
@@ -471,6 +468,4 @@ public class BurnTrees{
     System.out.println(b.animate(DELAY));//animate all screens and print the final answer
     //System.out.println(b.outputAll());//print all screens and the final answer
   }
-
-
 }
