@@ -15,6 +15,7 @@ public class BurnTrees{
   private static boolean isFire;
   private static boolean returnThat;
 
+  private static int nFire = 7;
 
   /*DO NOT UPDATE THIS
    *PLEASE READ SO YOU SEE HOW THE SIMULATION IS SUPPOSED TO WORK!!!
@@ -220,14 +221,14 @@ public class BurnTrees{
           if (row == 0) {
             // under
             if (map[row + 1][col] == TREE) {
-              map[row + 1][col] = FIRE;
+              map[row + 1][col] = nFire;
               upDown = true;
             }
             // left corner
             if (col == 0) {
               // right
               if (map[row][col + 1] == TREE) {
-                map[row][col + 1] = FIRE;
+                map[row][col + 1] = nFire;
                 rightAd = true;
               }
             }
@@ -235,18 +236,18 @@ public class BurnTrees{
             else if (col == map[0].length - 1) {
               // left
               if (map[row][col - 1] == TREE) {
-                map[row][col - 1] = FIRE;
+                map[row][col - 1] = nFire;
                 leftAd = true;
               }
             }
             // everything else
             else {
               if (map[row][col - 1] == TREE) {
-                map[row][col - 1] = FIRE;
+                map[row][col - 1] = nFire;
                 leftAd = true;
               }
               if (map[row][col + 1] == TREE) {
-                map[row][col + 1] = FIRE;
+                map[row][col + 1] = nFire;
                 rightAd = true;
               }
             }
@@ -256,14 +257,14 @@ public class BurnTrees{
           else if (row == map.length - 1) {
             // over
             if (map[row - 1][col] == TREE) {
-              map[row - 1][col] = FIRE;
+              map[row - 1][col] = nFire;
               upDown = true;
             }
             // left corner
             if (col == 0) {
               // right
               if (map[row][col + 1] == TREE) {
-                map[row][col + 1] = FIRE;
+                map[row][col + 1] = nFire;
                 rightAd = true;
               }
             }
@@ -271,18 +272,18 @@ public class BurnTrees{
             else if (col == map[0].length - 1) {
               // left
               if (map[row][col - 1] == TREE) {
-                map[row][col - 1] = FIRE;
+                map[row][col - 1] = nFire;
                 leftAd = true;
               }
             }
             // everything else
             else {
               if (map[row][col - 1] == TREE) {
-                map[row][col - 1] = FIRE;
+                map[row][col - 1] = nFire;
                 leftAd = true;
               }
               if (map[row][col + 1] == TREE) {
-                map[row][col + 1] = FIRE;
+                map[row][col + 1] = nFire;
                 rightAd = true;
               }
             }
@@ -292,17 +293,17 @@ public class BurnTrees{
           else if (col == 0) {
             // right
             if (map[row][col + 1] == TREE) {
-              map[row][col + 1] = FIRE;
+              map[row][col + 1] = nFire;
               rightAd = true;
             }
             // over
             if (map[row - 1][col] == TREE) {
-              map[row - 1][col] = FIRE;
+              map[row - 1][col] = nFire;
               upDown = true;
             }
             // down
             if (map[row + 1][col] == TREE) {
-              map[row + 1][col] = FIRE;
+              map[row + 1][col] = nFire;
               upDown = true;
             }
           }
@@ -311,17 +312,17 @@ public class BurnTrees{
           else if (col == map[0].length - 1) {
             // left
             if (map[row][col - 1] == TREE) {
-              map[row][col - 1] = FIRE;
+              map[row][col - 1] = nFire;
               rightAd = true;
             }
             // over
             if (map[row - 1][col] == TREE) {
-              map[row - 1][col] = FIRE;
+              map[row - 1][col] = nFire;
               upDown = true;
             }
             // down
             if (map[row + 1][col] == TREE) {
-              map[row + 1][col] = FIRE;
+              map[row + 1][col] = nFire;
               upDown = true;
             }
           }
@@ -330,27 +331,36 @@ public class BurnTrees{
           else {
             // right
             if (map[row][col + 1] == TREE) {
-              map[row][col + 1] = FIRE;
+              map[row][col + 1] = nFire;
               rightAd = true;
             }
             // left
             if (map[row][col - 1] == TREE) {
-              map[row][col - 1] = FIRE;
+              map[row][col - 1] = nFire;
               rightAd = true;
             }
             // over
             if (map[row - 1][col] == TREE) {
-              map[row - 1][col] = FIRE;
+              map[row - 1][col] = nFire;
               upDown = true;
             }
             // down
             if (map[row + 1][col] == TREE) {
-              map[row + 1][col] = FIRE;
+              map[row + 1][col] = nFire;
               upDown = true;
             }
           }
         }
       }
+    }
+
+    for (int col = 0; col < map[0].length; col++) {
+      for (int row = 0; row < map.length; row++) {
+        if (map[row][col] == nFire) {
+          map[row][col] = FIRE;
+        }
+      }
+
     }
 
     ticks++;
