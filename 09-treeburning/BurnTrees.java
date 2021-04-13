@@ -55,10 +55,10 @@ public class BurnTrees{
     hasDown = false;
     isFire = false;
     returnThat = false;
-    for (int col = minColAt; col <= maxColAt; col++) {
+    for (int col = minColAt; col < maxColAt; col++) {
       for (int row = 0; row < map.length; row++) {
         isFire = false;
-        if (map[row][col] == FIRE) {
+        if (map[row][col] == 1) {
           isFire = true;
         }
         if (isFire) {
@@ -201,7 +201,7 @@ public class BurnTrees{
         }
       }
     }
-    return !(returnThat);
+    return (returnThat);
   }
 
 
@@ -210,14 +210,13 @@ public class BurnTrees{
    *new fires should remain fire, and not spread.
    */
   public void tick(){
-    /*
-    boolean spread = false;
     boolean leftAd = false;
     boolean rightAd = false;
-    for (int col = minColAt; col <= maxColAt; col++) {
+    boolean upDown = false;
+    for (int col = minColAt; col < maxColAt; col++) {
       for (int row = 0; row < map.length; row++) {
         isFire = false;
-        if (map[row][col] == FIRE) {
+        if (map[row][col] == 1) {
           isFire = true;
           map[row][col] = ASH;
         }
@@ -226,36 +225,34 @@ public class BurnTrees{
           if (row == 0) {
             // under
             if (map[row + 1][col] == TREE) {
-              map[row + 1][col] == FIRE;
-              spread = true;
+              map[row + 1][col] = FIRE;
+              upDown = true;
             }
             // left corner
             if (col == 0) {
               // right
               if (map[row][col + 1] == TREE) {
-                map[row][col + 1] == FIRE;
+                map[row][col + 1] = FIRE;
                 rightAd = true;
-                spread = true;
               }
             }
             // right corner
             else if (col == map[0].length - 1) {
               // left
               if (map[row][col - 1] == TREE) {
-                map[row][col - 1] == FIRE;
+                map[row][col - 1] = FIRE;
                 leftAd = true;
-                spread = true;
               }
             }
             // everything else
             else {
               if (map[row][col - 1] == TREE) {
-                hasPrevCol = true;
-                returnThat = true;
+                map[row][col - 1] = FIRE;
+                leftAd = true;
               }
               if (map[row][col + 1] == TREE) {
-                hasNextCol = true;
-                returnThat = true;
+                map[row][col + 1] = FIRE;
+                rightAd = true;
               }
             }
           }
@@ -264,34 +261,34 @@ public class BurnTrees{
           else if (row == map.length - 1) {
             // over
             if (map[row - 1][col] == TREE) {
-              hasUp = true;
-              returnThat = true;
+              map[row - 1][col] = FIRE;
+              upDown = true;
             }
             // left corner
             if (col == 0) {
               // right
               if (map[row][col + 1] == TREE) {
-                hasNextCol = true;
-                returnThat = true;
+                map[row][col + 1] = FIRE;
+                rightAd = true;
               }
             }
             // right corner
             else if (col == map[0].length - 1) {
               // left
               if (map[row][col - 1] == TREE) {
-                hasPrevCol = true;
-                returnThat = true;
+                map[row][col - 1] = FIRE;
+                leftAd = true;
               }
             }
             // everything else
             else {
               if (map[row][col - 1] == TREE) {
-                hasPrevCol = true;
-                returnThat = true;
+                map[row][col - 1] = FIRE;
+                leftAd = true;
               }
               if (map[row][col + 1] == TREE) {
-                hasNextCol = true;
-                returnThat = true;
+                map[row][col + 1] = FIRE;
+                rightAd = true;
               }
             }
           }
@@ -300,18 +297,18 @@ public class BurnTrees{
           else if (col == 0) {
             // right
             if (map[row][col + 1] == TREE) {
-              hasNextCol = true;
-              returnThat = true;
+              map[row][col + 1] = FIRE;
+              rightAd = true;
             }
-            // up
+            // over
             if (map[row - 1][col] == TREE) {
-                hasUp = true;
-                returnThat = true;
+              map[row - 1][col] = FIRE;
+              upDown = true;
             }
             // down
             if (map[row + 1][col] == TREE) {
-              hasDown = true;
-              returnThat = true;
+              map[row + 1][col] = FIRE;
+              upDown = true;
             }
           }
 
@@ -319,18 +316,18 @@ public class BurnTrees{
           else if (col == map[0].length - 1) {
             // left
             if (map[row][col - 1] == TREE) {
-              hasPrevCol = true;
-              returnThat = true;
+              map[row][col - 1] = FIRE;
+              rightAd = true;
             }
-            // up
+            // over
             if (map[row - 1][col] == TREE) {
-                hasUp = true;
-                returnThat = true;
+              map[row - 1][col] = FIRE;
+              upDown = true;
             }
             // down
             if (map[row + 1][col] == TREE) {
-              hasDown = true;
-              returnThat = true;
+              map[row + 1][col] = FIRE;
+              upDown = true;
             }
           }
 
@@ -338,29 +335,45 @@ public class BurnTrees{
           else {
             // right
             if (map[row][col + 1] == TREE) {
-              hasNextCol = true;
-              returnThat = true;
+              map[row][col + 1] = FIRE;
+              rightAd = true;
             }
             // left
             if (map[row][col - 1] == TREE) {
-              hasPrevCol = true;
-              returnThat = true;
+              map[row][col - 1] = FIRE;
+              rightAd = true;
             }
-            // up
+            // over
             if (map[row - 1][col] == TREE) {
-                hasUp = true;
-                returnThat = true;
+              map[row - 1][col] = FIRE;
+              upDown = true;
             }
             // down
             if (map[row + 1][col] == TREE) {
-              hasDown = true;
-              returnThat = true;
+              map[row + 1][col] = FIRE;
+              upDown = true;
             }
           }
         }
       }
+      if (col == minColAt) {
+        if (leftAd) {
+          minColAt--;
+        }
+        else if (upDown == false) {
+          minColAt++;
+        }
+      }
+      if (col == maxColAt) {
+        if (rightAd) {
+          maxColAt++;
+        }
+        else if (upDown == false) {
+          maxColAt--;
+        }
+      }
     }
-    */
+
     ticks++;
     //YOU MUST IMPLEMENT THIS
   }
@@ -442,6 +455,7 @@ public class BurnTrees{
   public int outputAll(){
     System.out.println(toString());
     while(!done()){
+      System.out.println("in the while");
       tick();
       System.out.println(toString());
     }
@@ -465,8 +479,8 @@ public class BurnTrees{
     BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
 
 
-    System.out.println(b.animate(DELAY));//animate all screens and print the final answer
-    //System.out.println(b.outputAll());//print all screens and the final answer
+    //System.out.println(b.animate(DELAY));//animate all screens and print the final answer
+    System.out.println(b.outputAll());//print all screens and the final answer
   }
 
 
