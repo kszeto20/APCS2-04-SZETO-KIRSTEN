@@ -1,5 +1,3 @@
-//stops after like 5 runs i don't even know why
-
 import java.util.*;
 public class BurnTrees{
   private int[][]map;
@@ -11,9 +9,10 @@ public class BurnTrees{
 
   // my own
   private static boolean returnThat;
-
   private static int nFire = 7;
+
   private static Frontier set = new Frontier();
+
   /*DO NOT UPDATE THIS
    *PLEASE READ SO YOU SEE HOW THE SIMULATION IS SUPPOSED TO WORK!!!
    */
@@ -28,6 +27,7 @@ public class BurnTrees{
    *If you add more instance variables you can add more here,
    *otherwise it is complete
    */
+
   public BurnTrees(int width,int height, double density){
     map = new int[height][width];
     for(int r=0; r<map.length; r++ )
@@ -35,7 +35,7 @@ public class BurnTrees{
         if(Math.random() < density)
            map[r][c]=2;
     start();//set the left column on fire.
-    //System.out.println("AT START: " + set.size());
+//  System.out.println("AT START: " + set.size());
   }
 
   /*Determine if the simulation is still burning
@@ -45,7 +45,6 @@ public class BurnTrees{
     //YOU MUST IMPLEMENT THIS
     returnThat = false;
     int times = set.size();
-
     int nRow = 0;
     int nCol = 0;
 
@@ -58,7 +57,6 @@ public class BurnTrees{
         // under
         if (map[row + 1][col] == TREE) {
           returnThat = true;
-//            //System.out.println(Array.toString(corAdd));
         }
         // left corner
         if (col == 0) {
@@ -167,11 +165,17 @@ public class BurnTrees{
           returnThat = true;
         }
       }
+
+      // put it back because fires still need to be spread
       set.add(toCheck);
+
+      // any single fire to be spread?
       if (returnThat) {
         return false;
       }
+
     }
+    // if false isn't triggered then there is no fires left to be spread
     return true;
   }
 
@@ -180,18 +184,20 @@ public class BurnTrees{
    *All existing fires spread new fires, and turn to ash
    *new fires should remain fire, and not spread.
    */
+
   public void tick(){
+    //YOU MUST IMPLEMENT THIS
     int times = set.size();
-    //System.out.println("TIMES: " + times);
     int nRow = 0;
     int nCol = 0;
+//    System.out.println("TIMES: " + times);
 
     for (int i = 0; i < times; i++) {
-      //System.out.println("BEFORE: " + times);
+//      System.out.println("BEFORE: " + times);
       int[] toCheck = set.remove();
-      //System.out.println("AFTER: " + times);
-      //System.out.println("WHAT I TOOK OUT:" + toCheck);
-      //System.out.println(Arrays.toString(toCheck));
+//      System.out.println("AFTER: " + times);
+//      System.out.println("WHAT I TOOK OUT:" + toCheck);
+//      System.out.println(Arrays.toString(toCheck));
       int row = toCheck[0];
       int col = toCheck[1];
       map[row][col] = ASH;
@@ -203,9 +209,9 @@ public class BurnTrees{
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
-//        System.out.println(Array.toString(corAdd));
+//          System.out.println(Array.toString(corAdd));
         }
         // left corner
         if (col == 0) {
@@ -215,7 +221,7 @@ public class BurnTrees{
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -227,29 +233,26 @@ public class BurnTrees{
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
         }
         // everything else
         else {
           if (map[row][col - 1] == TREE) {
-
-
             nRow = row;
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
           if (map[row][col + 1] == TREE) {
-
             nRow = row;
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -259,25 +262,22 @@ public class BurnTrees{
       else if (row == map.length - 1) {
         // over
         if (map[row - 1][col] == TREE) {
-
-
           nRow = row - 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row - 1][col] = FIRE;
         }
         // left corner
         if (col == 0) {
           // right
           if (map[row][col + 1] == TREE) {
-
             nRow = row;
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -285,35 +285,30 @@ public class BurnTrees{
         else if (col == map[0].length - 1) {
           // left
           if (map[row][col - 1] == TREE) {
-
-
             nRow = row;
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
         }
         // everything else
         else {
           if (map[row][col - 1] == TREE) {
-
-
             nRow = row;
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
           if (map[row][col + 1] == TREE) {
-
             nRow = row;
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -323,34 +318,29 @@ public class BurnTrees{
       else if (col == 0) {
         // right
         if (map[row][col + 1] == TREE) {
-
-
           nRow = row;
           nCol = col + 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row][col + 1] = FIRE;
         }
         // up
         if (map[row - 1][col] == TREE) {
-
-
             nRow = row - 1;
             nCol = col;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row - 1][col] = FIRE;
         }
         // down
         if (map[row + 1][col] == TREE) {
-
           nRow = row + 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
         }
       }
@@ -359,34 +349,29 @@ public class BurnTrees{
       else if (col == map[0].length - 1) {
         // left
         if (map[row][col - 1] == TREE) {
-
-
           nRow = row;
           nCol = col - 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row][col - 1] = FIRE;
         }
         // up
         if (map[row - 1][col] == TREE) {
-
-
             nRow = row - 1;
             nCol = col;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row - 1][col] = FIRE;
         }
         // down
         if (map[row + 1][col] == TREE) {
-
           nRow = row + 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
         }
       }
@@ -395,56 +380,49 @@ public class BurnTrees{
       else {
         // right
         if (map[row][col + 1] == TREE) {
-
           nRow = row;
           nCol = col + 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row][col + 1] = FIRE;
         }
         // left
         if (map[row][col - 1] == TREE) {
-
-
           nRow = row;
           nCol = col - 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row][col - 1] = FIRE;
         }
         // up
         if (map[row - 1][col] == TREE) {
-
-
             nRow = row - 1;
             nCol = col;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
-            //System.out.println(Arrays.toString(corAdd));
+//            System.out.println(Arrays.toString(corAdd));
             map[row - 1][col] = FIRE;
         }
         // down
         if (map[row + 1][col] == TREE) {
-
-
           nRow = row + 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
-          //System.out.println(Arrays.toString(corAdd));
+//          System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
         }
       }
     }
     ticks++;
-    //YOU MUST IMPLEMENT THIS
   }
 
   /*
    *Sets the trees in the left column of the forest on fire
-   */
+  */
+
   public void start(){
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
@@ -452,9 +430,8 @@ public class BurnTrees{
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
         int[] toAdd = {i,0};
-        //System.out.println(Arrays.toString(toAdd));
+//        System.out.println(Arrays.toString(toAdd));
         set.add(toAdd);
-
       }
     }
   }
@@ -482,6 +459,7 @@ public class BurnTrees{
     }
     return builder.toString();
   }
+
   /*DO NOT UPDATE THIS*/
   public String toStringColor(){
     StringBuilder builder = new StringBuilder();
@@ -501,7 +479,6 @@ public class BurnTrees{
     return builder.toString()+ticks+"\n";
   }
 
-
   /*DO NOT UPDATE THIS*/
   public int animate(int delay) {
     System.out.print(Text.CLEAR_SCREEN);
@@ -519,7 +496,7 @@ public class BurnTrees{
   public int outputAll(){
   System.out.println(toString());
     while(!done()){
-//      //System.out.println("in the while");
+//    System.out.println("in the while");
       tick();
       System.out.println(toString());
     }

@@ -51,6 +51,6 @@ public class Text{
         catch (InterruptedException e) {
         }
     }
-    
+
 
 }
