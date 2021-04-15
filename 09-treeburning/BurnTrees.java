@@ -13,6 +13,12 @@ public class BurnTrees{
 
   private static Frontier set = new Frontier();
 
+  private static int nRow = 0;
+  private static int nCol = 0;
+  private static int times = 0;
+  private static int[] toCheck;
+  int testingC = 0;
+
   /*DO NOT UPDATE THIS
    *PLEASE READ SO YOU SEE HOW THE SIMULATION IS SUPPOSED TO WORK!!!
    */
@@ -43,140 +49,12 @@ public class BurnTrees{
    */
   public boolean done(){
     //YOU MUST IMPLEMENT THIS
-    returnThat = false;
-    int times = set.size();
-    int nRow = 0;
-    int nCol = 0;
-
-    for (int i = 0; i < times; i++) {
-      int[] toCheck = set.remove();
-      int row = toCheck[0];
-      int col = toCheck[1];
-      // top border
-      if (row == 0) {
-        // under
-        if (map[row + 1][col] == TREE) {
-          returnThat = true;
-        }
-        // left corner
-        if (col == 0) {
-          // right
-          if (map[row][col + 1] == TREE) {
-            returnThat = true;
-          }
-        }
-        // right corner
-        else if (col == map[0].length - 1) {
-          // left
-          if (map[row][col - 1] == TREE) {
-            returnThat = true;
-          }
-        }
-        // everything else
-        else {
-          if (map[row][col - 1] == TREE) {
-            returnThat = true;
-          }
-          if (map[row][col + 1] == TREE) {
-            returnThat = true;
-          }
-        }
-      }
-
-      // bottom border
-      else if (row == map.length - 1) {
-        // over
-        if (map[row - 1][col] == TREE) {
-          returnThat = true;
-        }
-        // left corner
-        if (col == 0) {
-          // right
-          if (map[row][col + 1] == TREE) {
-            returnThat = true;
-          }
-        }
-        // right corner
-        else if (col == map[0].length - 1) {
-          // left
-          if (map[row][col - 1] == TREE) {
-            returnThat = true;
-          }
-        }
-        // everything else
-        else {
-          if (map[row][col - 1] == TREE) {
-            returnThat = true;
-          }
-          if (map[row][col + 1] == TREE) {
-            returnThat = true;
-          }
-        }
-      }
-
-      // left border
-      else if (col == 0) {
-        // right
-        if (map[row][col + 1] == TREE) {
-          returnThat = true;
-        }
-        // up
-        if (map[row - 1][col] == TREE) {
-            returnThat = true;
-        }
-        // down
-        if (map[row + 1][col] == TREE) {
-          returnThat = true;
-        }
-      }
-
-      // right border
-      else if (col == map[0].length - 1) {
-        // left
-        if (map[row][col - 1] == TREE) {
-          returnThat = true;
-        }
-        // up
-        if (map[row - 1][col] == TREE) {
-            returnThat = true;
-        }
-        // down
-        if (map[row + 1][col] == TREE) {
-          returnThat = true;
-        }
-      }
-
-      // everything else
-      else {
-        // right
-        if (map[row][col + 1] == TREE) {
-          returnThat = true;
-        }
-        // left
-        if (map[row][col - 1] == TREE) {
-          returnThat = true;
-        }
-        // up
-        if (map[row - 1][col] == TREE) {
-            returnThat = true;
-        }
-        // down
-        if (map[row + 1][col] == TREE) {
-          returnThat = true;
-        }
-      }
-
-      // put it back because fires still need to be spread
-      set.add(toCheck);
-
-      // any single fire to be spread?
-      if (returnThat) {
-        return false;
-      }
-
+    if (set.size() == 0) {
+      return true;
     }
-    // if false isn't triggered then there is no fires left to be spread
-    return true;
+    else {
+      return false;
+    }
   }
 
 
@@ -187,14 +65,13 @@ public class BurnTrees{
 
   public void tick(){
     //YOU MUST IMPLEMENT THIS
-    int times = set.size();
-    int nRow = 0;
-    int nCol = 0;
+    times = set.size();
+
 //    System.out.println("TIMES: " + times);
 
     for (int i = 0; i < times; i++) {
 //      System.out.println("BEFORE: " + times);
-      int[] toCheck = set.remove();
+      toCheck = set.remove();
 //      System.out.println("AFTER: " + times);
 //      System.out.println("WHAT I TOOK OUT:" + toCheck);
 //      System.out.println(Arrays.toString(toCheck));
@@ -486,9 +363,11 @@ public class BurnTrees{
     Text.wait(delay);
     while(!done()){
       tick();
+      testingC++;
       System.out.println(Text.go(1,1)+toStringColor());
       Text.wait(delay);
     }
+    //System.out.println("LiteralTicks: " + testingC);
     return getTicks();
   }
 
