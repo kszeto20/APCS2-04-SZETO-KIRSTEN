@@ -11,7 +11,7 @@ public class BurnTrees{
   private static boolean returnThat;
   private static int nFire = 7;
 
-  private static Frontier set = new Frontier();
+  private Frontier set = new Frontier();
 
   private int nRow = 0;
   private int nCol = 0;
@@ -397,16 +397,16 @@ public class BurnTrees{
       DELAY = Integer.parseInt(args[3]);
     }
     BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
-    //System.out.println(b.animate(DELAY));//animate all screens and print the final answer
+    System.out.println(b.animate(DELAY));//animate all screens and print the final answer
     //System.out.println(b.outputAll());//print all screens and the final answer
-
+/*
     System.out.println("-------------SOLVE START---------------");
     long startTime = System.currentTimeMillis();
     b.run();
     long endTime = System.currentTimeMillis();
     long timeElapsed = endTime - startTime;
     System.out.println("Execution time in milliseconds: " + timeElapsed);
-
+*/
     // my tests
     /*
     Frontier test = new Frontier();
