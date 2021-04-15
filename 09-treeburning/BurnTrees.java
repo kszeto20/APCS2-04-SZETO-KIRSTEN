@@ -1,3 +1,5 @@
+//stops after like 5 runs i don't even know why
+
 import java.util.*;
 public class BurnTrees{
   private int[][]map;
@@ -8,11 +10,6 @@ public class BurnTrees{
   private static int SPACE = 0;
 
   // my own
-  private static boolean hasPrevCol;
-  private static boolean hasNextCol;
-  private static boolean hasUp;
-  private static boolean hasDown;
-  private static boolean isFire;
   private static boolean returnThat;
 
   private static int nFire = 7;
@@ -38,6 +35,7 @@ public class BurnTrees{
         if(Math.random() < density)
            map[r][c]=2;
     start();//set the left column on fire.
+    //System.out.println("AT START: " + set.size());
   }
 
   /*Determine if the simulation is still burning
@@ -45,11 +43,6 @@ public class BurnTrees{
    */
   public boolean done(){
     //YOU MUST IMPLEMENT THIS
-    hasPrevCol = false;
-    hasNextCol = false;
-    hasUp = false;
-    hasDown = false;
-    isFire = false;
     returnThat = false;
     int times = set.size();
 
@@ -64,15 +57,13 @@ public class BurnTrees{
       if (row == 0) {
         // under
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
           returnThat = true;
-//            System.out.println(Array.toString(corAdd));
+//            //System.out.println(Array.toString(corAdd));
         }
         // left corner
         if (col == 0) {
           // right
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
             returnThat = true;
           }
         }
@@ -80,18 +71,15 @@ public class BurnTrees{
         else if (col == map[0].length - 1) {
           // left
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
             returnThat = true;
           }
         }
         // everything else
         else {
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
             returnThat = true;
           }
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
             returnThat = true;
           }
         }
@@ -101,14 +89,12 @@ public class BurnTrees{
       else if (row == map.length - 1) {
         // over
         if (map[row - 1][col] == TREE) {
-          hasUp = true;
           returnThat = true;
         }
         // left corner
         if (col == 0) {
           // right
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
             returnThat = true;
           }
         }
@@ -116,18 +102,15 @@ public class BurnTrees{
         else if (col == map[0].length - 1) {
           // left
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
             returnThat = true;
           }
         }
         // everything else
         else {
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
             returnThat = true;
           }
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
             returnThat = true;
           }
         }
@@ -137,17 +120,14 @@ public class BurnTrees{
       else if (col == 0) {
         // right
         if (map[row][col + 1] == TREE) {
-          hasNextCol = true;
           returnThat = true;
         }
         // up
         if (map[row - 1][col] == TREE) {
-            hasUp = true;
             returnThat = true;
         }
         // down
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
           returnThat = true;
         }
       }
@@ -156,17 +136,14 @@ public class BurnTrees{
       else if (col == map[0].length - 1) {
         // left
         if (map[row][col - 1] == TREE) {
-          hasPrevCol = true;
           returnThat = true;
         }
         // up
         if (map[row - 1][col] == TREE) {
-            hasUp = true;
             returnThat = true;
         }
         // down
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
           returnThat = true;
         }
       }
@@ -175,25 +152,22 @@ public class BurnTrees{
       else {
         // right
         if (map[row][col + 1] == TREE) {
-          hasNextCol = true;
           returnThat = true;
         }
         // left
         if (map[row][col - 1] == TREE) {
-          hasPrevCol = true;
           returnThat = true;
         }
         // up
         if (map[row - 1][col] == TREE) {
-            hasUp = true;
             returnThat = true;
         }
         // down
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
           returnThat = true;
         }
       }
+      set.add(toCheck);
       if (returnThat) {
         return false;
       }
@@ -208,11 +182,16 @@ public class BurnTrees{
    */
   public void tick(){
     int times = set.size();
+    //System.out.println("TIMES: " + times);
     int nRow = 0;
     int nCol = 0;
 
     for (int i = 0; i < times; i++) {
+      //System.out.println("BEFORE: " + times);
       int[] toCheck = set.remove();
+      //System.out.println("AFTER: " + times);
+      //System.out.println("WHAT I TOOK OUT:" + toCheck);
+      //System.out.println(Arrays.toString(toCheck));
       int row = toCheck[0];
       int col = toCheck[1];
       map[row][col] = ASH;
@@ -220,25 +199,23 @@ public class BurnTrees{
       if (row == 0) {
         // under
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
-          returnThat = true;
           nRow = row + 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
-//            System.out.println(Array.toString(corAdd));
+//        System.out.println(Array.toString(corAdd));
         }
         // left corner
         if (col == 0) {
           // right
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
-            returnThat = true;
             nRow = row;
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -246,33 +223,33 @@ public class BurnTrees{
         else if (col == map[0].length - 1) {
           // left
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
-            returnThat = true;
             nRow = row;
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
         }
         // everything else
         else {
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
-            returnThat = true;
+
+
             nRow = row;
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
-            returnThat = true;
+
             nRow = row;
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -282,24 +259,25 @@ public class BurnTrees{
       else if (row == map.length - 1) {
         // over
         if (map[row - 1][col] == TREE) {
-          hasUp = true;
-          returnThat = true;
+
+
           nRow = row - 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row - 1][col] = FIRE;
         }
         // left corner
         if (col == 0) {
           // right
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
-            returnThat = true;
+
             nRow = row;
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -307,33 +285,35 @@ public class BurnTrees{
         else if (col == map[0].length - 1) {
           // left
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
-            returnThat = true;
+
+
             nRow = row;
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
         }
         // everything else
         else {
           if (map[row][col - 1] == TREE) {
-            hasPrevCol = true;
-            returnThat = true;
+
+
             nRow = row;
             nCol = col - 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col - 1] = FIRE;
           }
           if (map[row][col + 1] == TREE) {
-            hasNextCol = true;
-            returnThat = true;
+
             nRow = row;
             nCol = col + 1;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row][col + 1] = FIRE;
           }
         }
@@ -343,32 +323,34 @@ public class BurnTrees{
       else if (col == 0) {
         // right
         if (map[row][col + 1] == TREE) {
-          hasNextCol = true;
-          returnThat = true;
+
+
           nRow = row;
           nCol = col + 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row][col + 1] = FIRE;
         }
         // up
         if (map[row - 1][col] == TREE) {
-            hasUp = true;
-            returnThat = true;
+
+
             nRow = row - 1;
             nCol = col;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row - 1][col] = FIRE;
         }
         // down
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
-          returnThat = true;
+
           nRow = row + 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
         }
       }
@@ -377,32 +359,34 @@ public class BurnTrees{
       else if (col == map[0].length - 1) {
         // left
         if (map[row][col - 1] == TREE) {
-          hasPrevCol = true;
-          returnThat = true;
+
+
           nRow = row;
           nCol = col - 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row][col - 1] = FIRE;
         }
         // up
         if (map[row - 1][col] == TREE) {
-            hasUp = true;
-            returnThat = true;
+
+
             nRow = row - 1;
             nCol = col;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row - 1][col] = FIRE;
         }
         // down
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
-          returnThat = true;
+
           nRow = row + 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
         }
       }
@@ -411,42 +395,45 @@ public class BurnTrees{
       else {
         // right
         if (map[row][col + 1] == TREE) {
-          hasNextCol = true;
-          returnThat = true;
+
           nRow = row;
           nCol = col + 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row][col + 1] = FIRE;
         }
         // left
         if (map[row][col - 1] == TREE) {
-          hasPrevCol = true;
-          returnThat = true;
+
+
           nRow = row;
           nCol = col - 1;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row][col - 1] = FIRE;
         }
         // up
         if (map[row - 1][col] == TREE) {
-            hasUp = true;
-            returnThat = true;
+
+
             nRow = row - 1;
             nCol = col;
             int[] corAdd = {nRow, nCol};
             set.add(corAdd);
+            //System.out.println(Arrays.toString(corAdd));
             map[row - 1][col] = FIRE;
         }
         // down
         if (map[row + 1][col] == TREE) {
-          hasDown = true;
-          returnThat = true;
+
+
           nRow = row + 1;
           nCol = col;
           int[] corAdd = {nRow, nCol};
           set.add(corAdd);
+          //System.out.println(Arrays.toString(corAdd));
           map[row + 1][col] = FIRE;
         }
       }
@@ -465,8 +452,9 @@ public class BurnTrees{
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
         int[] toAdd = {i,0};
-//        System.out.println(Arrays.toString(toAdd));
+        //System.out.println(Arrays.toString(toAdd));
         set.add(toAdd);
+
       }
     }
   }
@@ -529,9 +517,9 @@ public class BurnTrees{
 
   /*DO NOT UPDATE THIS*/
   public int outputAll(){
-    System.out.println(toString());
+  System.out.println(toString());
     while(!done()){
-//      System.out.println("in the while");
+//      //System.out.println("in the while");
       tick();
       System.out.println(toString());
     }
@@ -559,12 +547,12 @@ public class BurnTrees{
     // my tests
     /*
     Frontier test = new Frontier();
-    System.out.println("SIZE BEFORE" + test.size());
+    //System.out.println("SIZE BEFORE" + test.size());
     int[] toAdd = {0,1};
     test.add(toAdd);
-    System.out.println("SIZE MID" + test.size());
-    System.out.println(Arrays.toString(test.remove()));
-    System.out.println("SIZE LAST" + test.size());
+    //System.out.println("SIZE MID" + test.size());
+    //System.out.println(Arrays.toString(test.remove()));
+    //System.out.println("SIZE LAST" + test.size());
     */
   }
 }

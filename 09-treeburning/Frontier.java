@@ -15,6 +15,10 @@ public class Frontier{
     int[] toRet = frontier.remove();
     return toRet;
   }
+
+  public ArrayDeque<int[]> getIt() {
+    return frontier;
+  }
 /*
   public String toString() {
     int[] hello = frontier.toArray();
