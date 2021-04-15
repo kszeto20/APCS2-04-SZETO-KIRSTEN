@@ -13,10 +13,10 @@ public class BurnTrees{
 
   private static Frontier set = new Frontier();
 
-  private static int nRow = 0;
-  private static int nCol = 0;
-  private static int times = 0;
-  private static int[] toCheck;
+  private int nRow = 0;
+  private int nCol = 0;
+  private int times = 0;
+  private int[] toCheck;
   int testingC = 0;
 
   /*DO NOT UPDATE THIS
@@ -397,8 +397,15 @@ public class BurnTrees{
       DELAY = Integer.parseInt(args[3]);
     }
     BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
-    System.out.println(b.animate(DELAY));//animate all screens and print the final answer
+    //System.out.println(b.animate(DELAY));//animate all screens and print the final answer
     //System.out.println(b.outputAll());//print all screens and the final answer
+
+    System.out.println("-------------SOLVE START---------------");
+    long startTime = System.currentTimeMillis();
+    b.run();
+    long endTime = System.currentTimeMillis();
+    long timeElapsed = endTime - startTime;
+    System.out.println("Execution time in milliseconds: " + timeElapsed);
 
     // my tests
     /*
