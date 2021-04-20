@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.*;
 public class MergeTester {
   public static void main(String[] args) {
-    int[] test = {-46, -35, -24, -16, -6, 2, 14, 22, 39, 43};
+    int[] test = {-67, -61, -47, -44, -33, -16, -14, 4, 7, 20, 33, 37, 47, 63, 72};
 
     int[] copy = new int[test.length];
     for (int i = 0; i < test.length; i++) {
