@@ -2,11 +2,8 @@ import java.util.*;
 import java.lang.*;
 public class MergeTester {
   public static void main(String[] args) {
-    int[] test = new int[10000000];
-    Random r = new Random();
-    for (int i = 0; i < test.length; i++) {
-      test[i] = r.nextInt(101);
-    }
+    int[] test = {63, -61, 20, -14, 72, -16, -44, 4, 7, -47, 33, 37, 47, -67, -33};
+
     int[] copy = new int[test.length];
     for (int i = 0; i < test.length; i++) {
       copy[i] = test[i];
@@ -20,7 +17,7 @@ public class MergeTester {
     long timeElapsed = endTime - startTime;
     System.out.println("Arrays.sort() Execution time in milliseconds: " + timeElapsed);
 
-    long prof = timeElapsed;
+    //long prof = timeElapsed;
 
     System.out.println("-------------NOW MY MERGING---------------");
 
@@ -30,10 +27,10 @@ public class MergeTester {
     timeElapsed = endTime - startTime;
     System.out.println("My.sort() Execution time in milliseconds: " + timeElapsed);
 
-    long ama = timeElapsed;
+    //long ama = timeElapsed;
 
-    long timesSlower = (ama / prof);
-    System.out.println("How many times slower is mine: " + timesSlower);
+    //long timesSlower = (ama / prof);
+    //System.out.println("How many times slower is mine: " + timesSlower);
 
     int smallest = 0;
     for (int i = 1; i < test.length; i++) {
@@ -42,6 +39,7 @@ public class MergeTester {
       }
     }
     System.out.println((smallest == 0));
+    System.out.println(toString(test));
   }
 
   public static String toString(int[] data) {

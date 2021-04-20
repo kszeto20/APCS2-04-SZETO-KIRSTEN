@@ -1,55 +1,60 @@
 public class Merge {
 
   public static void mergesort(int data[]) {
-    int[] temp = new int[data.length];
-    actualSort(data, temp, 0, data.length - 1);
+    actualSort(data, 0, data.length - 1);
   }
 
-  private static void mergeThat (int[] data, int[] temp, int lo, int middle, int hi) {
+  private static void mergeThat (int[] data, int lo, int middle, int hi) {
     // merge both sides
+    int leftTotal = middle - lo + 1;
+    int rightTotal = hi - middle;
+    int[] left = new int[leftTotal];
+    int[] right = new int[rightTotal];
 
-    int leftInitial = lo;
-    int rightInitial = middle + 1;
+    for (int i = 0; i < leftTotal; i++) {
+      left[i] = data[lo + i];
+    }
+    for (int i = 0; i < rightTotal; i++) {
+      right[i] = data[middle + i + 1];
+    }
 
-    int totalInitial = 0;
+    int leftInitial = 0;
+    int rightInitial = 0;
 
-    while (leftInitial <= middle && rightInitial <= hi) {
-      if (data[leftInitial] <= data[rightInitial]) {
-        temp[totalInitial] = data[leftInitial];
+    int totalInitial = lo;
+
+    while (leftInitial < leftTotal && rightInitial < rightTotal) {
+      if (left[leftInitial] <= right[rightInitial]) {
+        data[totalInitial] = left[leftInitial];
         leftInitial++;
-        totalInitial++;
       }
       else {
-        temp[totalInitial] = data[rightInitial];
+        data[totalInitial] = right[rightInitial];
         rightInitial++;
-        totalInitial++;
       }
+      totalInitial++;
     }
 
     // extras
-    if (leftInitial <= middle) {
-      temp[totalInitial] = data[leftInitial];
+    while (leftInitial < leftTotal) {
+      data[totalInitial] = left[leftInitial];
       leftInitial++;
       totalInitial++;
     }
-    if (rightInitial <= hi) {
-      temp[totalInitial] = data[rightInitial];
+    while (rightInitial < rightTotal) {
+      data[totalInitial] = right[rightInitial];
       rightInitial++;
       totalInitial++;
     }
-
-    for (int i = lo; i <= hi; i++) {
-      data[i] = temp[i - lo];
-    }
   }
-  private static void actualSort (int[] data, int[] temp, int lo, int hi) {
+  private static void actualSort (int[] data, int lo, int hi) {
     // middle is inclusive
 
     if (lo < hi) {
       int middle = (lo + hi) / 2;
-      actualSort(data, temp, lo, middle);
-      actualSort(data, temp, middle + 1, hi);
-      mergeThat(data, temp, lo, middle, hi);
+      actualSort(data, lo, middle);
+      actualSort(data, middle + 1, hi);
+      mergeThat(data, lo, middle, hi);
     }
   }
 
