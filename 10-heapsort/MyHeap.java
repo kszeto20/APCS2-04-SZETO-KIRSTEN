@@ -2,31 +2,32 @@ import java.util.*;
 import java.lang.*;
 public class MyHeap {
   public static void main (String[] args) {
-    int testSize = 500;
+    int testSize = 10000000;
     int[] test = new int[testSize];
     int[] copy = new int[testSize];
     Random r = new Random();
-    int toAdd;
-    for (int i = testSize - 1; i >= 0; i--) {
+    int toAdd = 0;
+
+    for (int i = 0; i < testSize; i++) {
       toAdd = r.nextInt(101);
       test[i] = toAdd;
       copy[i] = toAdd;
     }
-    System.out.println("Before: " + Arrays.toString(test));
+    //System.out.println("Before: " + Arrays.toString(test));
 
     long startTime = System.currentTimeMillis();
     Arrays.sort(copy);
     long endTime = System.currentTimeMillis();
     long timeElapsed = endTime - startTime;
     System.out.println("Arrays.sort() Execution time in milliseconds: " + timeElapsed);
-    System.out.println("Array: " + Arrays.toString(copy));
+    //System.out.println("Array: " + Arrays.toString(copy));
     startTime = System.currentTimeMillis();
     heapsort(test);
     endTime = System.currentTimeMillis();
     timeElapsed = endTime - startTime;
     System.out.println("My.sort() Execution time in milliseconds: " + timeElapsed);
 
-    System.out.println("After: " + Arrays.toString(test));
+    //System.out.println("After: " + Arrays.toString(test));
 
     boolean match = true;
     for (int i = 0; i < testSize; i++) {
