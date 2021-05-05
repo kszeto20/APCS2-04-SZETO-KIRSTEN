@@ -27,7 +27,7 @@ public class Cow {
   void display() {
     if (colliding) {
       stroke(0);
-      fill(225, 0, 34, 225);
+      fill(225, 0, 0, 60);
     }
     else {
       stroke(0);
@@ -42,6 +42,7 @@ public class Cow {
       line(this.x - 10, this.y - 5, this.x - 5, this.y + 10);
       line(this.x - 5, this.y + 10, this.x + 5, this.y + 10);
       line(this.x + 5, this.y + 10, this.x + 10, this.y - 5);
+      text("DX: "+this.dx+"\nDY: "+this.dy,this.x + radius + 5,this.y);
       //selected = false;
     }
   }
@@ -54,27 +55,20 @@ public class Cow {
       } else {
         selected = true;
       }
-      c = color(#E3AEA9);
     }
   }
   
   void collide(ArrayList<Cow> others) {
+    colliding = false;
     for (Cow comp : others) {
       if (this == comp) {
-      } else {
-        
-        if (
-         ((this.y + this.radius < comp.y - comp.radius) ||
-         (this.y - this.radius > comp.y + comp.radius)) &&
-         ((this.x + radius < comp.x - comp.radius) || 
-         (this.x - radius > comp.x + comp.radius)
-         )) {
-         colliding = false;
-         }
-         else {
-           colliding = true;
-         }
+        continue;
+      } 
+      else {
+        if (dist(this.x, this.y, comp.x, comp.y) < this.radius + comp.radius) {
+          colliding = true;
+        }
       }
-     }
-   }
+    }
+  }
 }
