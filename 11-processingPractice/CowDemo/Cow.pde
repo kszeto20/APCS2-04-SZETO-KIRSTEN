@@ -61,6 +61,10 @@ public class Cow {
         selected = true;
       }
     }
+    if (selected) {
+      //changeSpeed(2);
+      turn(30);
+    }
   }
   
   void collide(ArrayList<Cow> others) {
@@ -75,5 +79,23 @@ public class Cow {
         }
       }
     }
+  }
+  
+  void turn(float angle) {
+    float radAng = radians(angle);
+    
+    float inTan = dy / dx;
+    float origAng = atan(inTan);
+    float total = radAng + origAng;
+    
+    float len = sqrt((dx * dx) + (dy * dy));
+    
+    dx = (cos(total) * len);
+    dy = (sin(total) * len);
+  }
+  
+  void changeSpeed(float dv) {
+    dx = dx + dv;
+    dy = dy + dv;
   }
 }
