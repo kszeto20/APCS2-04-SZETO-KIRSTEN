@@ -39,8 +39,6 @@ public class Cow {
       fill(c);
     }
     ellipse(x, y, radius*2, radius*2);
-    fill(225, 0, 0, 0);
-    line(this.x, this.y, this.dx, this.dy);
     if (selected) {
       stroke(225);
       fill(#FCF2F2);
@@ -63,7 +61,9 @@ public class Cow {
         selected = true;
       }
     }
+    if (selected) {
       turn(30);
+    }
   }
   
   void collide(ArrayList<Cow> others) {
@@ -83,18 +83,22 @@ public class Cow {
   void turn(float angle) {
     float radAng = radians(angle);
     
-    float inTan = dy / dx;
-    float origAng = atan(inTan);
+    float origAng = atan2(dy, dx);
     float total = radAng + origAng;
     
-    float len = sqrt((dx * dx) + (dy * dy));
+    float len = dist(0, 0, dx, dy);
     
     dx = (cos(total) * len);
     dy = (sin(total) * len);
   }
   
   void changeSpeed(float dv) {
-    dx = dx + dv;
-    dy = dy + dv;
+    float origAng = atan2(dy, dx);
+    float len = dist(0, 0, dx, dy);
+    
+    len = len + dv;
+    
+    dx = cos(origAng) * len;
+    dy = sin(origAng) * len;
   }
 }
