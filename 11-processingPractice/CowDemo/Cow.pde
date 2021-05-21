@@ -61,9 +61,7 @@ public class Cow {
         selected = true;
       }
     }
-    if (selected) {
-      turn(30);
-    }
+    turn(30);
   }
   
   void collide(ArrayList<Cow> others) {
@@ -81,7 +79,7 @@ public class Cow {
   }
   
   void turn(float angle) {
-    float radAng = radians(angle);
+    float radAng = radians(angle) * -1;
     
     float origAng = atan2(dy, dx);
     float total = radAng + origAng;
