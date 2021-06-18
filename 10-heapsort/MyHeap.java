@@ -115,7 +115,7 @@ public class MyHeap {
  /*Sort the provided array
   *@param data is the array to be sorted
   */
- private static void heapsort(int[]data) {
+ public static void heapsort(int[]data) {
 //   System.out.println("Building the heap");
    buildHeap(data);
 //   System.out.println("Removing --------------------");
